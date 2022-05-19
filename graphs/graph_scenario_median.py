@@ -109,8 +109,8 @@ def traces(Class, fig):
                     font=dict(family="Proxima Nova", size=15, color=red ), align="left")
 
     fig.add_shape(type="line", 
-    x0=x_vertical_line, y0=perte_capital, x1= x_vertical_line - 3, y1=perte_capital,
-    line=dict(color=red, width=4))
+    x0=x_vertical_line, y0=perte_capital,  x1= x_vertical_line - 3, y1=perte_capital,
+    line=dict(color=red, width=4))  
    
 
     perte_capital = float(Class.PDI)
