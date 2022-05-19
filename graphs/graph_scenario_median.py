@@ -108,7 +108,7 @@ def traces(Class, fig):
     fig.add_annotation(x=x_vertical_line +4.75, y=perte_capital,text= (str(perte_capital) + "%" ), showarrow=False,
                     font=dict(family="Proxima Nova", size=15, color=red ), align="left")
 
-    fig.add_shape(type="line",
+    fig.add_shape(type="line", 
     x0=x_vertical_line, y0=perte_capital, x1= x_vertical_line - 3, y1=perte_capital,
     line=dict(color=red, width=4))
    
