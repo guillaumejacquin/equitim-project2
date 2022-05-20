@@ -1,4 +1,5 @@
 def DPR(Class):
+    #date de premeir remborusement
     dpr = Class.DPR
     annee = dpr[0:4]
     jours = dpr[5:7]

@@ -38,11 +38,11 @@ def Memoire6(Class):
 def BFP(Class):
     if (Class.type_bar2 == "degressif"):
         Class.BFP = Class.DBAC
-
     else:
         Class.BFP = "<BCPN>"
 
-def PAGE(Class):
+    
+def PAGE(Class): #balise pour le bas de page
     if (Class.type_bar2 == " "):
         Class.PAGE = "page 7"
 

@@ -1,4 +1,5 @@
 def tds(Class):
+    #définition des variables par flemme de les réécrire
     NDR = Class.NDR
     SJR5 = Class.SJR5
     DCI = Class.DCI

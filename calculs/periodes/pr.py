@@ -4,8 +4,11 @@ from dateutil import relativedelta
 def PR1(Class):
     frequence = Class.F0
 
+    #on transforme en date
     date_time_obj = datetime.strptime(Class.PDC2, '%Y-%m-%d')
     date_time_obj2 = datetime.strptime(Class.DR1, '%Y-%m-%d')
+
+    #soustraction des 2 dates
     diff = abs(date_time_obj2 - date_time_obj)
 
     #Calcul à la louche, pour arrondir
@@ -18,7 +21,8 @@ def PR1(Class):
     if (frequence == "jours"):
         result = days
     
-    if (frequence == "mois"):
+    #arrondis
+    if (frequence == "mois"): #choper la fréquence et augmenter de un selon les jours
         result = int(months)
         if (months % days >= 15):
             result += 1
@@ -40,7 +44,8 @@ def PR1(Class):
             result += 1
 
     result = abs(result)
-    #result = frequence + " " + str(result)
+    
+    #avant derniere date 
     Class.PR1_1 = result -1
     Class.PR1 = result
 

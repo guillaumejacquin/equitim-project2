@@ -6,3 +6,4 @@ def dec(Class):
   
     mystring = jours + "/" + mois + "/" + annee
     Class.DEC_affichage = mystring
+    #date d'echeance, affichage 

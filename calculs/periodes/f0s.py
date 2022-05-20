@@ -4,3 +4,4 @@ def f0s(Class):
     if frequence == "mois":
         Class.F0s = ""
     
+    #le s apres initié dans le class.py (= S)

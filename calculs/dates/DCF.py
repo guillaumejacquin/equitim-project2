@@ -1,4 +1,5 @@
 def DCF(Class):
+    #date de constatation finale
     dcf = Class.DCF
     annee = dcf[0:4]
     mois = dcf[5:7]

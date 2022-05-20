@@ -6,3 +6,4 @@ def adcf(Class):
   
     mystring = jours + "/" + mois + "/" + annee
     Class.ADCF_affichage = mystring
+    #affichage

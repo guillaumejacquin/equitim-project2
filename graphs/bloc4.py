@@ -27,16 +27,15 @@ def bloc4(Class, Name):
 
 def get_value_array(yearstoadd, start_date , df):
     bdays=BDay()
-   
+    start = start_date - relativedelta(years=yearstoadd)
 
-    start = start_date - relativedelta(years=12)
-    
     is_business_day = bdays.is_on_offset(start)
 
     while is_business_day != True:
             start = start + datetime.timedelta(days=1)
             is_business_day = bdays.is_on_offset(start)
     
+    print(start)
 
     while 1 == 1:
         try:
@@ -45,7 +44,6 @@ def get_value_array(yearstoadd, start_date , df):
             break
         except Exception:
             start = start + datetime.timedelta(days=1)
-
     last_value = (df.iloc[-2])
     # print(last_value)
    
@@ -204,7 +202,9 @@ def bloc4_simple_tickers(tickers, Class, Name):
 
         for i in simple_yahoo_value_arrays: #je fias une boucle pour parcourir les valeurs (1, 3,5 etc)
             try:
+                print("i = ", i)
                 result = get_value_array(int(i), end_date, adj_close)
+                print(result)
                 result = ("{:.2f}".format(result))
                 result = result.replace(".", ",") #joli format écrit
                 result = result + "%"
@@ -212,6 +212,9 @@ def bloc4_simple_tickers(tickers, Class, Name):
                 my_array.append(result)
             except Exception:
                 my_array.append("N/A")
+                pass
+        
+        print(my_array)
         
         try: #je  sors de la boucle et je rajoute le 10 ans "manuellement" car il est légèrement différent
             result = get_value_array(int(0), start_date, adj_close)
@@ -415,7 +418,7 @@ def bloc4_multiple_tickers(tickers, Class, Name):
         print("error in yahoo")
     
 
-    simple_yahoo_value_arrays = [1, 3 ,5 , 8, 12 ] # le tableau pour la boucle pour les années
+    simple_yahoo_value_arrays = [1, 3 ,5 , 10, ] # le tableau pour la boucle pour les années
 
     compteur = 0
     end = datetime.datetime.strptime(Class.DDR, '%d/%m/%Y')

@@ -3,7 +3,7 @@ def GC(Class):
         Class.GC = "coupon"
     else:
         Class.GC = "gain"
-    
+    #coupon ou gain en fonction de si autocall ou phoenix
 
 
 
@@ -21,6 +21,7 @@ def GCA(Class):
     if frequence == "jours":
         i = 365
     
+    #le nombre de coupon à l'année
     GCA = float(Class.CPN) * i
     GCA = round(GCA, 2)
     GCA = (f'{GCA:.2f}')

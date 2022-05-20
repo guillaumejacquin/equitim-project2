@@ -74,6 +74,7 @@ def takeinformations(Class):
 
 
     myresults = []
+    #j ajoute les tickers
     for i in Class.TSJ:
         myresults.append(collection.find({"Ticker":i}))
 
@@ -85,7 +86,7 @@ def takeinformations(Class):
                 mot = " et "
             try:
                 test = result[0]
-                Class.NOMSOUSJACENT = Class.NOMSOUSJACENT + mot + (test["Equity"])
+                Class.NOMSOUSJACENT = Class.NOMSOUSJACENT + mot + (test["Equity"]) #on ajoute le sous jacent + ce qu on avait avant
                 Class.DIVIDENDE = Class.DIVIDENDE + mot + test["Dividende"]
                 Class.SPONSOR = Class.SPONSOR + mot + test["Sponsor"]
                 Class.Site = Class.Site + mot + test["SiteWeb"]
@@ -94,7 +95,8 @@ def takeinformations(Class):
                 Class.Yahoo.append(test["Yahoo"])
                 Class.Yahoo_value_name.append(test["Equity"])
                 Class.Yahoo_value_dividende.append(test["Dividende"])
-            except Exception:
+
+            except Exception: #au cas ou si ca marche pas, pour éviter que ca crash
                 Class.NOMSOUSJACENT + mot + ("ERREUR LES POTES")
                 Class.DIVIDENDE = Class.DIVIDENDE + mot + "ERREUR"
                 Class.SPONSOR = Class.SPONSOR + mot + "ERREUR"

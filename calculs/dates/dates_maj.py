@@ -1,9 +1,10 @@
 from dateutil.relativedelta import relativedelta
 
 month =["POUET POUET", "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre" ]
+#tableau des mois(le tableau commencant a 0 et les mois a un, j'ai rempli le premier
 
 
-
+#TOUTES LES DATES EN MAJUSCULE
 def PDC1_maj(Class):
     month_string = (Class.PDC1[5:7])
     month_string = int(month_string)

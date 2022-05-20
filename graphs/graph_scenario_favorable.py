@@ -68,6 +68,30 @@ def traces(Class, fig):
     perte_capital = float(Class.PDI)
     niveau_de_scénario_déf = float(Class.NSD)
     premier_niveau_autocall = float(Class.BAC)
+    x_scenario_def = 0
+    #-----------------------Mettre en int si 100.0 par ex mais pas si 50.2"
+    x_niveau_ref = 0
+    x_derniere_observation = 0
+    x_perte_capital = 0
+    x_niveau_def = 0
+
+    if (niveau_de_référence).is_integer():
+        niveau_de_référence = int(niveau_de_référence)
+        x_niveau_ref = 0.5
+
+
+    if (derniere_observation).is_integer():
+        derniere_observation = int(derniere_observation)
+        x_derniere_observation = 0.5
+
+    if (perte_capital).is_integer():
+        perte_capital = int(perte_capital)
+        x_perte_capital = 0.5
+
+    if (niveau_de_scénario_déf).is_integer():
+        niveau_de_scénario_déf = int(niveau_de_scénario_déf)
+        x_scenario_def = 0.5
+    #-----------------------Mettre en int si 100.0 par ex mais pas si 50.2"
 
     x_vertical_line = 81 #le x de la ligne verticale pour aligner les elements
     pasdedegressivite = float(Class.DEG)
@@ -91,28 +115,34 @@ def traces(Class, fig):
 
 
 
-    fig.add_annotation(x=x_vertical_line +4.75, y=niveau_de_référence,text= (str(niveau_de_référence) + "%" ), showarrow=False,
+    fig.add_annotation(x=x_vertical_line +4.75 - x_niveau_ref, y=niveau_de_référence,text= (str(niveau_de_référence) + "%" ), showarrow=False,
                     font=dict(family="Proxima Nova", size=15, color=black ), align="left")
-    
+
     fig.add_shape(type="line",
     x0=x_vertical_line, y0=niveau_de_référence, x1= x_vertical_line - 3, y1=niveau_de_référence,
-    line=dict(color=red, width=4))
+    line=dict(color=black, width=4))
     
-    fig.add_annotation(x=x_vertical_line +4.75, y=derniere_observation,text= (str(derniere_observation) + "%" ), showarrow=False,
+    fig.add_annotation(x=x_vertical_line +4.75 - x_derniere_observation, y=derniere_observation,text= (str(derniere_observation) + "%" ), showarrow=False,
                     font=dict(family="Proxima Nova", size=15, color=green ), align="left")
     
     fig.add_shape(type="line",
     x0=x_vertical_line, y0=derniere_observation, x1= x_vertical_line - 3, y1=derniere_observation,
     line=dict(color=green, width=4))
 
-    fig.add_annotation(x=x_vertical_line +4.75, y=perte_capital,text= (str(perte_capital) + "%" ), showarrow=False,
+    fig.add_annotation(x=x_vertical_line +4.75 - x_perte_capital, y=perte_capital,text= (str(perte_capital) + "%" ), showarrow=False,
                     font=dict(family="Proxima Nova", size=15, color=red ), align="left")
 
     fig.add_shape(type="line",
     x0=x_vertical_line, y0=perte_capital, x1= x_vertical_line - 3, y1=perte_capital,
     line=dict(color=red, width=4))
    
-
+   
+    fig.add_annotation(x=x_vertical_line + 4.75 - x_scenario_def, y=niveau_de_scénario_déf,text= (str(niveau_de_scénario_déf) + "%" ), showarrow=False,
+                    font=dict(family="Proxima Nova", size=15, color=blue ), align="left")
+    
+    fig.add_shape(type="line",
+    x0=x_vertical_line, y0=niveau_de_scénario_déf, x1= x_vertical_line - 3, y1=niveau_de_scénario_déf,
+    line=dict(color=blue, width=4))
 
     # fig.add_shape(type="line",
     # x0=x_vertical_line, y0=niveau_de_scénario_déf, x1= x_vertical_line - 3.5, y1=niveau_de_scénario_déf,
@@ -123,7 +153,7 @@ def texte(Class, fig):
     indice = Class.Nom
 
 
-    fig.add_annotation(x=39, y=145 ,text= ("<b>Evolution "  + Class.SJR7 + "</b>" ), showarrow=False,
+    fig.add_annotation(x=39, y=165 ,text= ("<b>Evolution "  + Class.SJR7 + "</b>" ), showarrow=False,
                         font=dict(family="Proxima Nova", size=20, color=black ), align="left")
 
     pasdedegressivite = float(Class.DEG)
@@ -274,12 +304,7 @@ def phoenix_annotations(Class, fig):
                  ),  
         start_green_line = 20
         
-        # fig.add_shape(type="circle",
-        # xref="x", yref="y",
-        # fillcolor=blue,
-        # x0= start_green_line - 0.95 , y0= perfmax -1.705, x1=start_green_line + 0.95, y1 = perfmax + 1.705,
-        # line_color=blue,
-        # )
+
 
     else:
         fig.update_xaxes(tickangle=0,
@@ -289,14 +314,7 @@ def phoenix_annotations(Class, fig):
                     color="black"
                ),
         start_green_line = 30
-    
-        # fig.add_shape(type="circle",
-        # xref="x", yref="y",
-        # fillcolor=blue,
-        # x0= start_green_line - 0.95 , y0= perfmax -1.705, x1=start_green_line + 0.95, y1 = perfmax + 1.705,
-        # line_color=blue,
-        # )
-    
+ 
         tmp = avant_dernier_niveau_de_reference + 2 * pasdedegressivite
         compteur = 0
         if tmp < coupon and pasdedegressivite > 0: 
@@ -311,9 +329,7 @@ def phoenix_annotations(Class, fig):
             # fig.add_shape(type="line",
             # x0=start_white_line, y0=coupon, x1=81, y1=coupon,
         # line=dict(color="white", width=2, fillcolor="white"))
-            fig.add_shape(type="line",
-                    x0=10, y0=coupon, x1=start_white_line, y1=coupon,
-                    line=dict(color=blue, width=2),)
+
 
             fig.add_shape(type="line",
             x0=start_green_line + 3 , y0=premier_niveau_autocall, x1=60 , y1=coupon + 0.5 ,

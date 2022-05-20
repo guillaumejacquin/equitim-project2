@@ -2,9 +2,12 @@ from datetime import date
 
 
 def PDC1(Class):
+    #enlever les espaces pour une gestion d'erreur
     remove_blank =  Class.DCI.replace(" ", "")
+    #on transforme en list
     mylist = remove_blank.split(",")
     myreallist = []
+    
     for i in mylist:
         date_transformed = i[6:] + "-" + i[3:5] + "-" + i[:2]
         myreallist.append(date_transformed)

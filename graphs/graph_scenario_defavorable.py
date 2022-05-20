@@ -66,6 +66,10 @@ def traces(Class, fig):
     avant_dernier_niveau_de_reference = float(Class.ABDAC)
     derniere_observation = float(Class.DBAC)
     perte_capital = float(Class.PDI)
+
+
+
+    #-----------------------Mettre en int si 100.0 par ex mais pas si 50.2"
     x_niveau_ref = 0
     x_derniere_observation = 0
     x_perte_capital = 0
@@ -83,6 +87,7 @@ def traces(Class, fig):
     if (perte_capital).is_integer():
         perte_capital = int(perte_capital)
         x_perte_capital = 0.5
+    #-----------------------Mettre en int si 100.0 par ex mais pas si 50.2"
 
     niveau_de_scénario_déf = float(Class.NSD)
 
@@ -136,9 +141,7 @@ def traces(Class, fig):
     fig.add_annotation(x=x_vertical_line + 4.75 - x_niveau_ref, y=niveau_de_scénario_déf,text= (str(niveau_de_scénario_déf) + "%" ), showarrow=False,
                     font=dict(family="Proxima Nova", size=15, color=blue ), align="left")
 
-    # fig.add_shape(type="line",
-    # x0=x_vertical_line, y0=niveau_de_scénario_déf, x1= x_vertical_line - 3.5, y1=niveau_de_scénario_déf,
-    # line=dict(color=blue, width=6))
+
 
     fig.add_shape(type="circle",
     xref="x", yref="y",
@@ -314,9 +317,6 @@ def phoenix_annotations(Class, fig):
             # fig.add_shape(type="line",
             # x0=start_white_line, y0=coupon, x1=81, y1=coupon,
         # line=dict(color="white", width=2, fillcolor="white"))
-            fig.add_shape(type="line",
-                    x0=10, y0=coupon, x1=start_white_line, y1=coupon,
-                    line=dict(color=blue, width=2),)
 
 
             fig.add_shape(type="line",

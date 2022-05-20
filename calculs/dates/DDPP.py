@@ -10,7 +10,7 @@ def DDPP(Class):
     date_time_obj = datetime.strptime(Class.DDP, '%Y-%m-%d')
     date_time_obj2 = datetime.strptime(Class.DDCI, '%Y-%m-%d')
     diff = date_time_obj2 - date_time_obj
-
+    #soustraction des 2 dates
     
     #Calcul à la louche, pour arrondir
     years = diff.days / 365
@@ -20,8 +20,9 @@ def DDPP(Class):
     trimestriels = diff.days / 91
 
     if (frequence == "jours"):
-        result = days
+        result = days 
     
+    #ARRONDI
     if (frequence == "mois"):
         result = int(months)
         if (months % days >= 15):

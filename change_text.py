@@ -133,6 +133,7 @@ def elementsToReplaceCalcul(Class, shapes):
     replace_text({'<DDCI>': Class.DDCI}, shapes) 
 
     replace_text({'<BLOCDIVIDENDE>': Class.BLOCDIVIDENDE}, shapes)
+   
     replace_text({'<F0s>':  Class.F0s}, shapes)
 
 
@@ -408,6 +409,19 @@ def replace_text(replacements: dict, shapes: List):
                             new_text = cur_text.replace(str(match), str(replacement))
                             run.text = new_text
 
+                            # if("www" in run.text):
+                            #     array_text_split = run.text.split(' ')
+                            #     # print(run[0])
+                            #     print(run.text[0])
+
+                            #     for word in array_text_split:
+                            #         print(word)
+                            #         print("ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+                            #         if ("www" in word):
+                            #             print(word)
+                            #             print("yeah")
+                            #             hlink = run.text.hyperlink
+                            #             hlink.address = 'https://' + str(new_text)
 
             if shape.has_table:
                 for row in shape.table.rows:

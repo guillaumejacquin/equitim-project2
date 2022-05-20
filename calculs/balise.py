@@ -1,4 +1,5 @@
 def balise(Class):
+    #les variables
     strike = Class.type_strike
     ndr = Class.NDR
     sjr1 = Class.SJR1
@@ -7,6 +8,7 @@ def balise(Class):
     ddi2 = Class.DPCI
     ddi2 = ddi2[8:10] + "/" + ddi2[5:7] + "/" + ddi2[0:4]
     
+    #de l' ou du
     if (Class.TDP == "action"):
         du = "de l'"
     else:

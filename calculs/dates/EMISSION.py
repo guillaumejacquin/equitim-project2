@@ -1,4 +1,5 @@
 def emission(Class):
+    #date d'émission
     emisison = Class.Emission
     annee = emisison[0:4]
     mois = emisison[5:7]

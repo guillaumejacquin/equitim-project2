@@ -40,7 +40,7 @@ def abcisse_ordonnee(Class, fig, niveau_autocall, niveau_coupon,niveau_capital, 
     else:
         firstvaluexabciss = Class.F0 + " 1"
 
-    firstvaluexabciss = firstvaluexabciss.capitalize()
+    firstvaluexabciss = firstvaluexabciss.capitalize() #les legendes sous les blocs
     croisement =  int(float(Class.BAC) - float(Class.BCPN) +1)
     secondvaluexabciss = Class.F0 + Class.F0s + " " +  str(int(Class.PR1))  + " à " + str(croisement)
     secondvaluexabciss = secondvaluexabciss.capitalize()
@@ -51,7 +51,7 @@ def abcisse_ordonnee(Class, fig, niveau_autocall, niveau_coupon,niveau_capital, 
     lastvalue = Class.F0  + " " + str(Class.DPRR)
     lastvalue = lastvalue.capitalize()
 
-    
+    #on choisis nos valeurs
     fig.update_xaxes(tickangle=0,
                     tickmode = 'array',
                     tickvals = [12, 29, 46, 65],
@@ -66,7 +66,7 @@ def abcisse_ordonnee(Class, fig, niveau_autocall, niveau_coupon,niveau_capital, 
 
 
     mystring = "100%"
-    if (niveau_autocall[2] != 100):
+    if (niveau_autocall[2] != 100): #si c est pas égal a 100%"
 
    
         fig.add_annotation(x=2.5, y=niveau_autocall[2], text= str(niveau_autocall[2]) +"%", showarrow=False,
@@ -218,7 +218,7 @@ def last_bloc_text(Class, fig, niveau_coupon, niveau_autocall, black, niveau_cap
     )
 
 
-def first_bloc(Class, fig, blue, niveau_coupon):
+def first_bloc(Class, fig, blue, niveau_coupon): #first bloc design
     fig.add_shape( # add la ligne horizontale deuxieme block line
         type="line", line_color=blue, line_width=3, opacity=1, line_dash="dot",
         x0=5, x1=20,  y0=niveau_coupon[0], y1=niveau_coupon[1]
@@ -296,6 +296,9 @@ def third_block(Class, fig, blue):
                             mode='lines',  
                             hoverinfo ='none',
 ))
+    fig.add_annotation(x=53, y=float(Class.ABDAC) + 5,text=str(float(Class.ABDAC)) + "%", showarrow=False,
+                    font=dict( family="Proxima Nova", size=14, color="#002E8A"),align="left",
+                    )         
 
     fig.add_trace(go.Scatter(x=[39,54,54,39], 
                                     y=[float(Class.BCPN) +1 ,float(Class.ABDAC) +1 ,float(Class.ABDAC) -1,float(Class.BCPN) -1],
@@ -311,6 +314,11 @@ def third_block(Class, fig, blue):
     )
 
 def lastblock(Class, fig, green, red, blue):
+
+    fig.add_annotation(x=71, y=float(Class.DBAC) + 3,text=str(float(Class.DBAC)) + "%", showarrow=False,
+                    font=dict( family="Proxima Nova", size=14, color="#002E8A" ),align="left",
+                    )         
+
     fig.add_trace(go.Scatter(x=[58,73,73,58], 
                                     y=[float(Class.DBAC) +1 , float(Class.DBAC) + 1, float(Class.DBAC) -1, float(Class.DBAC) -1],
                                     fill='toself',
@@ -319,7 +327,7 @@ def lastblock(Class, fig, green, red, blue):
                                     showlegend=False,
                                     mode='lines',  
                                     hoverinfo ='none',))
-
+    #
     fig.add_shape( # add la ligne horizontale deuxieme block line
         type="line", line_color=blue, line_width=3, opacity=1, line_dash="dot",
         x0=58, x1=73, y0=float(Class.DBAC), y1=float(Class.DBAC)
@@ -415,29 +423,7 @@ def bloc3_4(Class, name, whitestrap=False):
 #------------------------------------------NE BOUGE PAS---------------------------------------------------------------------------------------------
 
 #-------------------------------------Pas fini, doit gerer les 100% ----------------------------------------------------
-    #NIVEAU de reference seulement si 100 % sinon creer bloc 90%(classique) et au dessu sniveau de reference100% (en noir)
 
-    #les valeurs qu on va mettre
-    mystring = "100%"
-    # if (niveau_autocall[2] != 100):
-    #     fig.add_annotation(x=3, y=niveau_coupon[0],text= (niveau_coupon[0]), showarrow=False,
-    #                 font=dict(family="Proxima Nova", size=14, color=green ),
-    #                 )
-   
-    #     # fig.add_annotation(x=2.5, y=niveau_autocall[2], text= str(niveau_autocall[2]) +"%", showarrow=False,
-    #     #             font=dict(family="Proxima Nova", size=14, color=green ))
-    # else:
-    #     mystring = str(Class.BAC) + "%"
-    #     fig.add_annotation(x=3, y=str(Class.BAC),text= (mystring), showarrow=False,
-    #                 font=dict(family="Proxima Nova", size=14, color=green ),
-    #                 )
-
-    # fig.add_annotation(x=2.5, y=niveau_coupon[-1], text= str(niveau_coupon[-1]) +"%", showarrow=False,
-    #                 font=dict(family="Proxima Nova", size=14, color=blue ),
-    #                 )
-    # fig.add_annotation(x=2.5, y=niveau_capital,text= str(niveau_capital) +"%", showarrow=False,
-    #                 font=dict(family="Proxima Nova", size=14, color="red" ),
-    #                 )
    
 #-------------------------------------!Pas fini, doit gerer les 100%! ----------------------------------------------------
 
@@ -476,7 +462,7 @@ def bloc3_4(Class, name, whitestrap=False):
 
 
 
-    fig.update_layout(
+    fig.update_layout( #les options
         legend=dict(
             itemclick="toggleothers",
             itemdoubleclick="toggle"),
