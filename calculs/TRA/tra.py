@@ -1,5 +1,6 @@
 from datetime import date
 from operator import index
+from tkinter import E
 from pandas import array
 from pyxirr import xirr
 from datetime import datetime, timedelta
@@ -199,9 +200,16 @@ def ALL_TRA(Class):
     Class.TRA_TOUT_SAUF_P = (boucleTRA(Class, Class.PDC2,Class.DEC, df, Class.CPN, Class.PDI, "tout_sauf_p"))
     #2 eme dataframe pour aller jusqu a l echance et plus jusque a 1dr
     compteurvar = Class.DEC
+    try:
+        Class.TRA_MAX_P = max(Class.TRA_TOUT_P, Class.TRA_F_P) 
+    except Exception:
+        Class.TRA_MAX_P = 0
+    
+    try:
+        Class.TRA_MRA_MAX_P = max(Class.TRA_TOUT_1_P, Class.TRA_F_P) 
+    except Exception:
+        Class.TRA_MRA_MAX_P = 0
 
-    Class.TRA_MAX_P = max(Class.TRA_TOUT_P, Class.TRA_F_P) 
-    Class.TRA_MRA_MAX_P = max(Class.TRA_TOUT_1_P, Class.TRA_F_P) 
 
     if (Class.Typologie == "coupon phoenix" and  Class.CPN_is_memoire == "oui"):
         Class.TRA_RM_P = Class.TRA_MRA_MIN_PM
