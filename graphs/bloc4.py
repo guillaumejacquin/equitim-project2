@@ -35,7 +35,6 @@ def get_value_array(yearstoadd, start_date , df):
             start = start + datetime.timedelta(days=1)
             is_business_day = bdays.is_on_offset(start)
     
-    print(start)
 
     while 1 == 1:
         try:
@@ -89,7 +88,8 @@ def bloc4_simple_tickers(tickers, Class, Name):
                         ,y = [adj_close],
                         
                         )
-          
+        fig.update_traces(line_color='#B9A049')
+
         newnames = {'wide_variable_0': tickers[0]}
 
         fig.update_layout(
@@ -125,7 +125,7 @@ def bloc4_simple_tickers(tickers, Class, Name):
                     size=13,
                     color='rgb(82, 82, 82)',
                     )
-            ),
+            ),#E5EBF7
             showlegend=True,
             legend_title=" ",
 
@@ -202,9 +202,7 @@ def bloc4_simple_tickers(tickers, Class, Name):
 
         for i in simple_yahoo_value_arrays: #je fias une boucle pour parcourir les valeurs (1, 3,5 etc)
             try:
-                print("i = ", i)
                 result = get_value_array(int(i), end_date, adj_close)
-                print(result)
                 result = ("{:.2f}".format(result))
                 result = result.replace(".", ",") #joli format écrit
                 result = result + "%"
@@ -214,7 +212,6 @@ def bloc4_simple_tickers(tickers, Class, Name):
                 my_array.append("N/A")
                 pass
         
-        print(my_array)
         
         try: #je  sors de la boucle et je rajoute le 10 ans "manuellement" car il est légèrement différent
             result = get_value_array(int(0), start_date, adj_close)
@@ -229,21 +226,6 @@ def bloc4_simple_tickers(tickers, Class, Name):
         
 
         Class.Yahoo_value.append(my_array)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #S'il y'a plusieurs blocs
@@ -290,18 +272,20 @@ def bloc4_multiple_tickers(tickers, Class, Name):
 
             # result = ((lastvalue/firstvalue) -1) * 100
 
+        colors = ['#B9A049', '#0B3371', '#C00000', '#007A37', '#4639F3']
 
         if len(name) == 2:
                 fig = px.line(data_frame = result
                         ,x = result.index
-                        ,y = [result[name[0]],result[name[1]]]
-                        )
+                        ,y = [result[name[0]],result[name[1]]],
+                        ) 
         
         if len(name) == 3:
                 fig = px.line(data_frame = result
                         ,x = result.index
                         ,y = [result[name[0]],result[name[1]], result[name[2]]]
                         )
+
         if len(name) == 4:
                 fig = px.line(data_frame = result
                         ,x = result.index
@@ -314,6 +298,9 @@ def bloc4_multiple_tickers(tickers, Class, Name):
                         ,x = result.index
                         ,y = [result[name[0]],result[name[1]], result[name[2]], result[name[3]], result[name[4]]]
                         )
+        
+        for color_line in range(len(name)): #tracer des couleurs des lignes
+            fig['data'][color_line]['line']['color']=colors[color_line]
 
         fig.update_layout(
                 xaxis=dict(
@@ -418,7 +405,7 @@ def bloc4_multiple_tickers(tickers, Class, Name):
         print("error in yahoo")
     
 
-    simple_yahoo_value_arrays = [1, 3 ,5 , 10, ] # le tableau pour la boucle pour les années
+    simple_yahoo_value_arrays = [1, 3 ,5 , 10] # le tableau pour la boucle pour les années
 
     compteur = 0
     end = datetime.datetime.strptime(Class.DDR, '%d/%m/%Y')

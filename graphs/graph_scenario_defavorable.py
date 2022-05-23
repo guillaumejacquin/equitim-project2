@@ -125,11 +125,11 @@ def traces(Class, fig):
     line=dict(color=black, width=4))
     
     fig.add_annotation(x=x_vertical_line +4.75 - x_derniere_observation, y=derniere_observation,text= (str(derniere_observation) + "%" ), showarrow=False,
-                    font=dict(family="Proxima Nova", size=15, color=green ), align="left")
+                    font=dict(family="Proxima Nova", size=15, color=blue ), align="left")
     
     fig.add_shape(type="line",
     x0=x_vertical_line, y0=derniere_observation, x1= x_vertical_line - 3, y1=derniere_observation,
-    line=dict(color=green, width=4))
+    line=dict(color=blue, width=4))
 
     fig.add_annotation(x=x_vertical_line +4.75 - x_perte_capital, y=perte_capital,text= (str(perte_capital) + "%" ), showarrow=False,
                     font=dict(family="Proxima Nova", size=15, color=red ), align="left")
@@ -165,7 +165,7 @@ def texte(Class, fig):
     fig.add_annotation(x=44, y=133 ,text= ("Seuil d'activation du mécanisme de la barrière "  + degressive +" de remboursement anticipé automatique <br> à partir de la fin du " + str(Class.F0)+ " " + str(Class.PR1) +  " jusqu'à la fin du "+ str(Class.F0)+ " " + str(Class.ADPR) + " et de versement du gain à l'échéance" ), showarrow=False,
                         font=dict(family="Proxima Nova", size=10, color=black ), align="left")
 
-    fig.add_annotation(x=28, y=123 ,text= ("Seuil de perte en capital à l'échéance" ), showarrow=False,
+    fig.add_annotation(x=28, y=123.5 ,text= ("Seuil de perte en capital à l'échéance" ), showarrow=False,
                         font=dict(family="Proxima Nova", size=10, color=black ), align="left")
    
     fig.add_annotation(x=25, y=118 ,text= ("Part de capital remboursé" ), showarrow=False,

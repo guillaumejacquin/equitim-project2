@@ -19,6 +19,7 @@ def callAllDates2Date(Class):
 
     dpr = Class.DPR[0:10]
     print("ouhhh", Class.DR1)
+    
     Class.Datesremb1 = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DCF, Class.DR1, Class.DCF, False, False)
     print("date de remboursement autocall = ", Class.Datesremb1)
     print("-----\n")
@@ -31,7 +32,7 @@ def callAllDates2Date(Class):
     # Class.Datesremb7 = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DCF, Class.DDCI, True)
     # Class.Datesremb8 = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DCF, Class.DDCI, True)
     
-    Class.Datespaiement1 = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DEC, Class.DDCI,Class.DEC, False, False)
+    Class.Datespaiement1 = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DEC, Class.DDCI,Class.DEC, True, False)
     print("date de paiement coupon = ", Class.Datespaiement1)
 
     # Class.Datespaiement2 = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DEC, Class.DDCI, True)

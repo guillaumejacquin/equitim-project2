@@ -517,13 +517,13 @@ def ChangeTextOnPpt(Class):
                     cur_text = shape.text
                     new_text = cur_text.replace(str("<graph1>"), str(""))
                     shape.text = new_text
-                    pic = slide.shapes.add_picture("graph1.png", Inches(0), Inches(6.75), Inches(7))
+                    pic = slide.shapes.add_picture("graph1.png", Inches(0), Inches(6.71), Inches(8))
                 
                 if ("<graph2>" in shape.text):  
                     cur_text = shape.text
                     new_text = cur_text.replace(str("<graph2>"), str(""))
                     shape.text = new_text
-                    pic = slide.shapes.add_picture("graph_scenario_def.png", Inches(0.45), Inches(1.91), Inches(3.6))
+                    pic = slide.shapes.add_picture("graph_scenario_def.png", Inches(0.45), Inches(1.8), Inches(3.7))
 
                 if ("<graph3>" in shape.text):  
                     cur_text = shape.text
@@ -541,7 +541,7 @@ def ChangeTextOnPpt(Class):
                         cur_text = shape.text
                         new_text = cur_text.replace(str("<graph5>"), str(""))
                         shape.text = new_text
-                        pic = slide.shapes.add_picture("graph5.png", Inches(0), Inches(4.8), width=Inches(6.8), height=Inches(4))
+                        pic = slide.shapes.add_picture("graph5.png", Inches(0.35), Inches(4.7), width=Inches(7), height=Inches(4.3))
 
 
     try:

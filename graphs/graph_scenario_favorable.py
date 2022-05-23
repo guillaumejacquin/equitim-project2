@@ -163,7 +163,7 @@ def texte(Class, fig):
         degressive = "dégressivité"
     fig.add_annotation(x=44, y=153 ,text= ("Seuil d'activation du mécanisme de la barrière "  + degressive +" de remboursement anticipé automatique <br> à partir de la fin du " + str(Class.F0)+ " " + str(Class.PR1) +  " jusqu'à la fin du "+ str(Class.F0)+ " " + str(Class.ADPR) + " et de versement du gain à l'échéance" ), showarrow=False,
                         font=dict(family="Proxima Nova", size=10, color=black ), align="left")
-    fig.add_annotation(x=28, y=143 ,text= ("Seuil de perte en capital à l'échéance" ), showarrow=False,
+    fig.add_annotation(x=28, y=14.5 ,text= ("Seuil de perte en capital à l'échéance" ), showarrow=False,
                         font=dict(family="Proxima Nova", size=10, color=black ), align="left")
    
     fig.add_annotation(x=25, y=138 ,text= ("Part de capital remboursé" ), showarrow=False,

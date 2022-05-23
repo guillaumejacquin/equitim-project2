@@ -25,6 +25,34 @@ import { parseISO } from 'date-fns';
 
 import * as success from "../components/1127-success.json";
 
+import fs from 'fs'
+
+const menu_déroulant = (template, settemplate) => {
+	const names = ['Test1']
+  const dir = "../../../"
+  //template bnp
+
+  return (
+    <div>
+    {/* <ul>{listItems}</ul> */}
+   <Select
+          labelId="template"
+          id="template"
+          value={template}
+          label="template"
+          onChange={(e)=>settemplate(e.target.value)}
+          >
+          
+          {names.map(name => <MenuItem value={name}>{name}</MenuItem>)}
+
+          <MenuItem value={"testmercredi"}>testmercredi</MenuItem>
+              {/* <ul>{listItems}</ul> */}
+
+        </Select> 
+
+    </div>
+  );
+}
 const Page_beta = ({ formData, setForm, navigation }) => { 
   const premiertab = () => {
     return(
@@ -156,16 +184,9 @@ const Page_beta = ({ formData, setForm, navigation }) => {
            
 
             <InputLabel style={{marginTop:"5%" }}id="F0">Template</InputLabel>
-        <Select
-          labelId="template"
-          id="template"
-          value={template}
-          label="template"
-          onChange={(e)=>settemplate(e.target.value)}
-          >
-          <MenuItem value={"testmercredi"}>testmercredi</MenuItem>
-
-        </Select> 
+       
+          
+          {menu_déroulant(template, settemplate)}
       </Container>
     </div>
     )}
@@ -559,6 +580,7 @@ const Page_beta = ({ formData, setForm, navigation }) => {
   }
   const props = { formData, navigation};
 
+  const a = [];
 
   const defaultOptions2 = {
     loop: true,
