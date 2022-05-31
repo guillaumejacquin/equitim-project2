@@ -27,7 +27,6 @@ def add_articles():
     Myclass.Isin = data["Isin"]
     
 
-
     #probleme de date, je coupe pour que ca enelever la merde apres 
     emission = data["Emission"]
     Myclass.Emission = emission[0:10]
@@ -85,7 +84,18 @@ def add_articles():
     Myclass.type_bar2 = data["type_bar2"]
 
     # Myclass.DCF = "2027-07-14"
-    print("AHHHHHHHHHHHHHHHHHHHHHHHHHH", "Emission = ", Myclass.Emission, "DATE PREMIER remboursement = ", Myclass.DPR, "DATE PREMIER RAPPEL", Myclass.DR1, "Date d'avant dernier remboursement ", Myclass.DADR, "DATE de constatation finale", Myclass.DCF,"Date d'échéance",  Myclass.DEC, "Avant derniere date de constatation finale", Myclass.ADCF)
+
+    print("------------------------------")
+    print("Emission = ",  Myclass.Emission)
+    print("Premier  constat Rappel = ",  Myclass.DPR)
+    print("Premier remboursement Rappel = ",  Myclass.DR1)
+    print("avant derniere date constat = ",  Myclass.ADCF)
+    print("avant derniere date remboursement = ",  Myclass.DADR)
+    print("derniere date constat finale = ",  Myclass.DCF)
+    print("date echeance = ",  Myclass.DEC)
+
+
+    print("------------------------------")
 
     resultmain = main(Myclass)  
     if resultmain == 0:

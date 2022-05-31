@@ -28,10 +28,12 @@ def legende(Class, fig, green, black, blue, red, niveau_capital):
 
 #Laxe abcisse ordonnée, parametrage visuel
 def abcisse_ordonnee(Class, fig, niveau_autocall, niveau_coupon,niveau_capital, green, blue):
+    text_legende = Class.SJR3 + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
+
     fig.add_annotation( x=4.5, y=140, ax=4.5, ay=0, xref='x', yref='y', axref='x', ayref='y',
      text='', showarrow=True, arrowhead=3, arrowwidth=2, arrowcolor='black')
 
-    fig.add_annotation(x=75, y=0, ax=4.5, ay=0, xref='x', yref='y', axref='x', ayref='y', text='',
+    fig.add_annotation(x=80, y=0, ax=4.5, ay=0, xref='x', yref='y', axref='x', ayref='y', text='',
     showarrow=True, arrowhead=3, arrowwidth=2, arrowcolor='black')
     
     # Periode + le nombre (exempla trimestre 1 a 3)
@@ -40,7 +42,7 @@ def abcisse_ordonnee(Class, fig, niveau_autocall, niveau_coupon,niveau_capital, 
     else:
         firstvaluexabciss = Class.F0 + " 1"
 
-    firstvaluexabciss = firstvaluexabciss.capitalize() #les legendes sous les blocs
+    firstvaluexabcissa = firstvaluexabciss.capitalize() #les legendes sous les blocs
     croisement =  int(float(Class.BAC) - float(Class.BCPN) +1)
     secondvaluexabciss = Class.F0 + Class.F0s + " " +  str(int(Class.PR1))  + " à " + str(croisement)
     secondvaluexabciss = secondvaluexabciss.capitalize()
@@ -82,6 +84,8 @@ def abcisse_ordonnee(Class, fig, niveau_autocall, niveau_coupon,niveau_capital, 
                     )
     fig.add_annotation(x=2.5, y=niveau_capital,text= str(niveau_capital) +"%", showarrow=False,
                     font=dict(family="Proxima Nova", size=14, color="red" ),
+                    )
+    fig.add_annotation(x=2.0, y=130, text= text_legende, showarrow=False, font=dict(family="Proxima Nova", size=12, color="black" ),
                     )
 
     

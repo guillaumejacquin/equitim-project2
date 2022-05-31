@@ -1,5 +1,6 @@
 from cmd import Cmd
 from dataclasses import dataclass
+from datetime import date
 from typing import List
 from unicodedata import name
 
@@ -14,6 +15,8 @@ from pptx.util import Pt
 
 from copy import deepcopy
 from pptx.table import Table, _Row, _Column, _Cell
+
+from calculs.periodes.pr import PR1
 
 def elementsToReplaceDegressivite(Class, shapes):
     #si degressif on supprime les balises
@@ -53,6 +56,7 @@ def elementsToReplaceRemplacement(Class, shapes):
     replace_text({'<F0>':  Class.F0}, shapes)
     replace_text({'<DDCI>':  Class.DDCI_affichage}, shapes)
     replace_text({'<DDCI_MAJ>':  Class.DDCI_MAJ}, shapes)
+    replace_text({'<DDCI_M_B_STRIKE>':  Class.DDCI_M_B_Strike}, shapes)
 
     replace_text({'<TSJ1>':  Class.TSJ[0]}, shapes)
 
@@ -181,6 +185,8 @@ def elementsToReplaceCalcul(Class, shapes):
     replace_text({'<SJR7>': Class.SJR7}, shapes)
 
     replace_text({'<F1>': Class.F1}, shapes)
+    replace_text({'<F1_MAJ>':  Class.F1_MAJ}, shapes)
+
     replace_text({'<F2>': Class.F2}, shapes)
 
     replace_text({'<TDS>': Class.TDS}, shapes)
@@ -203,6 +209,8 @@ def elementsToReplaceCalcul(Class, shapes):
     replace_text({'<type_bar2>': Class.type_bar2}, shapes) 
     replace_text({'<1PR-1>': Class.PR1_1}, shapes) 
     replace_text({'<ABAC2>': Class.ABAC2}, shapes) 
+    replace_text({'<ABAC2_MAJ>': Class.ABAC2_MAJ}, shapes) 
+
     replace_text({'<DDP>': Class.DDP}, shapes) 
     replace_text({'<Mémoire>': Class.Memoire}, shapes) 
     replace_text({'<Mémoire2>': Class.Memoire2}, shapes) 
@@ -346,14 +354,29 @@ def Dates_maj(Class, shapes):
     Replace_Boucle_Dates(Class, shapes)
 
 def Replace_Boucle_Dates(Class, shapes):
-    replace_text({'<Datesconstatations1>': Class.Datesconstatations1}, shapes)
+    if (Class.F0 == "mois"):
+        jours = str(Class.PDC1)[8:10]
+        date_constatation = "chaque " + jours + " du mois, à partir de la fin du  mois, à partir de la date du " + Class.PDC1 + "(inclus),  et jusqu'au " + Class.DCF + " (inclus), ou le jour ouvré suivant si le " + jours + " du mois n'est pas un jour ouvré"
+        date_constatation3 = date_constatation
+    else:
+        date_constatation = Class.Datesconstatations1
+        date_constatation3 = Class.Datesconstatations3
+    if (Class.F0 == "mois"):
+        jours = str(Class.PDC1)[8:10]
+        datesremb1 = "le " + Class.NJO + " de Bourse suivant la date de constatation mensuelle"
+        datesremb3 = datesremb1
+    else:
+        datesremb1 = Class.Datesremb1
+        datesremb3 = datesremb1
+
+    replace_text({'<Datesconstatations1>': date_constatation}, shapes)
     replace_text({'<Datesconstatations2>': Class.Datesconstatations2}, shapes)
-    replace_text({'<Datesconstatations3>': Class.Datesconstatations3}, shapes)
+    replace_text({'<Datesconstatations3>': date_constatation3}, shapes)
     replace_text({'<Datesconstatations4>': Class.Datesconstatations4}, shapes)
 
-    replace_text({'<Datesremb1>': Class.Datesremb1}, shapes)
+    replace_text({'<Datesremb1>': datesremb1}, shapes)
     replace_text({'<Datesremb2>': Class.Datesremb2}, shapes)
-    replace_text({'<Datesremb3>': Class.Datesremb3}, shapes)
+    replace_text({'<Datesremb3>': datesremb3}, shapes)
     replace_text({'<Datesremb4>': Class.Datesremb4}, shapes)
     replace_text({'<Datesremb5>': Class.Datesremb5}, shapes)
     replace_text({'<Datesremb6>': Class.Datesremb6}, shapes)
@@ -368,6 +391,12 @@ def Replace_Boucle_Dates(Class, shapes):
     replace_text({'<Datespaiement6>': Class.Datespaiement6}, shapes)
     replace_text({'<Datespaiement7>': Class.Datespaiement7}, shapes)
     replace_text({'<Datespaiement8>': Class.Datespaiement8}, shapes)
+    
+    replace_text({'<dates_constat_autocall>': Class.dates_constat_autocall}, shapes)
+    replace_text({'<dates_paiement_autocall>': Class.dates_paiement_autocall}, shapes)
+    replace_text({'<dates_constat_phoenix>': Class.dates_constat_phoenix}, shapes)
+    replace_text({'<dates_paiement_phoenix>': Class.dates_paiement_phoenix}, shapes)
+    replace_text({'<dates_last_remboursement_rappel>': Class.dates_last_remboursement_rappel}, shapes)
 
 #PREMIER RAPPEL A DATE DERNIER RAPPEL
 
@@ -490,24 +519,28 @@ def ChangeTextOnPpt(Class):
                     for col_idx, cell in enumerate(row.cells):
 
                         if (compteur_tab == 1 and col_idx == 0 and row_idx > 0): #on ajoute les sousjacent a la premiere colonne de chaque ligne
-                            cell = table.cell(row_idx, col_idx)
-                            cell.text = str(Class.Yahoo_value_name[row_idx -1]) +" " + str(Class.Yahoo_value_dividende[row_idx -1])
-
+                            try:
+                                cell = table.cell(row_idx, col_idx)
+                                cell.text = str(Class.Yahoo_value_name[row_idx -1]) +" " + str(Class.Yahoo_value_dividende[row_idx -1])
+                            except Exception:
+                                print("pas de tableau de perf")
 
                         # print("%r is cells[%d][%d]" % (cell, row_idx, col_idx))
                         cell = table.cell(row_idx, col_idx)
                         # cell.text = 'TEST DE LA STREET'
                         paragraph = cell.text_frame.paragraphs[0]
-                        paragraph.font.size = Pt(8)
+                        paragraph.font.size = Pt(7)
                         # paragraph.font.color = 'rgb(0, 0, 0)'
 
                         # paragraph.font.color.rgb = screen.bgcolor(color)
 
                         if(compteur_tab ==1 and row_idx >= 1 and col_idx >= 1 ):
-                            cell.text = Class.Yahoo_value[row_idx - 1][col_idx - 1]
-                            paragraph = cell.text_frame.paragraphs[0]
-                            paragraph.font.size = Pt(8)
-                        
+                            try:
+                                cell.text = Class.Yahoo_value[row_idx - 1][col_idx - 1]
+                                paragraph = cell.text_frame.paragraphs[0]
+                                paragraph.font.size = Pt(7)
+                            except Exception: 
+                                print("pas de text sur les paragraphes")
                 compteur_tab +=1
 
 
@@ -541,7 +574,7 @@ def ChangeTextOnPpt(Class):
                         cur_text = shape.text
                         new_text = cur_text.replace(str("<graph5>"), str(""))
                         shape.text = new_text
-                        pic = slide.shapes.add_picture("graph5.png", Inches(0.35), Inches(4.7), width=Inches(7), height=Inches(4.3))
+                        pic = slide.shapes.add_picture("graph5.png", Inches(0.35), Inches(4.7), width=Inches(7.5), height=Inches(4.3))
 
 
     try:

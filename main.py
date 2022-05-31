@@ -46,7 +46,7 @@ from calculs.style.NOMP1 import *
 from calculs.style.NOMSOUSJACENTP1 import *
 from calculs.dates.DDPP import *
 from calculs.dates.boucles.callAllDates2Date import *
-
+from calculs.dates.DDCI_M_B_Strike import *
 #traitement des données
 def start_processus_template(Class):
     PDC1(Class)
@@ -102,7 +102,8 @@ def start_processus_template(Class):
     DDR1_maj(Class)
     DDR1_maj_start(Class)
     callAllDates2Date(Class)
-
+    DDCI_M_B_Strike(Class)
+    # ABAC2_MAJ(Class)
     ALL_TRA(Class)
     #si coupon autocall
     if (Class.Typologie == "coupon autocall"):
@@ -138,4 +139,11 @@ def main(Class):
 
 
 
-    #BALISECM3 FAIRE LES PARENTHESES EN EXPOSANTS
+#date de constat mensuelles
+#DATE SI MENSUEL, chaque "jour" du mois, à partir de la date du <premier rappel> (inclus), 
+# et jusqu'au <date de constat finale> (inclus), ou le jour ouvré suivant si le "jour" du mois n'est pas un jour ouvré
+
+#date remboursement mensuelle
+#le <jour ouvré>  de Bourse suivant la date de constatation mensuelle.
+
+#Lege,nde 3blocs (niveau de l'indice par rapport à son cours/niveau initial de référence)

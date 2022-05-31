@@ -102,8 +102,9 @@ def takeinformations(Class):
                 Class.SPONSOR = Class.SPONSOR + mot + "ERREUR"
                 Class.Site = Class.Site + mot + "ERREUR"
                 Class.TICKER = Class.TICKER + mot + "ERREUR"
-                Class.Yahoo.append(test["Yahoo"])
-                Class.Yahoo_value_name.append(test["Equity"])
+                #Class.Yahoo.append(test["Yahoo"])
+                
+                # Class.Yahoo_value_name.append(test["Equity"])
                 Class.Yahoo_value_dividende.append("dividende inconnu")
 
                 Class.BLOCDIVIDENDE = "ERRORRRRRRRRRR ERRORRRRRRRRRRRRRR ERRORRRRRR"

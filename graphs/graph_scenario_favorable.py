@@ -109,9 +109,9 @@ def traces(Class, fig):
     add_remontee_var = 0    
     if Class.type_bar == "degressif":
         add_remontee_var = 1
-    fig.add_shape(type="line",
-    x0=69, y0=avant_dernier_niveau_de_reference + add_remontee_var, x1=73, y1=avant_dernier_niveau_de_reference + add_remontee_var,
-    line=dict(color=green, width=3),  line_dash="dash")
+    # fig.add_shape(type="line",
+    # x0=69, y0=avant_dernier_niveau_de_reference + add_remontee_var, x1=73, y1=avant_dernier_niveau_de_reference + add_remontee_var,
+    # line=dict(color=green, width=3),  line_dash="dash")
 
 
 
@@ -161,7 +161,7 @@ def texte(Class, fig):
         degressive = ""
     else:
         degressive = "dégressivité"
-    fig.add_annotation(x=44, y=153 ,text= ("Seuil d'activation du mécanisme de la barrière "  + degressive +" de remboursement anticipé automatique <br> à partir de la fin du " + str(Class.F0)+ " " + str(Class.PR1) +  " jusqu'à la fin du "+ str(Class.F0)+ " " + str(Class.ADPR) + " et de versement du gain à l'échéance" ), showarrow=False,
+    fig.add_annotation(x=46.25, y=153 ,text= ("Seuil d'activation du mécanisme de la barrière "  + degressive +" de remboursement anticipé automatique <br> à partir de la fin du " + str(Class.F0)+ " " + str(Class.PR1) +  " jusqu'à la fin du "+ str(Class.F0)+ " " + str(Class.ADPR) + " et de versement du gain à l'échéance" ), showarrow=False,
                         font=dict(family="Proxima Nova", size=10, color=black ), align="left")
     fig.add_annotation(x=28, y=14.5 ,text= ("Seuil de perte en capital à l'échéance" ), showarrow=False,
                         font=dict(family="Proxima Nova", size=10, color=black ), align="left")
@@ -169,6 +169,8 @@ def texte(Class, fig):
     fig.add_annotation(x=25, y=138 ,text= ("Part de capital remboursé" ), showarrow=False,
                         font=dict(family="Proxima Nova", size=10, color=black ), align="left")         
 
+    fig.add_annotation(x=28, y=143.5 ,text= ("Seuil de perte en capital à l'échéance" ), showarrow=False,
+                        font=dict(family="Proxima Nova", size=10, color=black ), align="left")
 
     fig.add_shape(type="line",
         x0=7, y0=153, x1=12, y1=153,
@@ -234,7 +236,7 @@ def athena_annotations(Class, fig):
         add_remontee_var = 4
         
     fig.add_shape(type="line",
-                    x0=23, y0=premier_niveau_autocall, x1=61, y1=avant_dernier_niveau_de_reference + 2 * pasdedegressivite + add_remontee_var,
+                    x0=23, y0=premier_niveau_autocall, x1=71, y1=avant_dernier_niveau_de_reference + 2 * pasdedegressivite + add_remontee_var,
                     line=dict(color=green, width=3),  line_dash="dash")
 
                     
@@ -288,7 +290,7 @@ def phoenix_annotations(Class, fig):
     font=dict(family="Proxima Nova", size=10, color=black), align="left")         
     fig.add_shape(type="line",
         x0=7, y0=133, x1=12, y1=133,
-        line=dict(color=blue, width=2))    
+        line=dict(color=blue, width=1), line_dash="dot")    
     #legende
 
     if (coupon != derniere_observation):
@@ -341,7 +343,7 @@ def phoenix_annotations(Class, fig):
             line=dict(color=green, width=3))
 
             fig.add_shape(type="line",
-                    x0=start_green_line + 3, y0=premier_niveau_autocall, x1=61, y1=avant_dernier_niveau_de_reference + 2 * pasdedegressivite,
+                    x0=start_green_line + 3, y0=premier_niveau_autocall, x1=71, y1=avant_dernier_niveau_de_reference + 2 * pasdedegressivite,
                     line=dict(color=green, width=3),  line_dash="dash")
 
     fig.add_shape(type="line",

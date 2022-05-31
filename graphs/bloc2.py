@@ -6,8 +6,6 @@ import kaleido
 
 #on arrive au bloc des deux graphs , j'ignorais encore qu'on pouvait des fonctions (j'avais eu un bug), bonne chance pour la lecture
 def bloc2(Class, name, whitestrap=False):
-
-    text_legende = ""
     text_legende = Class.SJR3 + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
    
    #valeurs des x_tickers

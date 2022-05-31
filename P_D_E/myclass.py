@@ -150,6 +150,7 @@ class InformationsForm():
         self.DDPP = ""
         self.BFP = ""
         self.PAGE = ""
+        self.DDCI_M_B_Strike = ""
         self.var_degressivite()
 
     def var_degressivite(self):
@@ -223,7 +224,9 @@ class InformationsForm():
         self.DEC_MAJ = ""
         self.DDCI_MAJ = ""
         self.DPCI_MAJ = ""
-   
+        self.F1_MAJ = ""
+        self.ABAC2_MAJ = ""
+
         self.dates_boucle()
 
 
@@ -249,6 +252,11 @@ class InformationsForm():
         self.Datespaiement7 = "[]"
         self.Datespaiement8 = "[]"
 
-        pass
+        self.dates_constat_autocall = ""
+        self.dates_paiement_autocall = ""
+        self.dates_constat_phoenix = ""
+        self.dates_paiement_phoenix = ""
+        self.dates_last_remboursement_rappel = ""
+
 #Graph 2 blocs, si strike moyen ou best strike, afficher dans les blocs en haut la date max des constatations initiales
 #niveau de référence cours de référence bloc 2

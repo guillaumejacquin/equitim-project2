@@ -15,6 +15,8 @@ def bloc3(Class, name, whitestrap=True):
     blue = "#002E8A"
     red = "#C00000"
     black = "#000000"
+    text_legende = Class.SJR3 + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
+
     niveau_autocall = [-50, -50, float(Class.BAC), float(Class.ABDAC), float(Class.DBAC)] #ligne verte
     niveau_coupon = [float(Class.BCPN), float(Class.BCPN), float(Class.BCPN), float(Class.BCPN), float(Class.BCPN)] #ligne noire  niveau coupon
     niveau_capital = float(Class.PDI) #Ligne rouge
@@ -80,7 +82,10 @@ def bloc3(Class, name, whitestrap=True):
     fig.update_xaxes(tickangle=0,
                     tickmode = 'array',
                     tickvals = [10, 27, 44.5],
-                    ticktext= [firstvaluexabciss, secondvaluexabciss, thirdvaluexabciss])
+                    ticktext= [firstvaluexabciss, secondvaluexabciss, thirdvaluexabciss],
+                    color="black"       
+
+                    )
 
     fig.update_yaxes(tickangle=0,
                     tickmode = 'array',
@@ -117,17 +122,17 @@ def bloc3(Class, name, whitestrap=True):
         x0=17, x1=37, y0=niveau_autocall[2], y1=niveau_autocall[3]
     )
 
-
-    fig.add_annotation(x=49, y=niveau_autocall[4] + 3, text=str(niveau_autocall[4]) + "%", showarrow=False,
+    if (Class.BCPN_is_degressif == "oui"):
+        fig.add_annotation(x=48, y=niveau_autocall[4] + 3, text=str(niveau_autocall[4]) + "%", showarrow=False,
                     font=dict( family="Proxima Nova", size=14, color=green ),align="left",
                     )
-    fig.add_annotation(x=37, y=niveau_autocall[3] + 5, text=str(niveau_autocall[3]) + "%", showarrow=False,
-                    font=dict( family="Proxima Nova", size=14, color=green ),align="left",
-                    )
+        fig.add_annotation(x=36, y=niveau_autocall[3] + 5, text=str(niveau_autocall[3]) + "%", showarrow=False,
+                        font=dict( family="Proxima Nova", size=14, color=green ),align="left",
+                        )
     fig.add_shape( # add la ligne horizontale deuxieme block line degressive
-        type="line", line_color=blue, line_width=3, opacity=1, line_dash="dot",
-        x0=39, x1=49, y0=niveau_autocall[4], y1=niveau_autocall[4]
-    )
+            type="line", line_color=blue, line_width=3, opacity=1, line_dash="dot",
+            x0=39, x1=49, y0=niveau_autocall[4], y1=niveau_autocall[4]
+        )
     #!LIGNE VERTE
 
     #LIGNE ROUGE
@@ -172,6 +177,10 @@ def bloc3(Class, name, whitestrap=True):
 
     #les valeurs qu on va mettre
     mystring = "100%"
+
+    fig.add_annotation(x=2.0, y=130, text= text_legende, showarrow=False, font=dict(family="Proxima Nova", size=12, color=black ),
+                    )
+
     if (niveau_autocall[2] != 100):
         fig.add_annotation(x=3.0, y=niveau_autocall[2], text= str(niveau_autocall[2]) +"%", showarrow=False,
                     font=dict(family="Proxima Nova", size=14, color=green ))
@@ -274,7 +283,7 @@ def bloc3(Class, name, whitestrap=True):
         y=(niveau_coupon[0] - (niveau_coupon[0]/2) + 10),
         text=texta,
         showarrow=False,
-        font=dict(color=black, size=10)
+        font=dict(color=black, size=12)
     )
     cpn = ("{:.2f}".format(float(Class.CPN)))
     cpn = cpn.replace(".", ",")
@@ -290,7 +299,7 @@ def bloc3(Class, name, whitestrap=True):
         y=(niveau_coupon[0] + (130-niveau_coupon[0]) /2),
         text=mystring,
         showarrow=False,
-        font=dict(color=black, size=10),
+        font=dict(color=black, size=12),
         
     )
 
@@ -300,7 +309,7 @@ def bloc3(Class, name, whitestrap=True):
         y=(niveau_autocall[3] /2),
         text=mystring,
         showarrow=False,
-        font=dict(color=black, size=10)
+        font=dict(color=black, size=12)
     )
    
 
@@ -310,7 +319,7 @@ def bloc3(Class, name, whitestrap=True):
         y=niveau_autocall[1]/2,
         text=mystring,
         showarrow=False,
-        font=dict(color=black,size=10)
+        font=dict(color=black,size=12)
     )
   
     mystring = "<b>Remboursement à l'échéance(1)</b> :<br><br>Le capital initial diminué de <br> l'intégralité de la baisse enregistrée <br> par l'indice entre <br> la date de constatation initiale <br> et la date de constatation finale"
@@ -325,7 +334,7 @@ def bloc3(Class, name, whitestrap=True):
         y= y/2,
         text=mystring,
         showarrow=False,
-        font=dict(color=black,size=10)
+        font=dict(color=black,size=12)
     )
     
     if (niveau_capital <= 0):
@@ -339,17 +348,17 @@ def bloc3(Class, name, whitestrap=True):
         mystring = mystring.replace("(1)", "⁽¹⁾")
 
         fig.add_annotation(
-        x=(54),
+        x=(55),
         y=(30),
         text=mystring,
         showarrow=False,
-        font=dict(color=black, size=10)
+        font=dict(color=black, size=12)
     )
         y_arrow =abs(float(myvar - (myvar  - float(Class.DBAC))))
         fig.add_annotation(
             x=44,  # arrows' head
-            ay=27,  # arrows' head
-            ax=51,  # arrows' tail
+            ay=31.5,  # arrows' head
+            ax=49.6,  # arrows' tail
             y=y_arrow - (float(Class.DBAC) - niveau_capital)/2,  # arrows' tail
             xref='x',
             yref='y',
@@ -368,7 +377,7 @@ def bloc3(Class, name, whitestrap=True):
         y= float(Class.DBAC) - (float(Class.DBAC) - niveau_capital)/2,
         text=mystring,
         showarrow=False,
-        font=dict(color=black,size=10)
+        font=dict(color=black,size=12)
     )
     mystring = "<b>Remboursement anticipé automatique(1) :</b><br><br>L'intégralité du capital initial <br> + <br> Un coupon de " + str(cpn) + " % <br> + <br> Les éventuels coupons mémorisés au préalable"
     mystring = mystring.replace("(1)", "⁽¹⁾")
@@ -378,10 +387,10 @@ def bloc3(Class, name, whitestrap=True):
         y= 130 - (130 - niveau_autocall[2])/2,
         text=mystring,
         showarrow=False,
-        font=dict(color=black,size=10)
+        font=dict(color=black,size=12)
     )
     if (niveau_autocall[3] != niveau_autocall[2]):
-        x = 20
+        x = 23
     else:
         x= 28
 
@@ -391,7 +400,7 @@ def bloc3(Class, name, whitestrap=True):
             y= niveau_autocall[2] - (niveau_autocall[2] - niveau_coupon[0])/2,
             text=mystring,
             showarrow=False,
-            font=dict(color=black,size=7),
+            font=dict(color=black,size=10),
             # align="left"
         )
         
@@ -400,11 +409,11 @@ def bloc3(Class, name, whitestrap=True):
     mystring = mystring.replace("(1)", "⁽¹⁾")
 
     fig.add_annotation(
-        x=(44.5),
+        x=(44),
         y= 130 - (130 - niveau_autocall[4])/2,
         text=mystring,
         showarrow=False,
-        font=dict(color=black,size=10)
+        font=dict(color=black,size=12)
     )
 
 
@@ -412,7 +421,7 @@ def bloc3(Class, name, whitestrap=True):
     x0=50.5, y0=116, x1=60, y1=116,
     line=dict(color=green,width=3),  line_dash="dot")
     fig.add_annotation(x=55, y=102.5,text= ("Seuil d'activation du <br> mécanisme de <br> remboursement anticipé <br> automatique à partir de la fin du <br>" + Class.F0 +" " + str(int(Class.PR1)) + " jusqu'à la fin du " + str(Class.F0) +"<br> " + str(int(Class.DPRR)-1) ), showarrow=False,
-                    font=dict(family="Proxima Nova", size=12, color=black ), align="left"
+                    font=dict(family="Proxima Nova", size=13, color=black ), align="left"
                     )
 
 
@@ -420,7 +429,7 @@ def bloc3(Class, name, whitestrap=True):
     x0=50.5, y0=77, x1=60, y1=77,
     line=dict(color=blue,width=3),  line_dash="dot")
     fig.add_annotation(x=55, y=71.5,text= ("Seuil de détachement des coupons"), showarrow=False,
-                    font=dict(family="Proxima Nova", size=12, color=black ), align="left"
+                    font=dict(family="Proxima Nova", size=13, color=black ), align="left"
                     )
 
 
@@ -436,7 +445,7 @@ def bloc3(Class, name, whitestrap=True):
     )
 
     fig.add_annotation(x=54, y=45,text= ("Seuil de perte en capital <br> à l'échéance"), showarrow=False,
-                    font=dict(family="Proxima Nova", size=12, color=black ), align="left",
+                    font=dict(family="Proxima Nova", size=13, color=black ), align="left",
                     )
     
     fig.update_layout(

@@ -1,7 +1,6 @@
 def balisedeg(Class):
     deg = float(Class.DEG)
     deg = ("{:.2f}".format(deg))
-
     if (Class.type_bar == "degressif"):
         Class.balisedeg = ", ou si à la date de constatation finale(¹), <SJR1> clôture à un <SJR3> supérieur ou égal à <DBAC> de son <NDR>"
         Class.balisedeg2 = "La barrière de remboursement anticipé automatique est dégressive au fil du temps. Elle est fixée à <BAC> du <NDR>  en fin de <F0> <1PR>, puis décroît de" + deg +"% chaque <F0>, pour atteindre <ABDAC>% du <NDR> à la fin du <F0> <ADPR>."
@@ -38,7 +37,7 @@ def balisedeg(Class):
 
 
     if (Class.type_bar == "degressif" or Class.type_bar == "airbag") and Class.DBAC == Class.PDI:
-        Class.baliseCM4 = """À la date de constatation finale(¹), <SJR1> clôture à un <SJR3> strictement supérieur à <DBAC> de son <NDR> (<NSM> dans cet exemple). L’investisseur récupère alors l’intégralité de son capital initialement investi majorée d’un <GC> de <CPN> par <F0> écoulé depuis le <DDCI> (soit un gain total de <GCE> total )."""
+        Class.baliseCM4 = """À la date de constatation finale(¹), <SJR1> clôture à un <SJR3> strictement supérieur à <DBAC> de son <NDR> (<NSM> dans cet exemple). L’investisseur récupère alors l’intégralité de son capital initialement investi majorée d’un <GC> de <CPN> par <F0> écoulé depuis le <DDCI> (soit un gain total de <GCE> total)."""
 
     else: 
         Class.baliseCM4 = """À la date de constatation finale(¹), <SJR1> clôture à un <SJR3> strictement inférieur à <DBAC> de son <NDR> (<NSM> dans cet exemple). L’investisseur récupère alors l’intégralité de son capital initialement investi.

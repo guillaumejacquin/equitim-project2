@@ -28,8 +28,8 @@ def dic(Class):
     diff = relativedelta.relativedelta(date_time_obj, date_time_obj2)
     year = diff.years
     #arrondir a l'année
-
-    if diff.months >= 0:
+    
+    if diff.months > 0:
         Class.DIC = str(year) + " ans et " + str(diff.months) + " mois"
     
     else:

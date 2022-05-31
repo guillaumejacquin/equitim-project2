@@ -20,18 +20,22 @@ import DatePicker from '@mui/lab/DatePicker';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import Lottie from "react-lottie";
-import { parseISO } from 'date-fns'; 
 
 import * as success from "../components/1127-success.json";
 
-import fs from 'fs'
 
 const menu_déroulant = (template, settemplate) => {
-	const names = ['Test1']
+	const names = ['Test1', 'CSG', "crédit suisse", "test crédit suisse", "goldman sachs fci"]
   const dir = "../../../"
   //template bnp
-
+  
+  function importAll(r) {
+    return r.keys().map(r);
+  }
+  
+  const images = importAll(require.context('../../../Templates', true, /\.pptx/));
+  
+  console.log(images)
   return (
     <div>
     {/* <ul>{listItems}</ul> */}
@@ -43,10 +47,8 @@ const menu_déroulant = (template, settemplate) => {
           onChange={(e)=>settemplate(e.target.value)}
           >
           
-          {names.map(name => <MenuItem value={name}>{name}</MenuItem>)}
+          {names.map(images => <MenuItem value={images}>{images}</MenuItem>)}
 
-          <MenuItem value={"testmercredi"}>testmercredi</MenuItem>
-              {/* <ul>{listItems}</ul> */}
 
         </Select> 
 
@@ -96,6 +98,7 @@ const Page_beta = ({ formData, setForm, navigation }) => {
                 value={Emission}
                 onChange={(Emission) => {
                   setEmission(Emission);
+                  console.log(Emission)
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />

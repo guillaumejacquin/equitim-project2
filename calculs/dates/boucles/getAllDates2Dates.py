@@ -38,7 +38,7 @@ def get_all_dates_between_2_dates_with_special_begin(Class, date_départ, date_d
 
 
     #une boucle inf
-    while var_date_depart <= date_fin:
+    while var_date_depart <= date_fin +  relativedelta(days=1):
         #on récupère les colonnes du excel (parie francaise)
         mask = (df['TARGETirs_holi'] >= var_date_depart) # JOUR SUIVANT
         #ca recree un dataframe de valeurs plus grande
@@ -47,8 +47,10 @@ def get_all_dates_between_2_dates_with_special_begin(Class, date_départ, date_d
 
         if (result >= date_calcul_depart  and result <= date_calcul_fin):
             #si la date est compris entre les 2 dates ou je veux qu il y ait mon tableau
-            if (compteur == 0 and constat == True): #ajouter le premier element
-                result = date_calcul_depart
+            if (compteur == 0 and constat == True): #ajouter le premier element                
+                mask = (df['TARGETirs_holi'] >= date_calcul_depart) # JOUR SUIVANT
+        #ca recree un dataframe de valeurs plus grande
+                result = df[mask]['TARGETirs_holi'].iloc[0]
 
             result = (str(result)[0:10])
             result = result[8:10] + "/" + result[5:7] + "/" + result[0:4] 
@@ -101,12 +103,12 @@ def get_all_dates_between_2_dates_with_special_begin_njo(Class, date_départ, da
         time_to_add = relativedelta(years=1)    
 
 
-    while var_date_depart <= date_fin:
+    while var_date_depart < date_fin + relativedelta(days=1):
         mask = (df['TARGETirs_holi'] >= var_date_depart) # JOUR SUIVANT
         result = df[mask]['TARGETirs_holi'].iloc[0]
         
 
-        if result <= date_calcul_depart:
+        if result < date_calcul_depart:
             print("ici", result)
 
         if (result >= date_calcul_depart and result <= date_calcul_fin):
