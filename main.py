@@ -38,7 +38,7 @@ from graphs.graph_scenario_median import *
 from graphs.graph_scenario_favorable import *
 
 from calculs.dates.dates_maj import *
-
+from calculs.GainOuCoupon import *
 from calculs.Memoire.memoire import *
 from calculs.TRA.tra import *
 from calculs.TRA.CMTRA import *
@@ -92,6 +92,7 @@ def start_processus_template(Class):
     BFP(Class)
     PAGE(Class)
     DDPP(Class)
+    GainOuCoupon(Class)
     PDC1_maj(Class)
     PDC2_maj(Class)
     DDR_maj(Class)

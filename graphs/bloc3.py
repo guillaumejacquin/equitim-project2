@@ -15,7 +15,7 @@ def bloc3(Class, name, whitestrap=True):
     blue = "#002E8A"
     red = "#C00000"
     black = "#000000"
-    text_legende = Class.SJR3 + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
+    text_legende = Class.SJR3.capitalize() + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
 
     niveau_autocall = [-50, -50, float(Class.BAC), float(Class.ABDAC), float(Class.DBAC)] #ligne verte
     niveau_coupon = [float(Class.BCPN), float(Class.BCPN), float(Class.BCPN), float(Class.BCPN), float(Class.BCPN)] #ligne noire  niveau coupon
@@ -343,7 +343,7 @@ def bloc3(Class, name, whitestrap=True):
         mystring = "<b>Remboursement à l'échéance:(1)</b> :<br><br>L'intégralité du capital initial "
         mystring = mystring.replace("(1)", "⁽¹⁾")
 
-    if (float(Class.DBAC) - niveau_capital < 10 or  niveau_capital < 0):
+    if (float(Class.DBAC) - niveau_capital < 15 or  niveau_capital < 0):
         mystring = "<b>Remboursement à l'échéance(1)</b> :<br><br>L'intégralité du capital initial"
         mystring = mystring.replace("(1)", "⁽¹⁾")
 
@@ -420,7 +420,7 @@ def bloc3(Class, name, whitestrap=True):
     fig.add_shape(type="line",
     x0=50.5, y0=116, x1=60, y1=116,
     line=dict(color=green,width=3),  line_dash="dot")
-    fig.add_annotation(x=55, y=102.5,text= ("Seuil d'activation du <br> mécanisme de <br> remboursement anticipé <br> automatique à partir de la fin du <br>" + Class.F0 +" " + str(int(Class.PR1)) + " jusqu'à la fin du " + str(Class.F0) +"<br> " + str(int(Class.DPRR)-1) ), showarrow=False,
+    fig.add_annotation(x=55, y=101,text= ("Seuil d'activation du <br> mécanisme de <br> remboursement anticipé <br> automatique à partir de la fin du <br>" + Class.F0 +" " + str(int(Class.PR1)) + " jusqu'à la fin du " + str(Class.F0) +"<br> " + str(int(Class.DPRR)-1) ), showarrow=False,
                     font=dict(family="Proxima Nova", size=13, color=black ), align="left"
                     )
 
@@ -431,7 +431,6 @@ def bloc3(Class, name, whitestrap=True):
     fig.add_annotation(x=55, y=71.5,text= ("Seuil de détachement des coupons"), showarrow=False,
                     font=dict(family="Proxima Nova", size=13, color=black ), align="left"
                     )
-
 
 
     fig.add_shape(type="line",

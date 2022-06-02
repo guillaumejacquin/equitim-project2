@@ -6,7 +6,7 @@ import kaleido
 
 #on arrive au bloc des deux graphs , j'ignorais encore qu'on pouvait des fonctions (j'avais eu un bug), bonne chance pour la lecture
 def bloc2(Class, name, whitestrap=False):
-    text_legende = Class.SJR3 + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
+    text_legende = Class.SJR3.capitalize() + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
    
    #valeurs des x_tickers
     secondvaluexabciss = Class.F0 + Class.F0s + " " + str(int(Class.PR1))  + " à " + str(int(Class.DPRR) - 1)
@@ -221,9 +221,8 @@ def bloc2(Class, name, whitestrap=False):
     #le premier parametre de range x, permet de mettre ou non un blanc entre le 0 et le premier bloc
    
     fig.add_shape(type="line",
-    x0=37.75, y0=116, x1=45, y1=116,
-    line=dict(color=green,width=1),  line_dash="dot")
-    
+    x0=37.5, y0=115, x1=44.5, y1=116,
+    line=dict(color=green,width=1),  line_dash="dot")   
     
     fig.add_annotation(x=41.5, y=101,text= ("Seuil d'activation du <br> mécanisme de <br> remboursement anticipé <br> automatique à partir de la fin du <br>" + Class.F0  + " " + str(int(Class.PR1)) + " jusqu'à la fin du " + Class.F0 + " "  + str(int(Class.DPRR) -1) + " <br> et de versement des gains à <br> l'échéance"), showarrow=False,
                     font=dict(family="Proxima Nova", size=12, color=black ), align="left"
@@ -231,7 +230,7 @@ def bloc2(Class, name, whitestrap=False):
 
 
     fig.add_shape(type="line",
-    x0=38, y0=60, x1=45, y1=60,
+    x0=37.73, y0=58, x1=45, y1=58,
     line=dict(color=red,width=1),  line_dash="dot")
     
     

@@ -69,16 +69,17 @@ def traces(Class, fig):
     niveau_de_scénario_déf = float(Class.NSD)
     premier_niveau_autocall = float(Class.BAC)
 
-
-    
-
-
     #-----------------------Mettre en int si 100.0 par ex mais pas si 50.2"
     x_niveau_ref = 0
     x_derniere_observation = 0
     x_perte_capital = 0
     x_niveau_def = 0
     x_scenario_def = 0
+
+    text_legende = Class.SJR3 + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
+    
+    fig.add_annotation(x=0.5, y=149, text= (text_legende), showarrow=False,
+                    font=dict(family="Proxima Nova", size=12, color=black ), align="left")
 
     if (niveau_de_référence).is_integer():
         niveau_de_référence = int(niveau_de_référence)
@@ -118,11 +119,11 @@ def traces(Class, fig):
 
 
     fig.add_annotation(x=x_vertical_line +4.75 - x_niveau_ref, y=niveau_de_référence,text= (str(niveau_de_référence) + "%" ), showarrow=False,
-                    font=dict(family="Proxima Nova", size=15, color=black ), align="left")
+                    font=dict(family="Proxima Nova", size=15, color=green ), align="left")
 
     fig.add_shape(type="line",
     x0=x_vertical_line, y0=niveau_de_référence, x1= x_vertical_line - 3, y1=niveau_de_référence,
-    line=dict(color=black, width=4))
+    line=dict(color=green, width=4))
     
     fig.add_annotation(x=x_vertical_line +4.75 - x_derniere_observation, y=derniere_observation,text= (str(derniere_observation) + "%" ), showarrow=False,
                     font=dict(family="Proxima Nova", size=15, color=blue ), align="left")
@@ -138,12 +139,12 @@ def traces(Class, fig):
     x0=x_vertical_line, y0=perte_capital, x1= x_vertical_line - 3, y1=perte_capital,
     line=dict(color=red, width=4))
    
-    fig.add_annotation(x=x_vertical_line + 4.75 - x_scenario_def, y=niveau_de_scénario_déf,text= (str(niveau_de_scénario_déf) + "%" ), showarrow=False,
-                    font=dict(family="Proxima Nova", size=15, color=blue ), align="left")
+    # fig.add_annotation(x=x_vertical_line + 4.75 - x_scenario_def, y=niveau_de_scénario_déf,text= (str(niveau_de_scénario_déf) + "%" ), showarrow=False,
+    #                 font=dict(family="Proxima Nova", size=15, color=blue ), align="left")
 
-    fig.add_shape(type="line",
-    x0=x_vertical_line, y0=niveau_de_scénario_déf, x1= x_vertical_line - 3, y1=niveau_de_scénario_déf,
-    line=dict(color=blue, width=4))
+    # fig.add_shape(type="line",
+    # x0=x_vertical_line, y0=niveau_de_scénario_déf, x1= x_vertical_line - 3, y1=niveau_de_scénario_déf,
+    # line=dict(color=blue, width=4))
 
 
     perte_capital = float(Class.PDI)

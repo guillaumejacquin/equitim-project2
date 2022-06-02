@@ -210,6 +210,7 @@ def elementsToReplaceCalcul(Class, shapes):
     replace_text({'<1PR-1>': Class.PR1_1}, shapes) 
     replace_text({'<ABAC2>': Class.ABAC2}, shapes) 
     replace_text({'<ABAC2_MAJ>': Class.ABAC2_MAJ}, shapes) 
+    replace_text({'<gainoucoupon>': Class.GainOuCoupon}, shapes) 
 
     replace_text({'<DDP>': Class.DDP}, shapes) 
     replace_text({'<Mémoire>': Class.Memoire}, shapes) 

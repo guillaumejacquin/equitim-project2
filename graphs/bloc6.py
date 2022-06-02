@@ -12,13 +12,13 @@ def legende(Class, fig, green, black, blue, red, niveau_capital):
                     font=dict(family="Proxima Nova", size=12, color=black ), align="left"
                     )
     fig.add_shape(type="line",
-    x0=75, y0=77, x1=83, y1=77,
+    x0=74.2, y0=77, x1=83, y1=77,
     line=dict(color=blue,width=3),  line_dash="dot")
     fig.add_annotation(x=80.5, y=71.5,text= ("Seuil de détachement des coupons"), showarrow=False,
                     font=dict(family="Proxima Nova", size=12, color=black ), align="left"
                     )
     fig.add_shape(type="line",
-    x0=75, y0=50, x1=83, y1=50,
+    x0=74.3, y0=50, x1=83, y1=50,
     line=dict(color=red,width=3), line_dash="dash")
 
     fig.add_annotation(x=79, y=45,text= ("Seuil de perte en capital <br> à l'échéance"), showarrow=False,
@@ -28,7 +28,7 @@ def legende(Class, fig, green, black, blue, red, niveau_capital):
 
 #Laxe abcisse ordonnée, parametrage visuel
 def abcisse_ordonnee(Class, fig, niveau_autocall, niveau_coupon,niveau_capital, green, blue):
-    text_legende = Class.SJR3 + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
+    text_legende = Class.SJR3.capitalize() + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
 
     fig.add_annotation( x=4.5, y=140, ax=4.5, ay=0, xref='x', yref='y', axref='x', ayref='y',
      text='', showarrow=True, arrowhead=3, arrowwidth=2, arrowcolor='black')
@@ -42,12 +42,24 @@ def abcisse_ordonnee(Class, fig, niveau_autocall, niveau_coupon,niveau_capital, 
     else:
         firstvaluexabciss = Class.F0 + " 1"
 
+    #ICIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII UN TRUC A CHANGER ################################################################
     firstvaluexabcissa = firstvaluexabciss.capitalize() #les legendes sous les blocs
-    croisement =  int(float(Class.BAC) - float(Class.BCPN) +1)
-    secondvaluexabciss = Class.F0 + Class.F0s + " " +  str(int(Class.PR1))  + " à " + str(croisement)
+
+    degressivite =  float(Class.DEG)
+
+    i = niveau_autocall[2]
+    croisement = float(Class.PR1) - 1
+    while i  >= float(Class.BCPN):
+        croisement += 1
+        i -= degressivite
+        
+
+        pass
+
+    secondvaluexabciss = Class.F0 + Class.F0s + " " +  str(int(Class.PR1))  + " à " + str(int(croisement))
     secondvaluexabciss = secondvaluexabciss.capitalize()
     
-    third_value = Class.F0 + Class.F0s + " " +  str(croisement + 1)  + " à " + str(int(Class.DPRR) - 1)
+    third_value = Class.F0 + Class.F0s + " " +  str(int(croisement) + 1)  + " à " + str(int(Class.DPRR) - 1)
     third_value = third_value.capitalize()
 
     lastvalue = Class.F0  + " " + str(Class.DPRR)

@@ -93,7 +93,7 @@ class InformationsForm():
 
         self.TDS = ""
         
-
+        self.GainOuCoupon = ""
         self.PDC1_affichage = ""
         self.PDC2_affichage = ""
         self.ADCF_affichage = ""

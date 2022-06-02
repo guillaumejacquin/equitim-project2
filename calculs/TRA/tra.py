@@ -195,9 +195,9 @@ def ALL_TRA(Class):
     #les 2 périodes
     période1 = df['dates'].iloc[1]
     période2 = df['dates'].iloc[2]
-    print("------------------------------------------------------------------------------------------------")
-    print(df['dates'])
-    print("------------------------------------------------------------------------------------------------")
+    # print("------------------------------------------------------------------------------------------------")
+    # print(df['dates'])
+    # print("------------------------------------------------------------------------------------------------")
 
     phoenix_3dates(Class, période1, période2)
 
@@ -221,7 +221,7 @@ def ALL_TRA(Class):
     except Exception:
         Class.TRA_MAX_P = 0
     
-    print(Class.TRA_TOUT_1_P, Class.TRA_F_P)
+    #print(Class.TRA_TOUT_1_P, Class.TRA_F_P)
     try:
         Class.TRA_MRA_MAX_P = max(Class.TRA_TOUT_1_P, Class.TRA_F_P) 
     except Exception:

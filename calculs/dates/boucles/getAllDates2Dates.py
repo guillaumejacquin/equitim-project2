@@ -46,6 +46,7 @@ def get_all_dates_between_2_dates_with_special_begin(Class, date_départ, date_d
         #on récupère la premiere valeur de ce dataframe
 
         if (result >= date_calcul_depart  and result <= date_calcul_fin):
+            # print(result)
             #si la date est compris entre les 2 dates ou je veux qu il y ait mon tableau
             if (compteur == 0 and constat == True): #ajouter le premier element                
                 mask = (df['TARGETirs_holi'] >= date_calcul_depart) # JOUR SUIVANT
@@ -54,6 +55,7 @@ def get_all_dates_between_2_dates_with_special_begin(Class, date_départ, date_d
 
             result = (str(result)[0:10])
             result = result[8:10] + "/" + result[5:7] + "/" + result[0:4] 
+
             result_dates.append(str(result))  #le resultat bien ajouté
             compteur += 1
 
@@ -66,7 +68,7 @@ def get_all_dates_between_2_dates_with_special_begin(Class, date_départ, date_d
     real_result = ', '.join(result_dates)
     return(real_result)
 
-def get_all_dates_between_2_dates_with_special_begin_njo(Class, date_départ, date_de_fin, date_debut_analyse, date_fin_analyse,  exclus=False, constat=False):
+def get_all_dates_between_2_dates_with_special_begin_njo(Class, date_départ, date_de_fin, date_debut_analyse, date_fin_analyse,  exclus=False, constat=False, exemple=""):
     date_depart = date_départ
     date_fin = date_de_fin
     compteur=0 
@@ -102,14 +104,27 @@ def get_all_dates_between_2_dates_with_special_begin_njo(Class, date_départ, da
     if (Class.F0 == "année"):
         time_to_add = relativedelta(years=1)    
 
+    if (exemple == "paiement1"):
+        if (Class.F0 == "mois"):
+            time_to_add2 = relativedelta(months=1)    
+            
+        if (Class.F0 == "trimestre"):
+            time_to_add2 = relativedelta(months=3)    
 
-    while var_date_depart < date_fin + relativedelta(days=1):
+        if (Class.F0 == "semestre"):
+            time_to_add2 = relativedelta(months=6)    
+
+        if (Class.F0 == "année"):
+            time_to_add2 = relativedelta(years=1)   
+    else:
+        time_to_add2 = relativedelta(days=0) 
+        
+    while var_date_depart < date_fin + relativedelta(days=1) + time_to_add2:
         mask = (df['TARGETirs_holi'] >= var_date_depart) # JOUR SUIVANT
         result = df[mask]['TARGETirs_holi'].iloc[0]
-        
-
-        if result < date_calcul_depart:
-            print("ici", result)
+    
+        # if result < date_calcul_depart:
+        #     print("ici", result)
 
         if (result >= date_calcul_depart and result <= date_calcul_fin):
             if compteur == 0 and constat ==True:

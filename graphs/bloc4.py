@@ -68,7 +68,7 @@ def bloc4_simple_tickers(tickers, Class, Name):
     try:
         while is_business_day != True:
             end_date = end_date - datetime.timedelta(days=1)
-            is_business_day = bdays.is_on_offset(start_date)
+            is_business_day = bdays.is_on_offset(end_date)
         #end_date/startdate -1
         start_date = end_date - relativedelta(days=1)
         start_date = end_date - relativedelta(years=12)
@@ -89,11 +89,10 @@ def bloc4_simple_tickers(tickers, Class, Name):
         fig = px.line(data_frame = adj_close.index
                         ,x = adj_close.index
                         ,y = [adj_close],
-                        
+                        title="En points",
+
                         )
         fig.update_traces(line_color='#B9A049')
-
-        newnames = {'wide_variable_0': tickers[0]}
 
         fig.update_layout(
             xaxis=dict(
@@ -113,7 +112,7 @@ def bloc4_simple_tickers(tickers, Class, Name):
             ),
             yaxis=dict(
                 showgrid=True,
-                zeroline=False,
+                zeroline=True,
                 showline=False,
                 showticklabels=True,
                 ticks='outside',
@@ -122,13 +121,21 @@ def bloc4_simple_tickers(tickers, Class, Name):
                 linecolor='rgb(0, 0, 0)',
                 linewidth= 1,
                 title=None,
-                ticksuffix= "%",
                 tickfont=dict(
                     family='Proxima Nova',
                     size=13,
                     color='rgb(82, 82, 82)',
                     )
-            ),#E5EBF7
+            ),#E5EBF7  
+            title=dict(
+                x=0.09,
+                y=0.85,
+                font=dict(
+                    family="Arial",
+                    size=10,
+                    color='#000000'
+                )
+            ),
             showlegend=True,
             legend_title=" ",
 
@@ -141,15 +148,15 @@ def bloc4_simple_tickers(tickers, Class, Name):
             )
         )
 
-        fig.add_annotation( x=adj_close.index[0] +  relativedelta(days=15), y=max_value, ax=adj_close.index[0] + relativedelta(days=15), ay=0, xref='x', yref='y', axref='x', ayref='y',
-     text='', showarrow=True, arrowhead=3, arrowwidth=2, arrowcolor='black')
+        fig.add_annotation( x=adj_close.index[0] - relativedelta(days=15), y=max_value, ax=adj_close.index[0] - relativedelta(days=15), ay=0, xref='x', yref='y', axref='x', ayref='y',
+     text='', showarrow=True, arrowhead=3, arrowwidth=1, arrowcolor='black')
 
-        fig.add_annotation(x=adj_close.index[-1] +  relativedelta(months=10), y=0, ax=adj_close.index[0], ay=0, xref='x', yref='y', axref='x', ayref='y',
-     text='', showarrow=True, arrowhead=3, arrowwidth=2, arrowcolor='black')
+        fig.add_annotation(x=adj_close.index[-1] +  relativedelta(months=10), y=0, ax=adj_close.index[0] - relativedelta(days=30) , ay=0, xref='x', yref='y', axref='x', ayref='y',
+     text='', showarrow=True, arrowhead=3, arrowwidth=1, arrowcolor='black')
 
         fig.data[0].line.color = 'rgb(197, 175, 92)'
         fig.data[0].line.width = 1
-        fig.data[0].name = tickers[0]
+        fig.data[0].name = Class.Yahoo_value_name[0]
         
 
 
@@ -255,6 +262,7 @@ def bloc4_multiple_tickers(tickers, Class, Name):
         df_list = []
         result = pd.DataFrame()
         name = []
+        i = 0
         # User pandas_reader.data.DataReader to load the desired data. As simple as that.
         for datas in tickers:
             try:
@@ -265,11 +273,12 @@ def bloc4_multiple_tickers(tickers, Class, Name):
                 adj_close.columns = ['Adj Close']
 
                 df_list.append(adj_close)
-
                 
                 panel_data[datas] = (panel_data['Adj Close'] / lastvalue) * 100
                 result[datas] = (panel_data['Adj Close'] / lastvalue) * 100
                 name.append(datas)
+                print("aasoikjoasjaisooajisioaj", Class.Yahoo_value_name)
+                i += 1
             except Exception:
                 print("erreur tickers")
 
@@ -281,29 +290,51 @@ def bloc4_multiple_tickers(tickers, Class, Name):
                 fig = px.line(data_frame = result
                         ,x = result.index
                         ,y = [result[name[0]],result[name[1]]],
+                                                title="En points",
+
                         ) 
-        
+                fig.data[0].name = Class.Yahoo_value_name[0]
+                fig.data[1].name = Class.Yahoo_value_name[1]
+
         if len(name) == 3:
                 fig = px.line(data_frame = result
                         ,x = result.index
-                        ,y = [result[name[0]],result[name[1]], result[name[2]]]
+                        ,y = [result[name[0]],result[name[1]], result[name[2]]],
+                                                title="En points",
+
                         )
+                fig.data[0].name = Class.Yahoo_value_name[0]
+                fig.data[1].name = Class.Yahoo_value_name[1]
+                fig.data[2].name = Class.Yahoo_value_name[2]
 
         if len(name) == 4:
                 fig = px.line(data_frame = result
                         ,x = result.index
-                        ,y = [result[name[0]],result[name[1]], result[name[2]], result[name[3]]]
-                        )
+                        ,y = [result[name[0]],result[name[1]], result[name[2]], result[name[3]]],
+                                                title="En points",
 
+                        )
+                fig.data[0].name = Class.Yahoo_value_name[0]
+                fig.data[1].name = Class.Yahoo_value_name[1]
+                fig.data[2].name = Class.Yahoo_value_name[2]
+                fig.data[3].name = Class.Yahoo_value_name[3]
 
         if len(name) == 5:
                 fig = px.line(data_frame = result
                         ,x = result.index
-                        ,y = [result[name[0]],result[name[1]], result[name[2]], result[name[3]], result[name[4]]]
+                        ,y = [result[name[0]],result[name[1]], result[name[2]], result[name[3]], result[name[4]]],
+                                                title="En points",
+
                         )
-        
+                fig.data[0].name = Class.Yahoo_value_name[0]
+                fig.data[1].name = Class.Yahoo_value_name[1]
+                fig.data[2].name = Class.Yahoo_value_name[2]
+                fig.data[3].name = Class.Yahoo_value_name[3]
+                fig.data[4].name = Class.Yahoo_value_name[4]
+
         for color_line in range(len(name)): #tracer des couleurs des lignes
             fig['data'][color_line]['line']['color']=colors[color_line]
+            #fig['data'][color_line]['line']['name']= Class.Yahoo_value_name[color_line]
 
         fig.update_layout(
                 xaxis=dict(
@@ -338,6 +369,15 @@ def bloc4_multiple_tickers(tickers, Class, Name):
                         color='rgb(82, 82, 82)',
                         )
                 ),
+                 title=dict(
+                x=0.09,
+                y=0.85,
+                font=dict(
+                    family="Arial",
+                    size=10,
+                    color='#000000'
+                )
+            ),
                 showlegend=True,
                 legend_title=" ",
 
@@ -358,11 +398,11 @@ def bloc4_multiple_tickers(tickers, Class, Name):
         max_max_value = (max(max_value))
 
         fig.add_annotation( x=result.index[0] +  relativedelta(days=15), y=max_max_value, ax=result.index[0] + relativedelta(days=15), ay=0, xref='x', yref='y', axref='x', ayref='y',
-     text='', showarrow=True, arrowhead=3, arrowwidth=3, arrowcolor='black')
+     text='', showarrow=True, arrowhead=3, arrowwidth=1, arrowcolor='black')
 
      
         fig.add_annotation(x=result.index[-1], y=0, ax=result.index[0], ay=0, xref='x', yref='y', axref='x', ayref='y',
-     text='', showarrow=True, arrowhead=3, arrowwidth=2, arrowcolor='black')
+     text='', showarrow=True, arrowhead=3, arrowwidth=1, arrowcolor='black')
         # fig.show()
         time_to_add_style = relativedelta(days=5)    
         time_to_add = relativedelta(years=1)    

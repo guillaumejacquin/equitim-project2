@@ -51,6 +51,7 @@ def params(fig):
 
 
 def axes_ordonees(fig):
+    
     fig.add_annotation( x=1.5, y=140, ax=1.5, ay=17, xref='x', yref='y', axref='x', ayref='y',
      text='', showarrow=True, arrowhead=3, arrowwidth=2, arrowcolor='black')
 
@@ -61,6 +62,13 @@ def axes_ordonees(fig):
     return(fig)
 
 def traces(Class, fig):
+    text_legende = Class.SJR3 + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
+    
+    fig.add_annotation(x=0.5, y=149, text= (text_legende), showarrow=False,
+                    font=dict(family="Proxima Nova", size=12, color=black ), align="left")
+    
+    fig.add_annotation(x=82, y=18, ax=1, ay=18, xref='x', yref='y', axref='x', ayref='y', text='',
+    showarrow=True, arrowhead=3, arrowwidth=2, arrowcolor='black')
     niveau_de_référence = float(Class.BAC)
     
     avant_dernier_niveau_de_reference = float(Class.ABDAC)
@@ -119,11 +127,11 @@ def traces(Class, fig):
 
 
     fig.add_annotation(x=x_vertical_line +4.75 - x_niveau_ref, y=niveau_de_référence,text= (str(niveau_de_référence) + "%" ), showarrow=False,
-                    font=dict(family="Proxima Nova", size=15, color=black ), align="left")
+                    font=dict(family="Proxima Nova", size=15, color=green ), align="left")
 
     fig.add_shape(type="line",
     x0=x_vertical_line, y0=niveau_de_référence, x1= x_vertical_line - 3, y1=niveau_de_référence,
-    line=dict(color=black, width=4))
+    line=dict(color=green, width=4))
     
     fig.add_annotation(x=x_vertical_line +4.75 - x_derniere_observation, y=derniere_observation,text= (str(derniere_observation) + "%" ), showarrow=False,
                     font=dict(family="Proxima Nova", size=15, color=blue ), align="left")
