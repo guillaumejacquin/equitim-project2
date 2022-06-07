@@ -29,6 +29,14 @@ def DDR_maj(Class):
     DDR_maj_constructor = Class.DDR[0:2] + " " + month_string + " " + Class.DDR[6:10] 
     Class.DDR_MAJ = DDR_maj_constructor
 
+def DPR_maj(Class):
+    month_string = (Class.DPR[5:7])
+    month_string = int(month_string)
+    month_string = (month[month_string])
+
+    DDR_maj_constructor = Class.DPR[8:10] + " " + month_string + " " + Class.DPR[0:4] 
+    Class.DPR_MAJ = DDR_maj_constructor
+
 def DEC_maj(Class):
     month_string = (Class.DEC[5:7])
     month_string = int(month_string)

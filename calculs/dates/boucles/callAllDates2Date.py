@@ -62,7 +62,8 @@ def callAllDates2Date(Class):
 
     Class.dates_constat_phoenix = get_all_dates_between_2_dates_with_special_begin(Class, Class.DDCI, Class.DEC, dpr, Class.DCF, False, False)
     Class.dates_paiement_phoenix = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DEC, dpr, Class.DCF, False, False)
-    Class.dates_last_remboursement_rappel = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DEC, dpr, Class.DADR, False, True)
+
+    Class.dates_last_remboursement_rappel = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DEC, Class.DR1, Class.DADR, False, True)
 
 #pr
 # 

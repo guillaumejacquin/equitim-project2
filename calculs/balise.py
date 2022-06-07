@@ -3,7 +3,7 @@ def balise(Class):
     strike = Class.type_strike
     ndr = Class.NDR
     sjr1 = Class.SJR1
-    sjr3 = Class.SJR3
+    sjr3 = Class.SJR5
     ddi = Class.DDCI_affichage
     ddi2 = Class.DPCI
     ddi2 = ddi2[8:10] + "/" + ddi2[5:7] + "/" + ddi2[0:4]

@@ -44,7 +44,7 @@ def BFP(Class):
     
 def PAGE(Class): #balise pour le bas de page
     if (Class.type_bar2 == " "):
-        Class.PAGE = "page 7"
+        Class.PAGE = "page 8"
 
     else:
-        Class.PAGE = "page 8"
+        Class.PAGE = "page 7"

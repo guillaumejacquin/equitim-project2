@@ -157,6 +157,8 @@ def elementsToReplaceCalcul(Class, shapes):
     pdiperf = str(int(Class.PDIPERF)) + "%"
     pdiperf = pdiperf.replace(".", ",")
 
+
+    replace_text({'<legendetickers>':  Class.legende_tickers}, shapes)
     replace_text({'<PDIPERF>': pdiperf}, shapes)
     replace_text({'<1PR>': Class.PR1}, shapes)
     replace_text({'<DPRR>': Class.DPRR}, shapes)
@@ -351,10 +353,17 @@ def Dates_maj(Class, shapes):
     replace_text({'<1PDC_MAJ>': Class.PDC1_MAJ}, shapes)
     replace_text({'<2PDC_MAJ>': Class.PDC2_MAJ}, shapes)
     replace_text({'<DDR_MAJ>': Class.DDR_MAJ}, shapes)
+    replace_text({'<DPR_MAJ>': Class.DPR_MAJ}, shapes)
+
     replace_text({'<DEC_MAJ>': Class.DEC_MAJ}, shapes)
     Replace_Boucle_Dates(Class, shapes)
 
 def Replace_Boucle_Dates(Class, shapes):
+
+    if Class.F0 == "jours":
+        Class.dates_constat_autocall = "Chaque jour ouvré entre le " + Class.DPR_MAJ + " (inclus) et le " + Class.DCF_MAJ +"."
+        Class.dates_paiement_autocall = "Le " + str(Class.NJO) + "e jour ouvré suivant la date de constatation quotidienne."
+
     if (Class.F0 == "mois"):
         jours = str(Class.PDC1)[8:10]
         date_constatation = "chaque " + jours + " du mois, à partir de la fin du  mois, à partir de la date du " + Class.PDC1 + "(inclus),  et jusqu'au " + Class.DCF + " (inclus), ou le jour ouvré suivant si le " + jours + " du mois n'est pas un jour ouvré"
@@ -393,6 +402,8 @@ def Replace_Boucle_Dates(Class, shapes):
     replace_text({'<Datespaiement7>': Class.Datespaiement7}, shapes)
     replace_text({'<Datespaiement8>': Class.Datespaiement8}, shapes)
     
+   
+
     replace_text({'<dates_constat_autocall>': Class.dates_constat_autocall}, shapes)
     replace_text({'<dates_paiement_autocall>': Class.dates_paiement_autocall}, shapes)
     replace_text({'<dates_constat_phoenix>': Class.dates_constat_phoenix}, shapes)

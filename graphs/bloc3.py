@@ -68,15 +68,21 @@ def bloc3(Class, name, whitestrap=True):
 
     fig.add_annotation(x=50, y=0, ax=4.5, ay=0, xref='x', yref='y', axref='x', ayref='y', text='',
     showarrow=True, arrowhead=3, arrowwidth=2, arrowcolor='black')
-    
-    # Periode + le nombre (exempla trimestre 1 a 3)
-    firstvaluexabciss = Class.F0 + Class.F0s + " 1 à " +  str(int(Class.PR1) -1)
-    firstvaluexabciss = firstvaluexabciss.capitalize()
 
-    secondvaluexabciss = Class.F0 + Class.F0s + " " +  str(int(Class.PR1))  + " à " + str(int(Class.DPRR) - 1)
+    if (Class.F0 == "jours"):
+        firstvaluexabciss = "Année" + Class.F0s + " 1 à " +  str(int(int(Class.PR1)/365))
+        secondvaluexabciss = "Année " + Class.F0s + " " +  str(int(int(Class.PR1)/365 +1))  + " à " + str(int(int(Class.DPRR)/365))
+        thirdvaluexabciss = "Année "  +" " + str(int(int(Class.DPRR)/365))
+
+    else:
+        firstvaluexabciss = Class.F0 + Class.F0s + " 1 à " +  str(int(Class.PR1) -1)
+        secondvaluexabciss = Class.F0 + Class.F0s + " " +  str(int(Class.PR1))  + " à " + str(int(Class.DPRR) - 1) 
+        thirdvaluexabciss = Class.F0  +" " + str(Class.DPRR)
+
+
+    # Periode + le nombre (exempla trimestre 1 a 3)
+    firstvaluexabciss = firstvaluexabciss.capitalize()
     secondvaluexabciss = secondvaluexabciss.capitalize()
-  
-    thirdvaluexabciss = Class.F0  +" " + str(Class.DPRR)
     thirdvaluexabciss = thirdvaluexabciss.capitalize()
 
     fig.update_xaxes(tickangle=0,
@@ -285,8 +291,13 @@ def bloc3(Class, name, whitestrap=True):
         showarrow=False,
         font=dict(color=black, size=12)
     )
-    cpn = ("{:.2f}".format(float(Class.CPN)))
-    cpn = cpn.replace(".", ",")
+    cpn = float(Class.CPN)
+    len_cpn = (str(cpn)[::-1].find('.'))
+
+    if (len_cpn < 2):
+            cpn = (f'{float(Class.CPN):.2f}')
+
+    cpn = str(cpn).replace(".", ",")
 
  
     gce = ("{:.2f}".format(float(Class.GCE)))
@@ -330,7 +341,7 @@ def bloc3(Class, name, whitestrap=True):
     else:
         y = niveau_capital
     fig.add_annotation(
-        x=(44),
+        x=(42),
         y= y/2,
         text=mystring,
         showarrow=False,
@@ -340,7 +351,7 @@ def bloc3(Class, name, whitestrap=True):
     if (niveau_capital <= 0):
         mystring= " "
     else:
-        mystring = "<b>Remboursement à l'échéance:(1)</b> :<br><br>L'intégralité du capital initial "
+        mystring = "<b>Remboursement à l'échéance(1)</b> :<br><br>L'intégralité du capital initial "
         mystring = mystring.replace("(1)", "⁽¹⁾")
 
     if (float(Class.DBAC) - niveau_capital < 15 or  niveau_capital < 0):
@@ -348,7 +359,7 @@ def bloc3(Class, name, whitestrap=True):
         mystring = mystring.replace("(1)", "⁽¹⁾")
 
         fig.add_annotation(
-        x=(55),
+        x=(52),
         y=(30),
         text=mystring,
         showarrow=False,

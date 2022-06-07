@@ -77,7 +77,7 @@ def traces(Class, fig):
 
     text_legende = Class.SJR3 + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
     
-    fig.add_annotation(x=0.5, y=169, text= (text_legende), showarrow=False,
+    fig.add_annotation(x=0.6, y=169, text= (text_legende), showarrow=False,
                     font=dict(family="Proxima Nova", size=12, color=black ), align="left")
 
     if (niveau_de_référence).is_integer():
@@ -166,7 +166,7 @@ def texte(Class, fig):
         degressive = ""
     else:
         degressive = "dégressivité"
-    fig.add_annotation(x=46.25, y=153 ,text= ("Seuil d'activation du mécanisme de la barrière "  + degressive +" de remboursement anticipé automatique <br> à partir de la fin du " + str(Class.F0)+ " " + str(Class.PR1) +  " jusqu'à la fin du "+ str(Class.F0)+ " " + str(Class.ADPR) + " et de versement du gain à l'échéance" ), showarrow=False,
+    fig.add_annotation(x=46.25, y=153 ,text= ("Seuil d'activation du mécanisme de la barrière "  + degressive +" de remboursement anticipé automatique <br> à partir de la fin du " + str(Class.F0)+ " " + str(Class.PR1) +  " jusqu'à la fin du "+ str(Class.F0)+ " " + str(Class.ADPR) ), showarrow=False,
                         font=dict(family="Proxima Nova", size=10, color=black ), align="left")
     fig.add_annotation(x=28, y=14.5 ,text= ("Seuil de perte en capital à l'échéance" ), showarrow=False,
                         font=dict(family="Proxima Nova", size=10, color=black ), align="left")
@@ -378,13 +378,22 @@ def is_athena_or_phoenix_annotations(Class, fig):
         perfmax = (f'{float(perfmax):.2f}')
         string = str(perfmax)  +"% ="
 
-        cpn = (f'{float(cpn):.2f}')
+        cpn = float(Class.CPN)
+        len_cpn = (str(cpn)[::-1].find('.'))
+
+        if (len_cpn < 2):
+                cpn = (f'{float(Class.CPN):.2f}')        
         str2 = "100% + " + str(prappel) + " x " + str(cpn) + "%" 
 
     else:
         perfmax = 100 + 1 * cpn
         perfmax = (f'{float(perfmax):.2f}')
         cpn = (f'{float(cpn):.2f}')
+        cpn = float(Class.CPN)
+        len_cpn = (str(cpn)[::-1].find('.'))
+
+        if (len_cpn < 2):
+                cpn = (f'{float(Class.CPN):.2f}')
 
         string = str(perfmax)  + "% ="
         str2 ="100% + 1 x " + str(cpn) + "%"

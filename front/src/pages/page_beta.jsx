@@ -25,7 +25,7 @@ import * as success from "../components/1127-success.json";
 
 
 const menu_déroulant = (template, settemplate) => {
-	const names = ['Test1', 'CSG', "crédit suisse", "test crédit suisse", "goldman sachs fci", "morgan"]
+	const names = ['testmercredi', 'CSG', "crédit suisse", "test crédit suisse", "goldman sachs fci", "morgan"]
   const dir = "../../../"
   //template bnp
   

@@ -64,7 +64,7 @@ def axes_ordonees(fig):
 def traces(Class, fig):
     text_legende = Class.SJR3 + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
     
-    fig.add_annotation(x=0.5, y=149, text= (text_legende), showarrow=False,
+    fig.add_annotation(x=0.6, y=149, text= (text_legende), showarrow=False,
                     font=dict(family="Proxima Nova", size=12, color=black ), align="left")
     
     fig.add_annotation(x=82, y=18, ax=1, ay=18, xref='x', yref='y', axref='x', ayref='y', text='',
@@ -171,7 +171,7 @@ def texte(Class, fig):
         degressive = ""
     else:
         degressive = "dégressivité"
-    fig.add_annotation(x=46.25, y=133 ,text= ("Seuil d'activation du mécanisme de la barrière "  + degressive +" de remboursement anticipé automatique <br> à partir de la fin du " + str(Class.F0)+ " " + str(Class.PR1) +  " jusqu'à la fin du "+ str(Class.F0)+ " " + str(Class.ADPR) + " et de versement du gain à l'échéance" ), showarrow=False,
+    fig.add_annotation(x=46.25, y=133 ,text= ("Seuil d'activation du mécanisme de la barrière "  + degressive +" de remboursement anticipé automatique <br> à partir de la fin du " + str(Class.F0)+ " " + str(Class.PR1) +  " jusqu'à la fin du "+ str(Class.F0)+ " " + str(Class.ADPR) ), showarrow=False,
                         font=dict(family="Proxima Nova", size=10, color=black ), align="left")
 
     fig.add_annotation(x=28, y=123.5 ,text= ("Seuil de perte en capital à l'échéance" ), showarrow=False,
@@ -210,8 +210,10 @@ def athena_annotations(Class, fig):
     avant_dernier_niveau_de_reference = float(Class.ABDAC)
     pasdedegressivite = float(Class.DEG)
 
+    if frequence == "jours":
+        prefix= "J"
  
-    if frequence == "jours" or frequence == "année":
+    if frequence == "année":
         prefix = "A"
     
     if frequence == "mois":

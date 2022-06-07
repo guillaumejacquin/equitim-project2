@@ -9,9 +9,15 @@ def bloc2(Class, name, whitestrap=False):
     text_legende = Class.SJR3.capitalize() + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
    
    #valeurs des x_tickers
-    secondvaluexabciss = Class.F0 + Class.F0s + " " + str(int(Class.PR1))  + " à " + str(int(Class.DPRR) - 1)
+    if (Class.F0 == "jours"):
+        secondvaluexabciss = "Année" + Class.F0s + " " + str(int(int(Class.PR1)/365 + 1))  + " à " + str(int(int(Class.DPRR)/365))
+        thirdvaluexabciss = "Année "  + " " + str(int(int(Class.DPRR)/365 + 1))
+
+    else:
+        secondvaluexabciss = Class.F0 + Class.F0s + " " + str(int(Class.PR1))  + " à " + str(int(Class.DPRR) - 1)
+        thirdvaluexabciss = Class.F0  + " " + str(Class.DPRR)
+
     secondvaluexabciss = secondvaluexabciss.capitalize()
-    thirdvaluexabciss = Class.F0  +" " + str(Class.DPRR)
     thirdvaluexabciss = thirdvaluexabciss.capitalize()
     gce = ("{:.2f}".format(Class.GCE))
 
@@ -331,7 +337,7 @@ def bloc2(Class, name, whitestrap=False):
     mystring = "<b>Remboursement à l'échéance: </b><br><br>L'intégralité du capital initial<br>+<br>Un gain de " + str(cpn) + "% par " + Class.F0 + " écoulé <br> depuis la date de constatation initiale <br> (soit un gain total de "+ str(gce) + "%)"
     fig.add_annotation(
         x=(32),
-        y=(float(Class.DBAC) + (130- float(Class.DBAC)) /2 +5),
+        y=(float(Class.DBAC) + (130 - float(Class.DBAC)) /2 +5),
         text=mystring,
         showarrow=False,
         font=dict(color=black, size=10)

@@ -31,8 +31,8 @@ from calculs.wordingdeg.balisedeg import *
 import time
 from graphs.bloc3 import *
 from graphs.bloc2 import *
+from graphs.graph_tickers import *
 from graphs.bloc4 import *
-from graphs.bloc6 import *
 from graphs.graph_scenario_defavorable import *
 from graphs.graph_scenario_median import *
 from graphs.graph_scenario_favorable import *
@@ -96,6 +96,8 @@ def start_processus_template(Class):
     PDC1_maj(Class)
     PDC2_maj(Class)
     DDR_maj(Class)
+    DPR_maj(Class)
+
     DEC_maj(Class)
     DCI_maj(Class)
     DCF_maj(Class)

@@ -24,6 +24,10 @@ def get_all_dates_between_2_dates_with_special_begin(Class, date_départ, date_d
     time_to_add = ""
 
     #pour ajouter la fréquence (en fonction de la fréquence)
+
+    if (Class.F0 == "jours"):
+        time_to_add = relativedelta(days=1)   
+
     if (Class.F0 == "mois"):
         time_to_add = relativedelta(months=1)    
         
@@ -91,7 +95,8 @@ def get_all_dates_between_2_dates_with_special_begin_njo(Class, date_départ, da
 
     time_to_add = ""
     nombre_dejours_ouvres = int(Class.NJO) #on y ajoute les jours ouvrés
-
+    if (Class.F0 == "jours"):
+        time_to_add = relativedelta(days=1)   
     if (Class.F0 == "mois"):
         time_to_add = relativedelta(months=1)    
         
@@ -105,6 +110,8 @@ def get_all_dates_between_2_dates_with_special_begin_njo(Class, date_départ, da
         time_to_add = relativedelta(years=1)    
 
     if (exemple == "paiement1"):
+        if (Class.F0 == "jours"):
+            time_to_add2 = relativedelta(days=1)    
         if (Class.F0 == "mois"):
             time_to_add2 = relativedelta(months=1)    
             

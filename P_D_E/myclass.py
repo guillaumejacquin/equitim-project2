@@ -212,12 +212,16 @@ class InformationsForm():
         self.NOMP1 = ""
         self.NOMSOUSJACENTP1 = ""
         self.SJR6P1 = ""
+
+        self.legende_tickers = ""
         self.dates_style()
 
     def dates_style(self):
         self.PDC1_MAJ = ""
         self.PDC2_MAJ = ""
         self.DDR_MAJ = ""
+        self.DPR_MAJ = ""
+
         self.DDR1_MAJ = ""
         self.DDR1_12_MAJ = ""
 
