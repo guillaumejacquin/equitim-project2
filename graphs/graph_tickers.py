@@ -397,15 +397,14 @@ def bloc4_multiple_tickers(tickers, Class, Name):
         firstvalue = adj_close.iloc[0]
         max_value = result.max() + 20
 
-
         max_max_value = (max(max_value))
 
-        fig.add_annotation( x=result.index[0] +  relativedelta(days=15), y=max_max_value, ax=result.index[0] + relativedelta(days=15), ay=0, xref='x', yref='y', axref='x', ayref='y',
+        fig.add_annotation( x=result.index[0] -  relativedelta(days=15), y=max_max_value, ax=result.index[0] - relativedelta(days=15), ay=0, xref='x', yref='y', axref='x', ayref='y',
      text='', showarrow=True, arrowhead=3, arrowwidth=1, arrowcolor='black')
 
-     
-        fig.add_annotation(x=result.index[-1], y=0, ax=result.index[0], ay=0, xref='x', yref='y', axref='x', ayref='y',
+        fig.add_annotation(x=result.index[-1] + relativedelta(months=10), y=0, ax=result.index[0] - relativedelta(days=30), ay=0, xref='x', yref='y', axref='x', ayref='y',
      text='', showarrow=True, arrowhead=3, arrowwidth=1, arrowcolor='black')
+
         # fig.show()
         time_to_add_style = relativedelta(days=5)    
         time_to_add = relativedelta(years=1)    

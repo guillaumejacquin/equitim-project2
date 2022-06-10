@@ -31,11 +31,13 @@ def callAllDates2Date(Class):
     Class.Datesremb1 = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DCF, dpr, Class.DCF, False, False) #Rjouter la premiere date
     Class.Datesremb1 = Class.Datesremb1[:-12]
 
+    Class.Datesremb3 = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DCF, Class.DR1, Class.DCF, False, False) #Rjouter la premiere date
+    Class.Datesremb3 = Class.Datesremb1[:-12]
     # print("date de remboursement autocall = ", Class.Datesremb1)
     # print("-----\n")
 
     #Class.Datesremb2 = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DCF, Class.DDCI, True, False)
-    Class.Datesremb3 = get_all_dates_between_2_dates_with_special_begin(Class, Class.DDCI, Class.DEC, Class.DDCI,Class.DEC, False, True)
+    # Class.Datesremb3 = get_all_dates_between_2_dates_with_special_begin(Class, Class.DDCI, Class.DEC, Class.DDCI,Class.DEC, False, True)
     # Class.Datesremb4 = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DCF, Class.DDCI, True)
     Class.Datesremb5 = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DEC, Class.DDCI,Class.DEC, False, False)
     # Class.Datesremb6 = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DCF, Class.DDCI, True)

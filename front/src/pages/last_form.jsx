@@ -1,0 +1,643 @@
+
+import "./last_form.css";
+import { useState } from 'react';
+import Container from "@material-ui/core/Container";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { FaPiedPiperAlt } from 'react-icons/fa';
+import { FaInternetExplorer } from 'react-icons/fa';
+import { ButtonGroup } from '@material-ui/core';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import FormControl from '@mui/material/FormControl';
+
+import { FaJs } from 'react-icons/fa';
+import { GiNotebook } from "react-icons/gi";
+import { VscGraphLine } from "react-icons/vsc";
+import { GiSpiralLollipop } from "react-icons/gi";
+import { useModal } from 'react-hooks-use-modal';
+import PreLoader2 from "../components/PreLoader2";
+import PreLoader1 from "../components/preloader";
+
+
+import DatePicker from '@mui/lab/DatePicker';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+
+import * as success from "../components/1127-success.json";
+
+
+const Last_form = () => {
+    const [Nom, setNom] = useState('')
+    const [Typologie, setTypologie] = useState('')
+    const [Droit_applicable, setDroit] = useState('')
+    const [Isin, setISIN] = useState('')
+    const [Emission, setEmission] = useState('')
+    const [DCI, setDCI] = useState('')
+    const [DR1, setDR1] = useState('')
+    const [DPR, setDPR] = useState('')
+    const [DADR, setDADR] = useState('')
+    const [DCF, setDCF] = useState('')
+    const [DEC, setDEC] = useState('')
+    const [ADCF, setADCF] = useState('')
+    const [F0, setF0] = useState('')
+    const [TSJ, setTSJ] = useState('')
+    const [DDP, setDDP] = useState('')
+    const [PCS1, setPCS1] = useState('')
+    const [PCS2, setPCS2] = useState('')
+    const [PCS3, setPCS3] = useState('')
+    const [PCS4, setPCS4] = useState('')
+    const [PCS5, setPCS5] = useState('')
+    const [CPN, setCPN] = useState('')
+    const [CPN_is_memoire, setCPN_is_memoire] = useState('')
+    const [PDI, setPDI] = useState('')
+    const [BAC, setBAC] = useState('')
+    const [BAC_is_degressif, setBAC_is_degressif] = useState('')
+    const [BCPN, setBCPN] = useState('')
+    const [BCPN_is_degressif, setBCPN_is_degressif] = useState('')
+
+    const [COM, setCOM] = useState('')
+    const [NSD, setNSD] = useState('')
+    const [NSM, setNSM] = useState('')
+    const [NSF, setNSF] = useState('')
+    const [ABDAC, setABDAC] = useState('')
+    const [DBAC, setDBAC] = useState('')
+    const [DEG, setDEG] = useState('')
+    const [type_strike, settype_strike] = useState('')
+    const [type_bar, settype_bar] = useState('')
+    const [sous_jacent, setsous_jacent] = useState('')
+    const [template, settemplate] = useState('')
+    const [type_bar2, settype_bar2 ] = useState('')
+    const [loading, setLoading] = useState(false)
+  
+    const [response, setResponse] = useState("")
+    const [NJO, setNJO] = useState("")
+
+
+    const menu_déroulant = (template, settemplate) => {
+      const names = ['testmercredi', 'CSG', "crédit suisse", "test crédit suisse", "goldman sachs fci", "morgan"]
+      
+      function importAll(r) {
+        return r.keys().map(r);
+      }
+      
+      const images = importAll(require.context('../../../Templates', true, /\.pptx/));
+      
+      return (
+        <div className="column1">
+        {/* <ul>{listItems}</ul> */}
+        <div style={{marginTop:"8%", marginRight:"5%"}}>
+        template:
+        </div> 
+       <Select
+              labelId="template"
+              sx={{ m: 1, minWidth: 200 }}
+
+              id="template"
+              value={template}
+              label="template"
+              onChange={(e)=>settemplate(e.target.value)}
+              >
+              
+              {names.map(images => <MenuItem value={images}>{images}</MenuItem>)}
+    
+    
+            </Select> 
+    
+        </div>
+      );
+    }
+
+    const first_bloc = () => {
+        return(
+            <div className="text_rec">
+                <div className="column1">
+                    <TextField label="Nom du produit <nom>" name="Nom"
+                        style={{width:"30%"}}
+                        onChange={(e)=>setNom(e.target.value)}
+                        margin="normal"
+                        variant="outlined"
+                        autoComplete="on"
+                        fullWidth/>
+
+                    <TextField
+                        style={{width:"30%"}}
+                        label="ISIN <ISIN>"
+                        name="Isin"
+                        onChange={(e)=>setISIN(e.target.value)}
+                        margin="normal"
+                        variant="outlined"
+                        autoComplete="on"
+                        fullWidth/>
+
+                        <FormControl>
+
+                        <InputLabel style={{marginTop:"7%"}}id="Droit">Droit</InputLabel>
+                                <Select
+                                style={{marginTop:"7%"}}
+                                sx={{ m: 1, minWidth: 200 }}
+                                labelId="Droit"
+                                id="Droit"
+                                value={Droit_applicable}
+                                label="Droit"
+                                onChange={(e)=>setDroit(e.target.value)}
+                                >
+                                <MenuItem value={"français"}>Français</MenuItem>
+                                <MenuItem value={"anglais"}>Anglais</MenuItem>
+                                <MenuItem value={"suisse"}>Suisse</MenuItem>
+                                </Select>
+                        </FormControl>
+                        
+                </div>
+
+                <div style={{marginLeft:"70%"}}>{menu_déroulant(template, settemplate)}</div>
+                <div className="column1">
+                    <TextField label="Nom du produit <nom>" name="Nom"
+                        style={{width:"30%"}}
+                        onChange={(e)=>setNom(e.target.value)}
+                        margin="normal"
+                        variant="outlined"
+                        autoComplete="on"
+                        fullWidth/>
+                
+                <div style={{marginTop:"2.5%", width:"30%"}}>
+
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePicker 
+                        label="Date d'émission"
+                        value={Emission}
+                        onChange={(Emission) => {
+                        setEmission(Emission);
+                        console.log(Emission)
+                        }}
+                        renderInput={(params) => <TextField {...params} />}
+                    />
+                </LocalizationProvider>
+                </div>
+
+                        <FormControl>
+
+                        <InputLabel style={{marginTop:"7%"}}id="Droit">Droit</InputLabel>
+                                <Select
+                                style={{marginTop:"7%"}}
+                                sx={{ m: 1, minWidth: 200 }}
+                                labelId="Droit"
+                                id="Droit"
+                                value={Droit_applicable}
+                                label="Droit"
+                                onChange={(e)=>setDroit(e.target.value)}
+                                >
+                                <MenuItem value={"français"}>Français</MenuItem>
+                                <MenuItem value={"anglais"}>Anglais</MenuItem>
+                                <MenuItem value={"suisse"}>Suisse</MenuItem>
+                                </Select>
+                        </FormControl>
+                        
+                </div>
+            </div>
+        );
+    }
+    const third_bloc = () => {
+        return(
+            <div className="text_rec">
+                <div className="thirdbloc">
+                    <div className="thirdbloctitle" style={{marginLeft:"1%"}}>
+                        <div style={{marginLeft:"10%"}}>Constatation</div>
+                        <div>
+                            <TextField
+                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
+                            label="ISIN <ISIN>"
+                            name="Isin"
+                            onChange={(e)=>setISIN(e.target.value)}
+                            margin="normal"
+                            variant="outlined"
+                            autoComplete="on"
+                            fullWidth/>
+                        </div>
+                        <div>
+                            <TextField
+                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
+                            label="ISIN <ISIN>"
+                            name="Isin"
+                            onChange={(e)=>setISIN(e.target.value)}
+                            margin="normal"
+                            variant="outlined"
+                            autoComplete="on"
+                            fullWidth/>
+                        </div>
+                        <div>
+                            <TextField
+                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
+                            label="ISIN <ISIN>"
+                            name="Isin"
+                            onChange={(e)=>setISIN(e.target.value)}
+                            margin="normal"
+                            variant="outlined"
+                            autoComplete="on"
+                            fullWidth/>
+                        </div>
+                        <div>
+                            <TextField
+                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
+                            label="ISIN <ISIN>"
+                            name="Isin"
+                            onChange={(e)=>setISIN(e.target.value)}
+                            margin="normal"
+                            variant="outlined"
+                            autoComplete="on"
+                            fullWidth/>
+                        </div>
+                    
+                    </div>
+                    
+                    <div className="thirdbloctitle" style={{marginLeft:"1%"}}>
+                        <div style={{marginLeft:"18%"}}>Paiement</div>
+                        <div>
+                            <TextField
+                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
+                            label="ISIN <ISIN>"
+                            name="Isin"
+                            onChange={(e)=>setISIN(e.target.value)}
+                            margin="normal"
+                            variant="outlined"
+                            autoComplete="on"
+                            fullWidth/>
+                        </div>
+                        <div>
+                            <TextField
+                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
+                            label="ISIN <ISIN>"
+                            name="Isin"
+                            onChange={(e)=>setISIN(e.target.value)}
+                            margin="normal"
+                            variant="outlined"
+                            autoComplete="on"
+                            fullWidth/>
+                        </div>
+                        <div>
+                            <TextField
+                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
+                            label="ISIN <ISIN>"
+                            name="Isin"
+                            onChange={(e)=>setISIN(e.target.value)}
+                            margin="normal"
+                            variant="outlined"
+                            autoComplete="on"
+                            fullWidth/>
+                        </div>
+                        <div>
+                            <TextField
+                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
+                            label="ISIN <ISIN>"
+                            name="Isin"
+                            onChange={(e)=>setISIN(e.target.value)}
+                            margin="normal"
+                            variant="outlined"
+                            autoComplete="on"
+                            fullWidth/>
+                        </div>
+                    
+                    </div>
+                    <div className="thirdbloctitle" style={{marginLeft:"1%"}}>
+                        <div style={{marginLeft:"10%"}}>Génération de dates</div>
+                        <div>
+                            <TextField
+                            style={{width:"80%", marginLeft:"0%", marginTop:"25%"}}
+                            label="ISIN <ISIN>"
+                            name="Isin"
+                            onChange={(e)=>setISIN(e.target.value)}
+                            margin="normal"
+                            variant="outlined"
+                            autoComplete="on"
+                            fullWidth/>
+                        </div>
+                        <div>
+                            <TextField
+                            style={{width:"80%", marginLeft:"0%", marginTop:"25%"}}
+                            label="ISIN <ISIN>"
+                            name="Isin"
+                            onChange={(e)=>setISIN(e.target.value)}
+                            margin="normal"
+                            variant="outlined"
+                            autoComplete="on"
+                            fullWidth/>
+                        </div>
+                    </div>             
+
+                    <div className="thirdbloctitle" style={{marginLeft:"1%"}}>
+                        <div style={{marginLeft:"10%"}}>scénarios</div>
+                        <div>
+                            <TextField
+                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
+                            label="ISIN <ISIN>"
+                            name="Isin"
+                            onChange={(e)=>setISIN(e.target.value)}
+                            margin="normal"
+                            variant="outlined"
+                            autoComplete="on"
+                            fullWidth/>
+                        </div>
+                        <div>
+                            <TextField
+                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
+                            label="ISIN <ISIN>"
+                            name="Isin"
+                            onChange={(e)=>setISIN(e.target.value)}
+                            margin="normal"
+                            variant="outlined"
+                            autoComplete="on"
+                            fullWidth/>
+                        </div>
+                        <div>
+                            <TextField
+                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
+                            label="ISIN <ISIN>"
+                            name="Isin"
+                            onChange={(e)=>setISIN(e.target.value)}
+                            margin="normal"
+                            variant="outlined"
+                            autoComplete="on"
+                            fullWidth/>
+                        </div>
+                    </div>
+                    
+                    </div>
+                
+            </div>
+        );
+    }
+
+
+    
+    const second_bloc = () => {
+        return(
+            <div className="text_rec">
+                <div className="column1">
+                    
+                <FormControl>
+
+                    <InputLabel style={{marginTop:"7%"}}id="Typologie">Typologie</InputLabel>
+                        <Select
+                        style={{marginTop:"7%"}}
+                        sx={{ m: 1, minWidth: 200 }}
+
+                        labelId="Typologie"
+                        id="Typologie"
+                        value={Typologie}
+                        label="Typologie"
+                        onChange={(e)=>setTypologie(e.target.value)}
+                        >
+                        <MenuItem value={"coupon autocall"}>Coupon Autocall</MenuItem>
+                        <MenuItem value={"coupon phoenix"}>Coupon Phoenix</MenuItem>
+
+
+                        </Select> 
+                    </FormControl>
+
+                    <FormControl>
+
+                        <InputLabel style={{marginTop:"5%" }}id="F0">Fréquence</InputLabel>
+                        <Select
+                            style={{marginTop:"7%"}}
+                            sx={{ m: 1, minWidth: 200 }}
+                            labelId="F0"
+                            id="F0"
+                            value={F0}
+                            label="F0"
+                            onChange={(e)=>setF0(e.target.value)}
+                            >
+                            <MenuItem value={"jours"}>Quotidienne</MenuItem>
+                            <MenuItem value={"mois"}>Mensuelle</MenuItem>
+                            <MenuItem value={"trimestre"}>Trimestrielle</MenuItem>
+                            <MenuItem value={"semestre"}>Semestrielle</MenuItem>
+                            <MenuItem value={"année"}>Annuelle</MenuItem>
+
+                            </Select>
+                    </FormControl>
+
+
+                            
+                    <TextField
+                        label="Coupon périodique (%)"
+                        style={{width:"30%"}}
+
+                        name="CPN"
+                        onChange={(e)=>setCPN(e.target.value)}
+                        margin="normal"
+                        variant="outlined"
+                        autoComplete="on"
+                        fullWidth/>
+                        
+                </div>
+                <div className="column2">
+                    <TextField
+                    style={{width:"30%", marginLeft:"1%"}}
+
+                    label="Sous-jacent(s)"
+                    name="TSJ"
+                    onChange={(e)=>setTSJ(e.target.value)}
+                    margin="normal"
+                    variant="outlined"
+                    autoComplete="on"
+                    fullWidth/>
+
+                    <FormControl>
+                        <InputLabel style={{marginTop:"5%", marginLeft:"20%" }}id="F0">Type de sous jacent</InputLabel>
+                        <Select
+                        labelId="sous_jacent"
+                        style={{marginTop:"7%", marginLeft:"20%"}}
+                        sx={{ m: 1, minWidth: 200 }}
+                        id="sous_jacent"
+                        value={sous_jacent}
+                        label="sous_jacent"
+                        onChange={(e)=>setsous_jacent(e.target.value)}
+                        >
+                        <MenuItem value={"mono action"}>Mono action</MenuItem>
+                        <MenuItem value={"wo action"}>WO actions</MenuItem>
+                        <MenuItem value={"equipondéré action"}>Equipondéré actions</MenuItem>
+                        <MenuItem value={"mono indice"}>Mono indice</MenuItem>
+                        <MenuItem value={"equipondéré indice"}>Equipondéré indices</MenuItem>
+                        <MenuItem value={"wo indice"}>WO indices</MenuItem>
+                        </Select> 
+                    </FormControl>
+                </div>
+
+                <div className="column5">
+                <div style={{marginTop:"2%", marginLeft:"1.5%", fontWeight: "bold", width:"18%"}}>Barrière de remboursement</div>
+                    <TextField
+                        style={{width:"15%", marginLeft:"6%"}}
+                        label="ISIN <ISIN>"
+                        name="Isin"
+                        onChange={(e)=>setISIN(e.target.value)}
+                        margin="normal"
+                        variant="outlined"
+                        autoComplete="on"
+                        fullWidth/>
+                    <TextField
+                        style={{width:"15%", marginLeft:"2%"}}
+                        label="ISIN <ISIN>"
+                        name="Isin"
+                        onChange={(e)=>setISIN(e.target.value)}
+                        margin="normal"
+                        variant="outlined"
+                        autoComplete="on"
+                        fullWidth/>
+                    <TextField
+                        style={{width:"15%", marginLeft:"2%"}}
+                        label="ISIN <ISIN>"
+                        name="Isin"
+                        onChange={(e)=>setISIN(e.target.value)}
+                        margin="normal"
+                        variant="outlined"
+                        autoComplete="on"
+                        fullWidth/>
+
+                    <TextField
+                        style={{width:"15%", marginLeft:"2%"}}
+                        label="ISIN <ISIN>"
+                        name="Isin"
+                        onChange={(e)=>setISIN(e.target.value)}
+                        margin="normal"
+                        variant="outlined"
+                        autoComplete="on"
+                        fullWidth/>
+                    <TextField
+                        style={{width:"15%", marginLeft:"2%"}}
+                        label="ISIN <ISIN>"
+                        name="Isin"
+                        onChange={(e)=>setISIN(e.target.value)}
+                        margin="normal"
+                        variant="outlined"
+                        autoComplete="on"
+                        fullWidth/>
+
+
+                </div>
+
+                <div className="column5">
+                <div style={{marginTop:"2%", marginLeft:"1.5%", fontWeight: "bold", width:"25%"}}>Coupon Phoenix</div>
+                    <TextField
+                        style={{width:"15%"}}
+                        label="ISIN <ISIN>"
+                        name="Isin"
+                        onChange={(e)=>setISIN(e.target.value)}
+                        margin="normal"
+                        variant="outlined"
+                        autoComplete="on"
+                        fullWidth/>
+                    <TextField
+                        style={{width:"15%", marginLeft:"2%"}}
+                        label="ISIN <ISIN>"
+                        name="Isin"
+                        onChange={(e)=>setISIN(e.target.value)}
+                        margin="normal"
+                        variant="outlined"
+                        autoComplete="on"
+                        fullWidth/>
+                    <TextField
+                        style={{width:"15%", marginLeft:"2%"}}
+                        label="ISIN <ISIN>"
+                        name="Isin"
+                        onChange={(e)=>setISIN(e.target.value)}
+                        margin="normal"
+                        variant="outlined"
+                        autoComplete="on"
+                        fullWidth/>
+
+                    <TextField
+                        style={{width:"15%", marginLeft:"2%"}}
+                        label="ISIN <ISIN>"
+                        name="Isin"
+                        onChange={(e)=>setISIN(e.target.value)}
+                        margin="normal"
+                        variant="outlined"
+                        autoComplete="on"
+                        fullWidth/>
+                    <TextField
+                        style={{width:"15%", marginLeft:"2%"}}
+                        label="ISIN <ISIN>"
+                        name="Isin"
+                        onChange={(e)=>setISIN(e.target.value)}
+                        margin="normal"
+                        variant="outlined"
+                        autoComplete="on"
+                        fullWidth/>                    
+                </div>
+
+                    <div className="protection">
+                    <div style={{marginTop:"5%", marginLeft:"2%", fontWeight: "bold", width:"32%"}}></div>
+
+                    <FormControl>
+                    <InputLabel style={{marginTop:"7%", marginLeft:"8.6%"}}id="Typologie">Barrière coupon mémoire</InputLabel>
+                        <Select
+                                style={{marginTop:"7%", marginLeft:"8.6%"}}
+                                sx={{ m: 1, minWidth: 200 }}
+                                labelId="CPN_is_memoire"
+                                id="CPN_is_memoire"
+                                value={CPN_is_memoire}
+                                label="CPN_is_memoire"
+                                onChange={(e)=>setCPN_is_memoire(e.target.value)}
+                                >
+                                <MenuItem value={"oui"}>oui</MenuItem>
+                                <MenuItem value={"non"}>non</MenuItem>
+                                </Select>
+                    </FormControl>
+
+                </div>
+                
+                <div className="protection">
+                    <div style={{marginTop:"5%", marginLeft:"2%", fontWeight: "bold", width:"32%"}}>Protection</div>
+                    <TextField
+                            style={{width:"21%", marginLeft:"2%"}}
+                            label="ISIN <ISIN>"
+                            name="Isin"
+                            onChange={(e)=>setISIN(e.target.value)}
+                            margin="normal"
+                            variant="outlined"
+                            autoComplete="on"
+                            fullWidth/>
+                    </div>
+        </div>
+        );
+    }
+
+
+
+
+
+
+    return (
+    <div> 
+        <h1> LA MOULINETTE BROCHURE DE WALLY</h1>
+        <h3>INFORMATIONS GENERALES</h3>
+        <div className="rect" style={{marginTop:"1.3%"}}>
+            {first_bloc()}
+        </div>
+        
+        <h3>STRUCTURE PAY_OFF</h3>
+        <div className="rect" style={{marginTop:"1.3%"}}>
+
+            {second_bloc()}
+        </div>
+        <h3>DATES & SCENARIOS</h3>
+        <div className="rect" style={{marginTop:"1.3%", marginBottom:"5%"}}>
+        {third_bloc()}
+        </div>
+
+        <div>
+        <Button
+          variant="contained"
+            color="primary"
+            size="large"
+            style={{ marginTop: "0%", left:"40%", width:"20%", marginBottom:"3%"}}
+            // onClick={handleSubmit}
+          >
+            Générer la brochure
+          </Button>
+        </div>
+    </div>
+    );
+};
+
+export default Last_form;

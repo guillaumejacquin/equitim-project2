@@ -1,0 +1,80 @@
+body {
+    background: white;
+    /* font-family:'Courier New', Courier, monospace */
+}
+
+h1 {
+    text-align: center;
+    margin-top: 1%;
+    font-size: 30px;
+}
+
+h3 {
+    margin-top: 3%;
+    margin-left: 8%;
+    text-decoration: underline;
+}
+
+.rect {
+    border: 1px solid #B9A049;
+    border-radius: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1%
+}
+
+
+.text_rec {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 3%;
+}
+
+.column1 {
+    display: flex;                  /* establish flex container */
+    flex-direction: row;            /* default value; can be omitted */
+    flex-wrap: nowrap;              /* default value; can be omitted */
+    justify-content: space-between; /* switched from default (flex-start, see below) */
+    width:60%
+}
+
+.column2 {
+    display: flex;                  /* establish flex container */
+    flex-direction: row; 
+               /* default value; can be omitted */
+    /* switched from default (flex-start, see below) */
+    width:60%
+}
+
+
+
+.column5 {
+    display: flex;                  /* establish flex container */
+    flex-direction: row; 
+               /* default value; can be omitted */
+    /* switched from default (flex-start, see below) */
+    width:90%
+}
+
+.protection {
+    display: flex;                  /* establish flex container */
+    flex-direction: row; 
+               /* default value; can be omitted */
+    /* switched from default (flex-start, see below) */
+    width:60%
+}
+
+.thirdbloc {
+    display: flex;
+    width:100%;                  /* establish flex container */
+
+}
+
+.thirdbloctitle {
+    width: 25%;
+    margin-left: 5%;
+    text-decoration: underline;
+    font-size: 17px;
+    font-weight: bold;
+
+}

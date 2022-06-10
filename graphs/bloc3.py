@@ -341,7 +341,7 @@ def bloc3(Class, name, whitestrap=True):
     else:
         y = niveau_capital
     fig.add_annotation(
-        x=(42),
+        x=(44),
         y= y/2,
         text=mystring,
         showarrow=False,
@@ -367,7 +367,7 @@ def bloc3(Class, name, whitestrap=True):
     )
         y_arrow =abs(float(myvar - (myvar  - float(Class.DBAC))))
         fig.add_annotation(
-            x=44,  # arrows' head
+            x=43.5,  # arrows' head
             ay=31.5,  # arrows' head
             ax=49.6,  # arrows' tail
             y=y_arrow - (float(Class.DBAC) - niveau_capital)/2,  # arrows' tail

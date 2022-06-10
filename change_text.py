@@ -53,7 +53,13 @@ def elementsToReplaceRemplacement(Class, shapes):
     replace_text({'<DCF>':  Class.DCF_affichage}, shapes)
     replace_text({'<DCF_MAJ>':  Class.DCF_MAJ}, shapes)
     replace_text({'<DEC>':  Class.DEC_affichage}, shapes)
-    replace_text({'<F0>':  Class.F0}, shapes)
+    
+    if (Class.F0 == "jours"):
+        Class.F0_affichage = "ans"
+    else:
+        Class.F0_affichage = Class.F0
+
+    replace_text({'<F0>':  Class.F0_affichage}, shapes)
     replace_text({'<DDCI>':  Class.DDCI_affichage}, shapes)
     replace_text({'<DDCI_MAJ>':  Class.DDCI_MAJ}, shapes)
     replace_text({'<DDCI_M_B_STRIKE>':  Class.DDCI_M_B_Strike}, shapes)
@@ -273,7 +279,6 @@ def TRA_replace(Class, shapes):
     replace_text({'<TRA.ECHEANCE.PERTE.A>': tra_echeance_perte_a}, shapes)
     replace_text({'<BALISECMTRA>': Class.TRA_A_S2_100}, shapes)
     
-
     tra_tout_p = Class.TRA_TOUT_P.replace(".", ",")
     tra_tout_p = tra_tout_p + "%"
     tra_d_p = Class.TRA_D_P.replace(".", ",")
@@ -378,7 +383,7 @@ def Replace_Boucle_Dates(Class, shapes):
     else:
         datesremb1 = Class.Datesremb1
         datesremb3 = datesremb1
-
+    
     replace_text({'<Datesconstatations1>': date_constatation}, shapes)
     replace_text({'<Datesconstatations2>': Class.Datesconstatations2}, shapes)
     replace_text({'<Datesconstatations3>': date_constatation3}, shapes)
@@ -533,7 +538,9 @@ def ChangeTextOnPpt(Class):
                         if (compteur_tab == 1 and col_idx == 0 and row_idx > 0): #on ajoute les sousjacent a la premiere colonne de chaque ligne
                             try:
                                 cell = table.cell(row_idx, col_idx)
-                                cell.text = str(Class.Yahoo_value_name[row_idx -1]) +" " + str(Class.Yahoo_value_dividende[row_idx -1])
+                                # cell.text = str(Class.Yahoo_value_name[row_idx -1]) +" " + str(Class.Yahoo_value_dividende[row_idx -1])
+                                cell.text = Class.NOMSOUSJACENTP1
+
                             except Exception:
                                 print("pas de tableau de perf")
 

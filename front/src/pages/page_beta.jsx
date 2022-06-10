@@ -20,41 +20,11 @@ import DatePicker from '@mui/lab/DatePicker';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import Lottie from "react-lottie";
+import { parseISO } from 'date-fns'; 
 
 import * as success from "../components/1127-success.json";
 
-
-const menu_déroulant = (template, settemplate) => {
-	const names = ['testmercredi', 'CSG', "crédit suisse", "test crédit suisse", "goldman sachs fci", "morgan"]
-  const dir = "../../../"
-  //template bnp
-  
-  function importAll(r) {
-    return r.keys().map(r);
-  }
-  
-  const images = importAll(require.context('../../../Templates', true, /\.pptx/));
-  
-  console.log(images)
-  return (
-    <div>
-    {/* <ul>{listItems}</ul> */}
-   <Select
-          labelId="template"
-          id="template"
-          value={template}
-          label="template"
-          onChange={(e)=>settemplate(e.target.value)}
-          >
-          
-          {names.map(images => <MenuItem value={images}>{images}</MenuItem>)}
-
-
-        </Select> 
-
-    </div>
-  );
-}
 const Page_beta = ({ formData, setForm, navigation }) => { 
   const premiertab = () => {
     return(
@@ -98,7 +68,6 @@ const Page_beta = ({ formData, setForm, navigation }) => {
                 value={Emission}
                 onChange={(Emission) => {
                   setEmission(Emission);
-                  console.log(Emission)
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
@@ -111,22 +80,12 @@ const Page_beta = ({ formData, setForm, navigation }) => {
             margin="normal"
             variant="outlined"
             autoComplete="on"
-            fullWidth/>   <div style={{marginTop:"8%"}}></div>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              label="Date constatation 1er rappel "
-              value={DPR}
-              onChange={(DPR) => {
-                setDPR(DPR);
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
+            fullWidth/>
 
               <div style={{marginTop:"8%"}}></div>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
-                label="Date remboursement 1er rappel"
+                label="Date de premier remboursement"
                 value={DR1}
                 onChange={(DR1) => {
                   setDR1(DR1);
@@ -134,18 +93,19 @@ const Page_beta = ({ formData, setForm, navigation }) => {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-
+         
             <div style={{marginTop:"8%"}}></div>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
-                label="Avant dernière date de constatation"
-                value={ADCF}
-                onChange={(ADCF) => {
-                  setADCF(ADCF);
+                label="Date de premier rappel"
+                value={DPR}
+                onChange={(DPR) => {
+                  setDPR(DPR);
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
+
 
             <div style={{marginTop:"8%"}}></div>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -184,12 +144,29 @@ const Page_beta = ({ formData, setForm, navigation }) => {
               />
             </LocalizationProvider>
 
-           
+            <div style={{marginTop:"8%"}}></div>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                label="Avant dernière date de constatation finale"
+                value={ADCF}
+                onChange={(ADCF) => {
+                  setADCF(ADCF);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
 
             <InputLabel style={{marginTop:"5%" }}id="F0">Template</InputLabel>
-       
-          
-          {menu_déroulant(template, settemplate)}
+        <Select
+          labelId="template"
+          id="template"
+          value={template}
+          label="template"
+          onChange={(e)=>settemplate(e.target.value)}
+          >
+          <MenuItem value={"testmercredi"}>testmercredi</MenuItem>
+
+        </Select> 
       </Container>
     </div>
     )}
@@ -283,7 +260,7 @@ const Page_beta = ({ formData, setForm, navigation }) => {
             fullWidth/>
       
         <TextField
-            label="Coupon périodique (%)"
+            label="Coupon périodique"
             name="CPN"
             onChange={(e)=>setCPN(e.target.value)}
             margin="normal"
@@ -305,8 +282,17 @@ const Page_beta = ({ formData, setForm, navigation }) => {
           <MenuItem value={"non"}>non</MenuItem>
         </Select>
 
+        <TextField
+            label="Barrière de protection"
+            name="PDI"
+            onChange={(e)=>setPDI(e.target.value)}
+            margin="normal"
+            variant="outlined"
+            autoComplete="on"
+            fullWidth/>
+      
       <TextField
-            label="Niveau de barrière autocall (%)"
+            label="Barrière de remboursement anticipé"
             name="BAC"
             onChange={(e)=>setBAC(e.target.value)}
             margin="normal"
@@ -314,23 +300,6 @@ const Page_beta = ({ formData, setForm, navigation }) => {
             autoComplete="on"
             fullWidth/>
 
-         <TextField
-            label="Niveau de barrière de coupon (%)"
-            name="BCPN"
-            onChange={(e)=>setBCPN(e.target.value)}
-            margin="normal"
-            variant="outlined"
-            autoComplete="on"
-            fullWidth/>
-
-        <TextField
-            label="Niveau de barrière de protection (%)"
-            name="PDI"
-            onChange={(e)=>setPDI(e.target.value)}
-            margin="normal"
-            variant="outlined"
-            autoComplete="on"
-            fullWidth/>
         
         <InputLabel style={{marginTop:"5%" }}id="F0">Barrière de remboursement anticipé dégressive</InputLabel>
         <Select
@@ -343,8 +312,16 @@ const Page_beta = ({ formData, setForm, navigation }) => {
           <MenuItem value={"oui"}>oui</MenuItem>
           <MenuItem value={"non"}>non</MenuItem>
         </Select>
-     
-        <InputLabel style={{marginTop:"5%" }}id="F0">Typologie barrière autocall</InputLabel>
+      <TextField
+            label="Barrière de coupon"
+            name="BCPN"
+            onChange={(e)=>setBCPN(e.target.value)}
+            margin="normal"
+            variant="outlined"
+            autoComplete="on"
+            fullWidth/>
+
+        <InputLabel style={{marginTop:"5%" }}id="F0">type_bar2</InputLabel>
         <Select
           labelId="type_bar2"
           id="type_bar2"
@@ -409,7 +386,7 @@ const Page_beta = ({ formData, setForm, navigation }) => {
           />
 
         <TextField
-            label="Niveau de scénario défavorable (%)"
+            label="Niveau de scénario défavorable"
             name="NSD"
             onChange={(e)=>setNSD(e.target.value)}
             margin="normal"
@@ -418,7 +395,7 @@ const Page_beta = ({ formData, setForm, navigation }) => {
             fullWidth
           />
         <TextField
-            label="Niveau de scénario médian (%)"
+            label="Niveau de scénario médian"
             name="NSM"
             onChange={(e)=>setNSM(e.target.value)}
             margin="normal"
@@ -428,7 +405,7 @@ const Page_beta = ({ formData, setForm, navigation }) => {
           />
 
         <TextField
-            label="Niveau de scénario favorable (%)"
+            label="Niveau de scénario favorable"
             name="NSF"
             onChange={(e)=>setNSF(e.target.value)}
             margin="normal"
@@ -438,7 +415,7 @@ const Page_beta = ({ formData, setForm, navigation }) => {
           />
 
         <TextField
-            label="Avant dernier niveau de barrière autocall (%)"
+            label="Avant dernier niveau de barrière dégressive"
             name="ABDAC"
             onChange={(e)=>setABDAC(e.target.value)}
             margin="normal"
@@ -448,7 +425,7 @@ const Page_beta = ({ formData, setForm, navigation }) => {
           />
 
         <TextField
-            label="Dernier niveau de barrière gains/coupons (%)"
+            label="Dernier niveau de barrière dégressive/airbag"
             name="DBAC"
             onChange={(e)=>setDBAC(e.target.value)}
             margin="normal"
@@ -457,7 +434,7 @@ const Page_beta = ({ formData, setForm, navigation }) => {
             fullWidth
           />
         <TextField
-            label="Pas de degressivité (%)"
+            label="Pas de degressivité"
             name="DEG"
             onChange={(e)=>setDEG(e.target.value)}
             margin="normal"
@@ -509,7 +486,7 @@ const Page_beta = ({ formData, setForm, navigation }) => {
     fetch('http://localhost:5000/add', requestOptions)
         .then(response => response.json())
         .then(response => setResponse(response))
-        .then(response =>     console.log(requestOptions)        )
+        // .then(response => setLoading(false))
 
         .then(response => test = (response))
 
@@ -583,7 +560,6 @@ const Page_beta = ({ formData, setForm, navigation }) => {
   }
   const props = { formData, navigation};
 
-  const a = [];
 
   const defaultOptions2 = {
     loop: true,
@@ -628,5 +604,3 @@ return (
 }
 
 export default Page_beta;
-
-

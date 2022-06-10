@@ -19,8 +19,9 @@ def PR1(Class):
     trimestriels = diff.days / 91
 
     if (frequence == "jours"):
-        result = days
-    
+        result = int(years)
+        if (years % days >= 182):
+            result += 1    
     #arrondis
     if (frequence == "mois"): #choper la fréquence et augmenter de un selon les jours
         result = int(months)
@@ -65,8 +66,10 @@ def DPRR(Class):
 
    
     if (frequence == "jours"):
-        result = days
-    
+        result = int(years)
+        if (years % days >= 182):
+            result += 1
+              
     if (frequence == "mois"):
         result = int(months)
         if (months % days >=21):

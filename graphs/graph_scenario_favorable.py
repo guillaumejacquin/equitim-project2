@@ -119,7 +119,7 @@ def traces(Class, fig):
     # line=dict(color=green, width=3),  line_dash="dash")
 
 
-
+    
     fig.add_annotation(x=x_vertical_line +4.75 - x_niveau_ref, y=niveau_de_référence,text= (str(niveau_de_référence) + "%" ), showarrow=False,
                     font=dict(family="Proxima Nova", size=15, color=green ), align="left")
 
@@ -166,7 +166,7 @@ def texte(Class, fig):
         degressive = ""
     else:
         degressive = "dégressivité"
-    fig.add_annotation(x=46.25, y=153 ,text= ("Seuil d'activation du mécanisme de la barrière "  + degressive +" de remboursement anticipé automatique <br> à partir de la fin du " + str(Class.F0)+ " " + str(Class.PR1) +  " jusqu'à la fin du "+ str(Class.F0)+ " " + str(Class.ADPR) ), showarrow=False,
+    fig.add_annotation(x=43.5, y=153 ,text= ("Seuil d'activation du mécanisme de la barrière "  + degressive +" de remboursement anticipé automatique <br> à partir de la fin du " + str(Class.F0)+ " " + str(Class.PR1) +  " jusqu'à la fin du "+ str(Class.F0)+ " " + str(Class.ADPR) ), showarrow=False,
                         font=dict(family="Proxima Nova", size=10, color=black ), align="left")
     fig.add_annotation(x=28, y=14.5 ,text= ("Seuil de perte en capital à l'échéance" ), showarrow=False,
                         font=dict(family="Proxima Nova", size=10, color=black ), align="left")
@@ -387,7 +387,14 @@ def is_athena_or_phoenix_annotations(Class, fig):
 
     else:
         perfmax = 100 + 1 * cpn
-        perfmax = (f'{float(perfmax):.2f}')
+
+        len_cpn = (str(perfmax)[::-1].find('.'))
+
+        if (len_cpn < 2):
+            perfmax = (f'{float(perfmax):.2f}')
+
+        perfmax = perfmax
+
         cpn = (f'{float(cpn):.2f}')
         cpn = float(Class.CPN)
         len_cpn = (str(cpn)[::-1].find('.'))

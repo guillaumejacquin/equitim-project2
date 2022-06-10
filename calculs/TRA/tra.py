@@ -21,7 +21,7 @@ def tra_athena(Class):
     Class.ADCF = Class.ADCF[0:10]
 
     Class.TRA_MIN_A = (xirr_test(Class, Class.PDC2, Class.DADR, tra_mra_min_a))#Mécanisme de remboursement anticipé MIN(-100, CPN*ADPR+100)
-    Class.TRA_echeance_perte_A = (xirr_test(Class, Class.PDC2, Class.DEC, Class.PDI))#Mécanisme de remboursement échéance perte(-100, PDI)
+    Class.TRA_echeance_perte_A = (xirr_test(Class, Class.PDC2, Class.DADR, Class.PDI))#Mécanisme de remboursement échéance perte(-100, PDI)
 
 def phoenix_3dates(Class, période1, période2):
         période1 = période1[6:10]+ "-" + période1[3:5] + "-" + période1[0:2]
