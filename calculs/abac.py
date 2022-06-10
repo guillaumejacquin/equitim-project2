@@ -6,7 +6,7 @@ def abac(Class):
         Class.ABAC = mystring
 
 def abac2(Class):
-    if Class.type_bar2 == "degressif":
+    if Class.type_bar2 == "degressif" and Class.BCPN_is_degressif == "oui":
         Class.ABAC2 = "la barrière dégressive de versement du coupon"
 
     else:

@@ -58,16 +58,21 @@ def callAllDates2Date(Class):
     # Class.Datespaiement8 = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DEC, Class.DDCI, True)
 
     dpr = Class.DPR[0:10]
+    
+    #################################   DATES COUPONS AUTOCALL###################################################################################################### 
+    #Constatations :
     Class.dates_constat_autocall = get_all_dates_between_2_dates_with_special_begin(Class, Class.DDCI, Class.DEC, dpr, Class.DCF, False, False)
+    #Paiements :
     Class.dates_paiement_autocall = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DEC, dpr, Class.DCF, False, False)
 
-
-    Class.dates_constat_phoenix = get_all_dates_between_2_dates_with_special_begin(Class, Class.DDCI, Class.DEC, dpr, Class.DCF, False, False)
-    Class.dates_paiement_phoenix = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DEC, dpr, Class.DCF, False, False)
-
-    Class.dates_last_remboursement_rappel = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DEC, Class.DR1, Class.DADR, False, True)
-
-#pr
-# 
-# emier rajouter l
-#date de remboursement il manque la premiere et jarter la drniere
+    #################################   DATES COUPONS PHOENIX ######################################################################################################
+    #Constatations coupons :
+    Class.dates_constat_phoenix = get_all_dates_between_2_dates_with_special_begin(Class, Class.DDCI, Class.DEC, Class.DDCI, Class.DCF, False, False)
+    Class.dates_constat_phoenix = Class.dates_constat_phoenix[12:]
+    #Paiements coupons :
+    Class.date_remb1 =  Class.dates_constat_phoenix[0:10]
+    Class.date_remb1 =  Class.date_remb1.replace("/", "-")
+    Class.date_remb1 = Class.date_remb1[6:10] + "-" + Class.date_remb1[3:5] + "-" + Class.date_remb1[0:2]
+    Class.dates_paiement_phoenix = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DEC, Class.date_remb1, Class.DCF, False, False)
+    #Paiements scenarios autocall pour phoenix
+    Class.dates_last_remboursement_rappel = get_all_dates_between_2_dates_with_special_begin_njo(Class, Class.DDCI, Class.DEC, dpr, Class.DADR, False, True)

@@ -85,14 +85,16 @@ const Last_form = () => {
       const images = importAll(require.context('../../../Templates', true, /\.pptx/));
       
       return (
-        <div className="column1">
+        <div style={{marginLeft:"20%"}}>
         {/* <ul>{listItems}</ul> */}
-        <div style={{marginTop:"8%", marginRight:"5%"}}>
-        template:
-        </div> 
-       <Select
+
+
+    <FormControl>
+        <InputLabel style={{marginTop:"7%"}}id="template">template</InputLabel>
+
+        <Select
               labelId="template"
-              sx={{ m: 1, minWidth: 200 }}
+              sx={{ m: 1, minWidth: 250 }}
 
               id="template"
               value={template}
@@ -104,7 +106,8 @@ const Last_form = () => {
     
     
             </Select> 
-    
+            </FormControl>
+
         </div>
       );
     }
@@ -153,15 +156,8 @@ const Last_form = () => {
 
                 <div style={{marginLeft:"70%"}}>{menu_déroulant(template, settemplate)}</div>
                 <div className="column1">
-                    <TextField label="Nom du produit <nom>" name="Nom"
-                        style={{width:"30%"}}
-                        onChange={(e)=>setNom(e.target.value)}
-                        margin="normal"
-                        variant="outlined"
-                        autoComplete="on"
-                        fullWidth/>
                 
-                <div style={{marginTop:"2.5%", width:"30%"}}>
+                <div style={{marginTop:"1.7%", width:"30%"}}>
 
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker 
@@ -175,26 +171,22 @@ const Last_form = () => {
                     />
                 </LocalizationProvider>
                 </div>
-
-                        <FormControl>
-
-                        <InputLabel style={{marginTop:"7%"}}id="Droit">Droit</InputLabel>
-                                <Select
-                                style={{marginTop:"7%"}}
-                                sx={{ m: 1, minWidth: 200 }}
-                                labelId="Droit"
-                                id="Droit"
-                                value={Droit_applicable}
-                                label="Droit"
-                                onChange={(e)=>setDroit(e.target.value)}
-                                >
-                                <MenuItem value={"français"}>Français</MenuItem>
-                                <MenuItem value={"anglais"}>Anglais</MenuItem>
-                                <MenuItem value={"suisse"}>Suisse</MenuItem>
-                                </Select>
-                        </FormControl>
-                        
-                </div>
+                <TextField
+            label="Commission"
+            style={{width:"30%", marginTop:"2%", marginLeft:"5%"}}
+            name="COM"
+            onChange={(e)=>setCOM(e.target.value)}
+            margin="normal"
+            variant="outlined"
+            autoComplete="on"
+            fullWidth
+          />
+            <div style={{marginLeft:"0%", marginTop:"1.4%"}}>                                   
+              {menu_déroulant(template, settemplate)}
+            </div>
+     
+            </div>
+            
             </div>
         );
     }
@@ -203,108 +195,127 @@ const Last_form = () => {
             <div className="text_rec">
                 <div className="thirdbloc">
                     <div className="thirdbloctitle" style={{marginLeft:"1%"}}>
-                        <div style={{marginLeft:"10%"}}>Constatation</div>
+                        <div className="thirdblocrealtitle" style={{marginLeft:"0%"}}> Dates Constatation & Paiement</div>
                         <div>
                             <TextField
-                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
-                            label="ISIN <ISIN>"
-                            name="Isin"
-                            onChange={(e)=>setISIN(e.target.value)}
-                            margin="normal"
-                            variant="outlined"
-                            autoComplete="on"
-                            fullWidth/>
+                                style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
+
+                                label="Date(s) de constatation(s) initiale(s)"
+                                name="DCI"
+                                onChange={(e)=>setDCI(e.target.value)}
+                                margin="normal"
+                                variant="outlined"
+                                autoComplete="on"
+                                fullWidth/>
                         </div>
-                        <div>
-                            <TextField
-                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
-                            label="ISIN <ISIN>"
-                            name="Isin"
-                            onChange={(e)=>setISIN(e.target.value)}
-                            margin="normal"
-                            variant="outlined"
-                            autoComplete="on"
-                            fullWidth/>
+                        <div style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}>
+
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                label="Date de premier rappel"
+                                value={DPR}
+                                onChange={(DPR) => {
+                                setDPR(DPR);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </LocalizationProvider>
                         </div>
-                        <div>
-                            <TextField
-                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
-                            label="ISIN <ISIN>"
-                            name="Isin"
-                            onChange={(e)=>setISIN(e.target.value)}
-                            margin="normal"
-                            variant="outlined"
-                            autoComplete="on"
-                            fullWidth/>
+                        <div style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                label="Avant dernière date de constatation finale"
+                                value={ADCF}
+                                onChange={(ADCF) => {
+                                setADCF(ADCF);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </LocalizationProvider>
                         </div>
-                        <div>
-                            <TextField
-                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
-                            label="ISIN <ISIN>"
-                            name="Isin"
-                            onChange={(e)=>setISIN(e.target.value)}
-                            margin="normal"
-                            variant="outlined"
-                            autoComplete="on"
-                            fullWidth/>
-                        </div>
-                    
-                    </div>
-                    
-                    <div className="thirdbloctitle" style={{marginLeft:"1%"}}>
-                        <div style={{marginLeft:"18%"}}>Paiement</div>
-                        <div>
-                            <TextField
-                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
-                            label="ISIN <ISIN>"
-                            name="Isin"
-                            onChange={(e)=>setISIN(e.target.value)}
-                            margin="normal"
-                            variant="outlined"
-                            autoComplete="on"
-                            fullWidth/>
-                        </div>
-                        <div>
-                            <TextField
-                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
-                            label="ISIN <ISIN>"
-                            name="Isin"
-                            onChange={(e)=>setISIN(e.target.value)}
-                            margin="normal"
-                            variant="outlined"
-                            autoComplete="on"
-                            fullWidth/>
-                        </div>
-                        <div>
-                            <TextField
-                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
-                            label="ISIN <ISIN>"
-                            name="Isin"
-                            onChange={(e)=>setISIN(e.target.value)}
-                            margin="normal"
-                            variant="outlined"
-                            autoComplete="on"
-                            fullWidth/>
-                        </div>
-                        <div>
-                            <TextField
-                            style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
-                            label="ISIN <ISIN>"
-                            name="Isin"
-                            onChange={(e)=>setISIN(e.target.value)}
-                            margin="normal"
-                            variant="outlined"
-                            autoComplete="on"
-                            fullWidth/>
+                        <div style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                label="Date de constatation finale"
+                                value={DCF}
+                                onChange={(DCF) => {
+                                setDCF(DCF);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                            </LocalizationProvider>
                         </div>
                     
                     </div>
+                    
+        
+                    
                     <div className="thirdbloctitle" style={{marginLeft:"1%"}}>
-                        <div style={{marginLeft:"10%"}}>Génération de dates</div>
+
+                        <div style={{width:"80%", marginLeft:"0%", marginTop:"14.55%"}}>
+                        <FormControl>
+                            <InputLabel style={{marginTop:"0%", marginLeft:"8.4%"}}id="Type de strike">Type de strike</InputLabel>
+                            <Select
+                                sx={{  minWidth: 200 }}
+
+                                labelId="type_strike"
+                                id="type_strike"
+                                value={type_strike}
+                                label="type_strike"
+                                onChange={(e)=>settype_strike(e.target.value)}
+                                >
+                                <MenuItem value={"strike normal"}>Strike normal</MenuItem>
+                                <MenuItem value={"strike moyen"}>Strike moyen</MenuItem>
+                                <MenuItem value={"best strike"}>Best strike</MenuItem>
+                            </Select>
+                        </FormControl>
+                        </div>
+                        
+                        <div style={{width:"80%", marginLeft:"0%", marginTop:"12%"}}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                label="Date remboursement premier rappel"
+                                value={DR1}
+                                onChange={(DR1) => {
+                                setDR1(DR1);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                            </LocalizationProvider>
+                        </div>
+                        <div style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                label="Avant dernière date de remboursement"
+                                value={DADR}
+                                onChange={(DADR) => {
+                                setDADR(DADR);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </LocalizationProvider>
+                        </div>
+
+                        <div style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                label="Date d'échéance"
+                                value={DEC}
+                                onChange={(DEC) => {
+                                setDEC(DEC);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </LocalizationProvider>
+                        </div>
+                    
+                    </div>
+                    <div className="thirdbloctitle" style={{marginLeft:"1%"}}>
+                        <div className="thirdblocrealtitle" style={{marginLeft:"10%"}}>Génération de dates</div>
                         <div>
                             <TextField
                             style={{width:"80%", marginLeft:"0%", marginTop:"25%"}}
-                            label="ISIN <ISIN>"
+                            label="Jour de référence <pasfait>"
                             name="Isin"
                             onChange={(e)=>setISIN(e.target.value)}
                             margin="normal"
@@ -315,24 +326,25 @@ const Last_form = () => {
                         <div>
                             <TextField
                             style={{width:"80%", marginLeft:"0%", marginTop:"25%"}}
-                            label="ISIN <ISIN>"
-                            name="Isin"
-                            onChange={(e)=>setISIN(e.target.value)}
+                            label="Nombre de jours ouvrés"
+                            name="NJO"
+                            onChange={(e)=>setNJO(e.target.value)}
                             margin="normal"
                             variant="outlined"
                             autoComplete="on"
-                            fullWidth/>
+                            fullWidth
+                          />
                         </div>
                     </div>             
 
                     <div className="thirdbloctitle" style={{marginLeft:"1%"}}>
-                        <div style={{marginLeft:"10%"}}>scénarios</div>
+                        <div className="thirdblocrealtitle" style={{marginLeft:"10%"}}>Scénarios</div>
                         <div>
                             <TextField
                             style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
-                            label="ISIN <ISIN>"
-                            name="Isin"
-                            onChange={(e)=>setISIN(e.target.value)}
+                            label="Niveau de scénario défavorable"
+                            name="NSD"
+                            onChange={(e)=>setNSD(e.target.value)}
                             margin="normal"
                             variant="outlined"
                             autoComplete="on"
@@ -341,9 +353,9 @@ const Last_form = () => {
                         <div>
                             <TextField
                             style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
-                            label="ISIN <ISIN>"
-                            name="Isin"
-                            onChange={(e)=>setISIN(e.target.value)}
+                            label="Niveau de scénario médian"
+                            name="NSM"
+                            onChange={(e)=>setNSM(e.target.value)}
                             margin="normal"
                             variant="outlined"
                             autoComplete="on"
@@ -352,9 +364,9 @@ const Last_form = () => {
                         <div>
                             <TextField
                             style={{width:"80%", marginLeft:"0%", marginTop:"10%"}}
-                            label="ISIN <ISIN>"
-                            name="Isin"
-                            onChange={(e)=>setISIN(e.target.value)}
+                            label="Niveau de scénario favorable"
+                            name="NSF"
+                            onChange={(e)=>setNSF(e.target.value)}
                             margin="normal"
                             variant="outlined"
                             autoComplete="on"
@@ -467,27 +479,38 @@ const Last_form = () => {
                 <div style={{marginTop:"2%", marginLeft:"1.5%", fontWeight: "bold", width:"18%"}}>Barrière de remboursement</div>
                     <TextField
                         style={{width:"15%", marginLeft:"6%"}}
-                        label="ISIN <ISIN>"
-                        name="Isin"
-                        onChange={(e)=>setISIN(e.target.value)}
+                        label="Barrière de remboursement initiale"
+                        name="BAC"
+                        onChange={(e)=>setBAC(e.target.value)}
                         margin="normal"
                         variant="outlined"
                         autoComplete="on"
                         fullWidth/>
+                        
+                        <div style={{width:"15%", marginLeft:"2%", marginTop:"1.1%"}}>
+                            <FormControl>
+                                <InputLabel style={{marginTop:"0%"}}id="Type de strike">Type de strike</InputLabel>
+                                <Select
+                                    sx={{  minWidth: 200 }}
+
+                                    labelId="type_strike"
+                                    id="type_strike"
+                                    value={type_strike}
+                                    label="type_strike"
+                                    onChange={(e)=>settype_strike(e.target.value)}
+                                    >
+                                    <MenuItem value={"strike normal"}>Strike normal</MenuItem>
+                                    <MenuItem value={"strike moyen"}>Strike moyen</MenuItem>
+                                    <MenuItem value={"best strike"}>Best strike</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+
                     <TextField
                         style={{width:"15%", marginLeft:"2%"}}
-                        label="ISIN <ISIN>"
-                        name="Isin"
-                        onChange={(e)=>setISIN(e.target.value)}
-                        margin="normal"
-                        variant="outlined"
-                        autoComplete="on"
-                        fullWidth/>
-                    <TextField
-                        style={{width:"15%", marginLeft:"2%"}}
-                        label="ISIN <ISIN>"
-                        name="Isin"
-                        onChange={(e)=>setISIN(e.target.value)}
+                        label="Pas de degressivité"
+                        name="DEG"
+                        onChange={(e)=>setDEG(e.target.value)}
                         margin="normal"
                         variant="outlined"
                         autoComplete="on"
@@ -495,18 +518,18 @@ const Last_form = () => {
 
                     <TextField
                         style={{width:"15%", marginLeft:"2%"}}
-                        label="ISIN <ISIN>"
-                        name="Isin"
-                        onChange={(e)=>setISIN(e.target.value)}
+                        label="Avant dernier niveau de barrière dégressive"
+                        name="ABDAC"
+                        onChange={(e)=>setABDAC(e.target.value)}
                         margin="normal"
                         variant="outlined"
                         autoComplete="on"
                         fullWidth/>
                     <TextField
                         style={{width:"15%", marginLeft:"2%"}}
-                        label="ISIN <ISIN>"
-                        name="Isin"
-                        onChange={(e)=>setISIN(e.target.value)}
+                        label="Dernier niveau de barrière dégressive/airbag"
+                        name="DBAC"
+                        onChange={(e)=>setDBAC(e.target.value)}
                         margin="normal"
                         variant="outlined"
                         autoComplete="on"
@@ -517,24 +540,34 @@ const Last_form = () => {
 
                 <div className="column5">
                 <div style={{marginTop:"2%", marginLeft:"1.5%", fontWeight: "bold", width:"25%"}}>Coupon Phoenix</div>
+                
                     <TextField
                         style={{width:"15%"}}
-                        label="ISIN <ISIN>"
-                        name="Isin"
-                        onChange={(e)=>setISIN(e.target.value)}
+                        label="Barrière de coupon"
+                        name="BCPN"
+                        onChange={(e)=>setBCPN(e.target.value)}
                         margin="normal"
                         variant="outlined"
                         autoComplete="on"
                         fullWidth/>
-                    <TextField
-                        style={{width:"15%", marginLeft:"2%"}}
-                        label="ISIN <ISIN>"
-                        name="Isin"
-                        onChange={(e)=>setISIN(e.target.value)}
-                        margin="normal"
-                        variant="outlined"
-                        autoComplete="on"
-                        fullWidth/>
+
+                        <div style={{width:"15%", marginLeft:"2%", marginTop:"1.1%"}}>
+                            <FormControl>
+                                <InputLabel style={{marginTop:"0%"}}id="Barrière de coupon dégressive">Barrière de coupon dégressive</InputLabel>
+                                <Select
+                                    sx={{minWidth: 200 }}
+                                    labelId="BCPN_is_degressif"
+                                    id="BCPN_is_degressif"
+                                    value={BCPN_is_degressif}
+                                    label="BCPN_is_degressif"
+                                    onChange={(e)=>setBCPN_is_degressif(e.target.value)}
+                                    >
+                                    <MenuItem value={"oui"}>oui</MenuItem>
+                                    <MenuItem value={"non"}>non</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+                        
                     <TextField
                         style={{width:"15%", marginLeft:"2%"}}
                         label="ISIN <ISIN>"
@@ -545,15 +578,18 @@ const Last_form = () => {
                         autoComplete="on"
                         fullWidth/>
 
-                    <TextField
-                        style={{width:"15%", marginLeft:"2%"}}
-                        label="ISIN <ISIN>"
-                        name="Isin"
-                        onChange={(e)=>setISIN(e.target.value)}
-                        margin="normal"
-                        variant="outlined"
-                        autoComplete="on"
-                        fullWidth/>
+                        <div style={{width:"15%", marginLeft:"2%", marginTop:"1.12%"}}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                                label="Début dégressivité Phoenix"
+                                value={DDP}
+                                onChange={(DDP) => {
+                                setDDP(DDP);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                            </LocalizationProvider>
+                        </div>
                     <TextField
                         style={{width:"15%", marginLeft:"2%"}}
                         label="ISIN <ISIN>"
@@ -569,7 +605,7 @@ const Last_form = () => {
                     <div style={{marginTop:"5%", marginLeft:"2%", fontWeight: "bold", width:"32%"}}></div>
 
                     <FormControl>
-                    <InputLabel style={{marginTop:"7%", marginLeft:"8.6%"}}id="Typologie">Barrière coupon mémoire</InputLabel>
+                    <InputLabel style={{marginTop:"7%", marginLeft:"8.6%"}}id="Barrière coupon mémoire">Barrière coupon mémoire</InputLabel>
                         <Select
                                 style={{marginTop:"7%", marginLeft:"8.6%"}}
                                 sx={{ m: 1, minWidth: 200 }}
@@ -589,10 +625,10 @@ const Last_form = () => {
                 <div className="protection">
                     <div style={{marginTop:"5%", marginLeft:"2%", fontWeight: "bold", width:"32%"}}>Protection</div>
                     <TextField
+                            label="Barrière de protection"
                             style={{width:"21%", marginLeft:"2%"}}
-                            label="ISIN <ISIN>"
-                            name="Isin"
-                            onChange={(e)=>setISIN(e.target.value)}
+                            name="PDI"
+                            onChange={(e)=>setPDI(e.target.value)}
                             margin="normal"
                             variant="outlined"
                             autoComplete="on"
@@ -615,7 +651,7 @@ const Last_form = () => {
             {first_bloc()}
         </div>
         
-        <h3>STRUCTURE PAY_OFF</h3>
+        <h3>STRUCTURE PRODUIT</h3>
         <div className="rect" style={{marginTop:"1.3%"}}>
 
             {second_bloc()}
@@ -626,11 +662,12 @@ const Last_form = () => {
         </div>
 
         <div>
-        <Button
+        <Button 
+       //#0B3371
           variant="contained"
             color="primary"
             size="large"
-            style={{ marginTop: "0%", left:"40%", width:"20%", marginBottom:"3%"}}
+            style={{ marginTop: "0%", left:"40%", width:"20%", marginBottom:"3%", backgroundColor:"#0B3371"}}
             // onClick={handleSubmit}
           >
             Générer la brochure

@@ -129,9 +129,10 @@ def traces(Class, fig):
     fig.add_annotation(x=x_vertical_line +4.75 - x_niveau_ref, y=niveau_de_référence,text= (str(niveau_de_référence) + "%" ), showarrow=False,
                     font=dict(family="Proxima Nova", size=15, color=green ), align="left")
 
-    fig.add_shape(type="line",
-    x0=x_vertical_line, y0=niveau_de_référence, x1= x_vertical_line - 3, y1=niveau_de_référence,
-    line=dict(color=green, width=4))
+    if (Class.type_bar == "degressif"):
+        fig.add_shape(type="line",
+        x0=x_vertical_line, y0=niveau_de_référence, x1= x_vertical_line - 3, y1=niveau_de_référence,
+        line=dict(color=green, width=4))
     
     fig.add_annotation(x=x_vertical_line +4.75 - x_derniere_observation, y=derniere_observation,text= (str(derniere_observation) + "%" ), showarrow=False,
                     font=dict(family="Proxima Nova", size=15, color=blue ), align="left")
@@ -171,7 +172,7 @@ def texte(Class, fig):
         degressive = ""
     else:
         degressive = "dégressivité"
-    fig.add_annotation(x=43.5, y=133 ,text= ("Seuil d'activation du mécanisme de la barrière "  + degressive +" de remboursement anticipé automatique <br> à partir de la fin du " + str(Class.F0)+ " " + str(Class.PR1) +  " jusqu'à la fin du "+ str(Class.F0)+ " " + str(Class.ADPR) ), showarrow=False,
+    fig.add_annotation(x=44.5, y=133 ,text= ("Seuil d'activation du mécanisme de la barrière "  + degressive +" de remboursement anticipé automatique <br> à partir de la fin du " + str(Class.F0)+ " " + str(Class.PR1) +  " jusqu'à la fin du "+ str(Class.F0)+ " " + str(Class.ADPR) ), showarrow=False,
                         font=dict(family="Proxima Nova", size=10, color=black ), align="left")
 
     fig.add_annotation(x=28, y=123.5 ,text= ("Seuil de perte en capital à l'échéance" ), showarrow=False,
