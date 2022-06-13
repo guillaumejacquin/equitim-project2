@@ -70,7 +70,8 @@ const Last_form = () => {
     const [template, settemplate] = useState('')
     const [type_bar2, settype_bar2 ] = useState('')
     const [loading, setLoading] = useState(false)
-  
+    const [jdr, setjdr] = useState('')
+
     const [response, setResponse] = useState("")
     const [NJO, setNJO] = useState("")
 
@@ -85,16 +86,16 @@ const Last_form = () => {
       const images = importAll(require.context('../../../Templates', true, /\.pptx/));
       
       return (
-        <div style={{marginLeft:"20%"}}>
+        <div style={{marginLeft:"-5%", marginTop:"2%"}}>
         {/* <ul>{listItems}</ul> */}
 
 
     <FormControl>
-        <InputLabel style={{marginTop:"7%"}}id="template">template</InputLabel>
+        <InputLabel id="template">template</InputLabel>
 
         <Select
               labelId="template"
-              sx={{ m: 1, minWidth: 250 }}
+              sx={{ minWidth: 200 }}
 
               id="template"
               value={template}
@@ -154,7 +155,6 @@ const Last_form = () => {
                         
                 </div>
 
-                <div style={{marginLeft:"70%"}}>{menu_déroulant(template, settemplate)}</div>
                 <div className="column1">
                 
                 <div style={{marginTop:"1.7%", width:"30%"}}>
@@ -316,8 +316,8 @@ const Last_form = () => {
                             <TextField
                             style={{width:"80%", marginLeft:"0%", marginTop:"25%"}}
                             label="Jour de référence <pasfait>"
-                            name="Isin"
-                            onChange={(e)=>setISIN(e.target.value)}
+                            name="Jdr"
+                            onChange={(e)=>setjdr(e.target.value)}
                             margin="normal"
                             variant="outlined"
                             autoComplete="on"
@@ -380,7 +380,39 @@ const Last_form = () => {
         );
     }
 
-
+    const handleSubmit  = (event) => {
+        event.preventDefault();
+  
+      // Simple POST request with a JSON body using fetch
+      
+      const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            Nom: Nom, Typologie:Typologie,
+            Droit: Droit_applicable, Isin: Isin, Emission:Emission, DCI:DCI,
+            DR1:DR1, DPR:DPR, DADR:DADR, DCF:DCF, DEC:DEC, ADCF:ADCF,
+            F0:F0, TSJ:TSJ, PCS1:PCS1, PCS2:PCS2, PCS3:PCS3, PCS4:PCS4, PCS5:PCS5,
+            CPN:CPN, CPN_is_memoire:CPN_is_memoire, PDI:PDI, 
+            BAC:BAC, BAC_is_degressif:BAC_is_degressif, BCPN:BCPN, BCPN_is_degressif:BCPN_is_degressif,
+             COM:COM, NSD:NSD, NSM:NSM, NSF:NSF,
+            ABDAC:ABDAC, DBAC:DBAC, DEG:DEG, type_strike:type_strike,
+            type_bar:type_bar, sous_jacent:sous_jacent, template:template, DDP:DDP, type_bar2:type_bar2, NJO:NJO, jdr:jdr
+          })
+      };
+      // setLoading(true);
+      let test = ""
+      fetch('http://localhost:5000/add', requestOptions)
+          .then(response => response.json())
+          .then(response => setResponse(response))
+          .then(response =>     console.log(requestOptions)        )
+  
+          .then(response => test = (response))
+  
+          .catch(error => console.log(error))
+  
+  
+        }
     
     const second_bloc = () => {
         return(
@@ -489,20 +521,21 @@ const Last_form = () => {
                         
                         <div style={{width:"15%", marginLeft:"2%", marginTop:"1.1%"}}>
                             <FormControl>
-                                <InputLabel style={{marginTop:"0%"}}id="Type de strike">Type de strike</InputLabel>
-                                <Select
-                                    sx={{  minWidth: 200 }}
+                                <InputLabel style={{marginTop:"0%"}}id="Type de barrière">Type de barrière</InputLabel>
+                                    <Select
+                                        labelId="type_bar"
+                                        sx={{minWidth: 200 }}
 
-                                    labelId="type_strike"
-                                    id="type_strike"
-                                    value={type_strike}
-                                    label="type_strike"
-                                    onChange={(e)=>settype_strike(e.target.value)}
-                                    >
-                                    <MenuItem value={"strike normal"}>Strike normal</MenuItem>
-                                    <MenuItem value={"strike moyen"}>Strike moyen</MenuItem>
-                                    <MenuItem value={"best strike"}>Best strike</MenuItem>
-                                </Select>
+                                        id="type_bar"
+                                        value={type_bar}
+                                        label="type_bar"
+                                        onChange={(e)=>settype_bar(e.target.value)}
+                                        >
+                                        <MenuItem value={"degressif"}>Dégressive</MenuItem>
+                                        <MenuItem value={"airbag"}>Airbag</MenuItem>
+                                        <MenuItem value={"normal"}>Normale</MenuItem>
+                                    </Select> 
+
                             </FormControl>
                         </div>
 
@@ -568,15 +601,8 @@ const Last_form = () => {
                             </FormControl>
                         </div>
                         
-                    <TextField
-                        style={{width:"15%", marginLeft:"2%"}}
-                        label="ISIN <ISIN>"
-                        name="Isin"
-                        onChange={(e)=>setISIN(e.target.value)}
-                        margin="normal"
-                        variant="outlined"
-                        autoComplete="on"
-                        fullWidth/>
+                   
+                   
 
                         <div style={{width:"15%", marginLeft:"2%", marginTop:"1.12%"}}>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -590,15 +616,8 @@ const Last_form = () => {
                             />
                             </LocalizationProvider>
                         </div>
-                    <TextField
-                        style={{width:"15%", marginLeft:"2%"}}
-                        label="ISIN <ISIN>"
-                        name="Isin"
-                        onChange={(e)=>setISIN(e.target.value)}
-                        margin="normal"
-                        variant="outlined"
-                        autoComplete="on"
-                        fullWidth/>                    
+                        <div style={{width:"15%", marginLeft:"2%", marginTop:"1.12%"}}></div>
+                        <div style={{width:"15%", marginLeft:"2%", marginTop:"1.12%"}}></div>                
                 </div>
 
                     <div className="protection">
@@ -639,10 +658,6 @@ const Last_form = () => {
     }
 
 
-
-
-
-
     return (
     <div> 
         <h1> LA MOULINETTE BROCHURE DE WALLY</h1>
@@ -668,7 +683,7 @@ const Last_form = () => {
             color="primary"
             size="large"
             style={{ marginTop: "0%", left:"40%", width:"20%", marginBottom:"3%", backgroundColor:"#0B3371"}}
-            // onClick={handleSubmit}
+            onClick={handleSubmit}
           >
             Générer la brochure
           </Button>

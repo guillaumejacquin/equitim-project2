@@ -76,7 +76,7 @@ def traces(Class, fig):
     x_niveau_def = 0
     x_scenario_def = 0
 
-    text_legende = Class.SJR3 + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
+    text_legende = Class.SJR3.capitalize() + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
     
     fig.add_annotation(x=0.6, y=149, text= (text_legende), showarrow=False,
                     font=dict(family="Proxima Nova", size=12, color=black ), align="left")
@@ -147,6 +147,10 @@ def traces(Class, fig):
     # line=dict(color=blue, width=4))
 
 
+    if (float(avant_dernier_niveau_de_reference) < premier_niveau_autocall):
+            fig.add_annotation(x=70, y=avant_dernier_niveau_de_reference + 2 * pasdedegressivite + add_remontee_var + 8 ,text= str(avant_dernier_niveau_de_reference) +"%", showarrow=False,
+            font=dict(family="Proxima Nova", size=14, color=green), align="left")
+            
     perte_capital = float(Class.PDI)
     derniere_observation = float(Class.DBAC)
 

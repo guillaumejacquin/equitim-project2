@@ -156,6 +156,8 @@ def elementsToReplaceCalcul(Class, shapes):
     ddr1 = ddr1[8:10] + "/"+ ddr1[5:7] + "/" + ddr1[0:4]
     replace_text({'<DDR1>': ddr1}, shapes)
     replace_text({'<DDR1_MAJ>': Class.DDR1_MAJ}, shapes)
+    replace_text({'<DDR1_MAJ_MIN>': Class.DDR1_MAJ_MIN}, shapes)
+
     replace_text({'<DDR1-12_MAJ>': Class.DDR1_12_MAJ}, shapes)
 
     replace_text({'<DIC>': Class.DIC}, shapes)

@@ -33,6 +33,7 @@ def add_articles():
 
     dci = data["DCI"]
     Myclass.DCI = dci
+    Myclass.DCI = Myclass.DCI.replace("/", "-")
     
 
     dr1 = data["DR1"]
@@ -84,7 +85,11 @@ def add_articles():
     Myclass.type_bar2 = data["type_bar2"]
 
     # Myclass.DCF = "2027-07-14"
+    try:
+        Myclass.JDR = data["jdr"]
 
+    except Exception:
+        print("pas de jour de reference")
     print("------------------------------")
     print("Emission = ",  Myclass.Emission)
     print("Premier  constat Rappel = ",  Myclass.DPR)

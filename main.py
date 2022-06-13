@@ -36,6 +36,7 @@ from graphs.bloc4 import *
 from graphs.graph_scenario_defavorable import *
 from graphs.graph_scenario_median import *
 from graphs.graph_scenario_favorable import *
+from graphs.indice_graph import *
 
 from calculs.dates.dates_maj import *
 from calculs.GainOuCoupon import *
@@ -47,6 +48,7 @@ from calculs.style.NOMSOUSJACENTP1 import *
 from calculs.dates.DDPP import *
 from calculs.dates.boucles.callAllDates2Date import *
 from calculs.dates.DDCI_M_B_Strike import *
+
 #traitement des données
 def start_processus_template(Class):
     PDC1(Class)
@@ -119,7 +121,16 @@ def start_processus_template(Class):
 
     # Class.graph1 = bloc2(Class, "graph1.png", whitestrap=False)
     Class.graph2 = bloc3(Class, "graph2.png", whitestrap=True)
-    Class.graph5 = bloc4(Class, "graph5.png")
+
+    #ici
+    #bloc4
+    #èèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèè
+    if  Class.TDP == "indice" :
+        indice_main(Class, "graph5.png")
+    else:
+        Class.graph5 = bloc4(Class, "graph5.png")
+    #èèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèèè
+
     Class.smallgraph1 = smallgraph1(Class, "graph_scenario_def.png")
     Class.smallgraph2 = smallgraph2(Class, "graph_scenario_median.png")
     Class.smallgraph3 = smallgraph3(Class, "graph_scenario_fav.png")
@@ -127,6 +138,9 @@ def start_processus_template(Class):
     SV(Class)
     balisedeg(Class)
     BaliseCMTRA(Class)
+
+
+    Class.DCI = Class.DCI.replace("-", "/") #on remplace le style(plus joli le 11/05/2020 plutot que 11-05-2020)
 
     ChangeTextOnPpt(Class)
 

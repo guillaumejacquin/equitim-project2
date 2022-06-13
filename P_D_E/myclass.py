@@ -56,7 +56,8 @@ class InformationsForm():
     
         self.DDP = ""
         self.NJO = ""
-        #on appelle la fonction pour  initier les variables de calcul
+        self.JDR = ""
+     #on appelle la fonction pour  initier les variables de calcul
         self.var_calculs()
     
     #AUTRES VARIABLES, ICI CALCULS

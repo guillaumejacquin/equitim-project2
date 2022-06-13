@@ -104,23 +104,22 @@ def xirr_3dates_phoenix(Class, date1, date2, date3, variable, variable2):
 def boucleTRA(Class, date1, date2, df, variable, variable2, exception=""):
     first_date = datetime.strptime(date1, '%Y-%m-%d')
     second_date = datetime.strptime(date2, '%Y-%m-%d')
-
-    df["dates"] = pd.to_datetime(df['dates'], format='%d/%m/%Y')
+    df_tmp = df
+    df_tmp["dates"] = pd.to_datetime(df_tmp['dates'], format='%d/%m/%Y')
     #on met le dataframe au format de dates
     #premiere date 
-    
     pd.options.mode.chained_assignment = None 
     try:  
-        df["flux"] = float(variable)
-        df["flux"].loc[0] = -100
-        df["flux"].loc[-1] = float(variable2)
-        df["dates"].loc[0] = first_date
+        df_tmp["flux"] = float(variable)
+        df_tmp["flux"].loc[0] = -100
+        df_tmp["flux"].loc[-1] = float(variable2)
+        df_tmp["dates"].loc[0] = first_date
         
 
-        df["dates"] = pd.to_datetime(df['dates'], format='%Y-%m-%d')
-        df["soustract2dates"] = (df["dates"] - first_date).dt.days
+        df_tmp["dates"] = pd.to_datetime(df_tmp['dates'], format='%Y-%m-%d')
+        df_tmp["soustract2dates"] = (df_tmp["dates"] - first_date).dt.days
 
-        df2 = df[ df['dates'] <= second_date]
+        df2 = df_tmp[ df_tmp['dates'] <= second_date]
         df2["flux"].iloc[-1] += 100
         #on cree un deuxième dataframe mon pote
 
@@ -195,22 +194,29 @@ def ALL_TRA(Class):
     #les 2 périodes
     période1 = df['dates'].iloc[1]
     période2 = df['dates'].iloc[2]
-    # print("------------------------------------------------------------------------------------------------")
-    # print(df['dates'])
-    # print("------------------------------------------------------------------------------------------------")
+
+    print(df["dates"])
 
     phoenix_3dates(Class, période1, période2)
 
 
     #On appelle encore la fcontion en changeant les arguments pour que le résultat ne soit pas le même
+    print(df["dates"])
+
     Class.TRA_F_P = (boucleTRA(Class, Class.PDC2, Class.DR1, df, Class.CPN, float(Class.CPN)+100)) #Scénario favorable phoenix
+    df = pd.DataFrame({'col':dataframe_dates})
+    df.columns=["dates"]
     # df.drop(df.tail(1).index,inplace=True)
   
     # Class.MDR_P = (boucleTRA(Class, Class.PDC2, df2, Class.CPN, Class.PDI)) #Scénario favorable phoenix( -100,CPN,…,PDI)
     # Class.MDR_TRA_TOUT_SAUF_P = (boucleTRA(Class, Class.PDC2, df2, Class.CPN, 100)) #TRA remboursement échéance médian max( -100,CPN,…,100)
-    Class.TRA_TOUT_P = (boucleTRA(Class, Class.PDC2,Class.DEC, df, Class.CPN, Class.PDI)) #Scénario favorable phoenix( -100,CPN,…,PDI)
     
+
+    Class.TRA_TOUT_P = (boucleTRA(Class, Class.PDC2,Class.DEC, df, Class.CPN, Class.PDI)) #Scénario favorable phoenix( -100,CPN,…,PDI)
+    df = pd.DataFrame({'col':dataframe_dates})
+    df.columns=["dates"]
     Class.TRA_MED_P = (boucleTRA(Class, Class.PDC2,Class.DEC, df, Class.CPN, Class.PDI, "med_p")) #Scénario favorable phoenix( -100,CPN,…,PDI)
+    
     # Class.TRA_FP = (boucleTRA(Class, Class.PDC2, df, Class.CPN, float(Class.CPN)+100)) #Scénario favorable phoenix
     Class.TRA_TOUT_1_P = (boucleTRA(Class, Class.PDC2,Class.DADR, df, Class.CPN, Class.PDI)) #Scénario favorable phoenix( -100,CPN,…,PDI)
     Class.TRA_TOUT_SAUF_P = (boucleTRA(Class, Class.PDC2,Class.DEC, df, Class.CPN, Class.PDI, "tout_sauf_p"))
@@ -223,7 +229,7 @@ def ALL_TRA(Class):
     
     #print(Class.TRA_TOUT_1_P, Class.TRA_F_P)
     try:
-        Class.TRA_MRA_MAX_P = max(Class.TRA_TOUT_1_P, Class.TRA_F_P) 
+        Class.TRA_MRA_MAX_P = max(Class.TRA_TOUT_P, Class.TRA_F_P) 
     except Exception:
         Class.TRA_MRA_MAX_P = 0
 

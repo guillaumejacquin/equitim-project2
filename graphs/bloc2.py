@@ -7,7 +7,7 @@ import kaleido
 #on arrive au bloc des deux graphs , j'ignorais encore qu'on pouvait des fonctions (j'avais eu un bug), bonne chance pour la lecture
 def bloc2(Class, name, whitestrap=False):
     text_legende = Class.SJR3.capitalize() + " de <br> l'"+ Class.TDP +  " par <br> rapport à son <br>" + Class.NDR
-   
+    
    #valeurs des x_tickers
     if (Class.F0 == "jours"):
         secondvaluexabciss = "Année" + Class.F0s + " " + str(int(int(Class.PR1)/365 + 1))  + " à " + str(int(int(Class.DPRR)/365))
@@ -57,6 +57,13 @@ def bloc2(Class, name, whitestrap=False):
         "x2":  '#D9CD9F',
         "x3":  '#F7F4E9',
     }
+    # len_autocall = (str(niveau_autocall[0])[::-1].find('.'))
+    # if (len_autocall < 2):
+    #         niveau_autocall[0] = (f'{float(niveau_autocall[0]):.2f}')
+
+    # len_autocall = (str(niveau_capital)[::-1].find('.'))
+    # if (len_autocall < 2):
+    #         nniveau_capital = (f'{float(nniveau_capital[0]):.2f}')
 
     #la boucle du dictionnaire data (avec color) pour tracer les blocs
     for key in data:
@@ -175,6 +182,7 @@ def bloc2(Class, name, whitestrap=False):
 
 #     #ici on remplace les valeurs x (ecrites abcisses(ne plus avoir 10 20 30 40 mais trimestre1 etc))
 #         # ajout des petites lignes nulles
+  
 
     fig.add_shape(type="line",
     x0=x0, y0=niveau_autocall[0], x1=x1, y1=niveau_autocall[0],
@@ -202,10 +210,13 @@ def bloc2(Class, name, whitestrap=False):
             x0=4, y0=100, x1=4.5, y1=100,
             line=dict(color=black, width=3))
 
+        if int(niveau_autocall[0]) == float(niveau_autocall[0]):
+            autocall0 = int(niveau_autocall[0])
+        else:
+            autocall0 = niveau_autocall[0]
 
-    
-        fig.add_annotation(x=3.0, y=niveau_autocall[0], text= str(niveau_autocall[0]) +"%", showarrow=False,
-                    font=dict( family="Proxima Nova", size=14, color=green ),align="left")
+        fig.add_annotation(x=3.0, y=niveau_autocall[0], text= str(autocall0) +"%", showarrow=False,
+                        font=dict( family="Proxima Nova", size=14, color="red" ),align="left")
     else:
         #si le niveau_autocall est égal à 100 , dessiner les options
 

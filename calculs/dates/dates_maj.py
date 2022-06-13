@@ -87,8 +87,11 @@ def DDR1_maj(Class):
 
     DDR_maj_constructor = ddr1[8:10] + " " + month_string + " " + ddr1[0:4] 
     DDR_maj_constructor = DDR_maj_constructor.upper()
+    ddr_min = DDR_maj_constructor
 
     Class.DDR1_MAJ = DDR_maj_constructor
+    Class.DDR1_MAJ_MIN = ddr_min
+
 #DCI MAJ, DCF MAJ, DDCIDDR1_12_MAJ
 
 
@@ -113,7 +116,7 @@ def F1_MAJ(Class):
 
     DDR_maj_constructor = Class.F1[8:10] + " " + month_string + " " + Class.F1[0:4] 
     Class.F1_MAJ = DDR_maj_constructor
-    
+
 
 # def ABAC2_MAJ(Class):
 #     print("AHHHHHHHHHHH", )

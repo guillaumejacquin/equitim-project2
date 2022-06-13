@@ -1,7 +1,4 @@
-from cgitb import text
-from flask import Flask
 import plotly.graph_objects as go
-import kaleido
 
 # 1 #si  coupon == coupon_autocall == True, 2 blocs, (soit SANS barrière coupon)
 
@@ -75,7 +72,10 @@ def bloc3(Class, name, whitestrap=True):
         thirdvaluexabciss = "Année "  +" " + str(int(int(Class.DPRR)/365))
 
     else:
-        firstvaluexabciss = Class.F0 + Class.F0s + " 1 à " +  str(int(Class.PR1) -1)
+        if (int(Class.PR1) -1 == 1):
+            firstvaluexabciss = Class.F0 + " 1"
+        else:
+            firstvaluexabciss = Class.F0 + Class.F0s + " 1 à " +  str(int(Class.PR1) -1)
         secondvaluexabciss = Class.F0 + Class.F0s + " " +  str(int(Class.PR1))  + " à " + str(int(Class.DPRR) - 1) 
         thirdvaluexabciss = Class.F0  +" " + str(Class.DPRR)
 
@@ -85,6 +85,16 @@ def bloc3(Class, name, whitestrap=True):
     secondvaluexabciss = secondvaluexabciss.capitalize()
     thirdvaluexabciss = thirdvaluexabciss.capitalize()
 
+
+
+
+    # len_autocall = (str(niveau_autocall[0])[::-1].find('.'))
+    # if (len_autocall < 2):
+    #         niveau_autocall[0] = float((f'{float(niveau_autocall[0]):.2f}'))
+
+    # len_capital = (str(niveau_capital)[::-1].find('.'))
+    # if (len_capital < 2):
+    #         niveau_capital = float((f'{float(niveau_capital):.2f}'))
     fig.update_xaxes(tickangle=0,
                     tickmode = 'array',
                     tickvals = [10, 27, 44.5],
@@ -128,6 +138,7 @@ def bloc3(Class, name, whitestrap=True):
         x0=17, x1=37, y0=niveau_autocall[2], y1=niveau_autocall[3]
     )
 
+    
     if (Class.BCPN_is_degressif == "oui"):
         fig.add_annotation(x=48, y=niveau_autocall[4] + 3, text=str(niveau_autocall[4]) + "%", showarrow=False,
                     font=dict( family="Proxima Nova", size=14, color=green ),align="left",
@@ -186,19 +197,36 @@ def bloc3(Class, name, whitestrap=True):
 
     fig.add_annotation(x=2.0, y=130, text= text_legende, showarrow=False, font=dict(family="Proxima Nova", size=12, color=black ),
                     )
+    if int(niveau_autocall[2]) == float(niveau_autocall[2]):
+            autocall2 = int(niveau_autocall[2])
+    else:
+        autocall2 = float(niveau_autocall[2])
 
     if (niveau_autocall[2] != 100):
-        fig.add_annotation(x=3.0, y=niveau_autocall[2], text= str(niveau_autocall[2]) +"%", showarrow=False,
+        fig.add_annotation(x=3.0, y=niveau_autocall[2], text= str(autocall2) +"%", showarrow=False,
                     font=dict(family="Proxima Nova", size=14, color=green ))
     else:
-        mystring = str(Class.BAC) + "%"
-        fig.add_annotation(x=3, y=str(Class.BAC),text= (mystring), showarrow=False,
+        if int(Class.BAC) == float(Class.BAC):
+            bac = int(Class.BAC)
+        else:
+            bac = Class.BAC
+        mystring = str(bac) + "%"
+        fig.add_annotation(x=3, y=str(bac),text= (mystring), showarrow=False,
                     font=dict(family="Proxima Nova", size=14, color=green ),
                     )
+    if int(niveau_coupon[-1],) == float(niveau_coupon[-1],):
+            coupon1 = int(niveau_coupon[-1])
+    else:
+        coupon1 = float(niveau_coupon[-1])
 
-    fig.add_annotation(x=3.0, y=niveau_coupon[-1], text= str(niveau_coupon[-1]) +"%", showarrow=False,
+    fig.add_annotation(x=3.0, y=niveau_coupon[-1], text= str(coupon1) +"%", showarrow=False,
                     font=dict(family="Proxima Nova", size=14, color=blue ),
                     )
+
+    if int(niveau_capital) == float(niveau_capital):
+            niveau_capital = int(niveau_capital)
+    else:
+        niveau_capital = float(niveau_capital)
     fig.add_annotation(x=3.0, y=niveau_capital,text= str(niveau_capital) +"%", showarrow=False,
                     font=dict(family="Proxima Nova", size=14, color="red" ),
                     )
@@ -359,7 +387,7 @@ def bloc3(Class, name, whitestrap=True):
         mystring = mystring.replace("(1)", "⁽¹⁾")
 
         fig.add_annotation(
-        x=(52),
+        x=(55),
         y=(30),
         text=mystring,
         showarrow=False,
@@ -368,8 +396,8 @@ def bloc3(Class, name, whitestrap=True):
         y_arrow =abs(float(myvar - (myvar  - float(Class.DBAC))))
         fig.add_annotation(
             x=43.5,  # arrows' head
-            ay=31.5,  # arrows' head
-            ax=49.6,  # arrows' tail
+            ay=36,  # arrows' head
+            ax=50.6,  # arrows' tail
             y=y_arrow - (float(Class.DBAC) - niveau_capital)/2,  # arrows' tail
             xref='x',
             yref='y',
@@ -390,7 +418,7 @@ def bloc3(Class, name, whitestrap=True):
         showarrow=False,
         font=dict(color=black,size=12)
     )
-    mystring = "<b>Remboursement anticipé automatique(1) :</b><br><br>L'intégralité du capital initial <br> + <br> Un coupon de " + str(cpn) + " % <br> + <br> Les éventuels coupons mémorisés au préalable"
+    mystring = "<b>Remboursement anticipé automatique(1) :</b><br><br>L'intégralité du capital initial <br> + <br> Un coupon de " + str(cpn) + "% <br> + <br> Les éventuels coupons mémorisés au préalable"
     mystring = mystring.replace("(1)", "⁽¹⁾")
 
     fig.add_annotation(
@@ -416,7 +444,7 @@ def bloc3(Class, name, whitestrap=True):
         )
         
     
-    mystring = "<b>Remboursement à l'échéance(1)</b> :<br><br>L'intégralité du capital initial <br> + <br> Un coupon de " + str(cpn) + " % <br> + <br>Les éventuels coupons <br> mémorisés au préalable <br>"
+    mystring = "<b>Remboursement à l'échéance(1)</b> :<br><br>L'intégralité du capital initial <br> + <br> Un coupon de " + str(cpn) + "% <br> + <br>Les éventuels coupons <br> mémorisés au préalable <br>"
     mystring = mystring.replace("(1)", "⁽¹⁾")
 
     fig.add_annotation(
