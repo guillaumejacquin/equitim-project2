@@ -182,6 +182,8 @@ class InformationsForm():
         self.TRA_echeance_perte_A = "" #oui
         self.BaliseCMTRA = "" #oui
         #PHOENIX
+        self.TRA_MP = "" #oui
+ 
         self.TRA_D_P = "" #oui
         self.TRA_M_P = "" #oui
         self.TRA_M_PM = "" #oui

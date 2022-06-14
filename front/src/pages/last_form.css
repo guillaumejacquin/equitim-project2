@@ -54,7 +54,7 @@ h3 {
     flex-direction: row; 
                /* default value; can be omitted */
     /* switched from default (flex-start, see below) */
-    width:90%
+    width:100%
 }
 
 .protection {

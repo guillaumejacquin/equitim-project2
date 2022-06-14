@@ -182,7 +182,10 @@ def ALL_TRA(Class):
         compteur = relativedelta(years=+1)    
 
     #on appelle le dataframe pour les tra_max
+    tmp = Class.Datespaiement1[0:12]
+    Class.Datespaiement1 = tmp + Class.Datespaiement1
     dataframe_dates = Class.Datespaiement1.split(", ")
+    
     df = pd.DataFrame({'col':dataframe_dates})
     df.columns=["dates"]
 
@@ -195,13 +198,12 @@ def ALL_TRA(Class):
     période1 = df['dates'].iloc[1]
     période2 = df['dates'].iloc[2]
 
-    print(df["dates"])
 
     phoenix_3dates(Class, période1, période2)
 
 
     #On appelle encore la fcontion en changeant les arguments pour que le résultat ne soit pas le même
-    print(df["dates"])
+    Class.TRA_MRA_MIN_P = (xirr_test(Class, Class.PDC2, Class.DADR, 100 + float(Class.CPN)))
 
     Class.TRA_F_P = (boucleTRA(Class, Class.PDC2, Class.DR1, df, Class.CPN, float(Class.CPN)+100)) #Scénario favorable phoenix
     df = pd.DataFrame({'col':dataframe_dates})
@@ -211,50 +213,60 @@ def ALL_TRA(Class):
     # Class.MDR_P = (boucleTRA(Class, Class.PDC2, df2, Class.CPN, Class.PDI)) #Scénario favorable phoenix( -100,CPN,…,PDI)
     # Class.MDR_TRA_TOUT_SAUF_P = (boucleTRA(Class, Class.PDC2, df2, Class.CPN, 100)) #TRA remboursement échéance médian max( -100,CPN,…,100)
     
-
     Class.TRA_TOUT_P = (boucleTRA(Class, Class.PDC2,Class.DEC, df, Class.CPN, Class.PDI)) #Scénario favorable phoenix( -100,CPN,…,PDI)
     df = pd.DataFrame({'col':dataframe_dates})
     df.columns=["dates"]
     Class.TRA_MED_P = (boucleTRA(Class, Class.PDC2,Class.DEC, df, Class.CPN, Class.PDI, "med_p")) #Scénario favorable phoenix( -100,CPN,…,PDI)
-    
+    df = pd.DataFrame({'col':dataframe_dates})
+    df.columns=["dates"]
     # Class.TRA_FP = (boucleTRA(Class, Class.PDC2, df, Class.CPN, float(Class.CPN)+100)) #Scénario favorable phoenix
     Class.TRA_TOUT_1_P = (boucleTRA(Class, Class.PDC2,Class.DADR, df, Class.CPN, Class.PDI)) #Scénario favorable phoenix( -100,CPN,…,PDI)
+    df = pd.DataFrame({'col':dataframe_dates})
+    df.columns=["dates"]
     Class.TRA_TOUT_SAUF_P = (boucleTRA(Class, Class.PDC2,Class.DEC, df, Class.CPN, Class.PDI, "tout_sauf_p"))
+    df = pd.DataFrame({'col':dataframe_dates})
+    df.columns=["dates"]
     #2 eme dataframe pour aller jusqu a l echance et plus jusque a 1dr
     compteurvar = Class.DEC
     try:#des petites gestions d erreurs pour éviter le crash
         Class.TRA_MAX_P = max(Class.TRA_TOUT_P, Class.TRA_F_P) 
     except Exception:
         Class.TRA_MAX_P = 0
-    
+    df = pd.DataFrame({'col':dataframe_dates})
+    df.columns=["dates"]
     #print(Class.TRA_TOUT_1_P, Class.TRA_F_P)
     try:
         Class.TRA_MRA_MAX_P = max(Class.TRA_TOUT_P, Class.TRA_F_P) 
     except Exception:
         Class.TRA_MRA_MAX_P = 0
 
+    df = pd.DataFrame({'col':dataframe_dates})
+    df.columns=["dates"]
 
     if (Class.Typologie == "coupon phoenix" and  Class.CPN_is_memoire == "oui"):
         Class.TRA_RM_P = Class.TRA_MRA_MIN_PM
     else:
         Class.TRA_RM_P = Class.TRA_MRA_MIN_P
-    
+
+    df = pd.DataFrame({'col':dataframe_dates})
+    df.columns=["dates"]
     if (Class.CPN_is_memoire == "oui"):
         Class.TRA_EM_P = Class.TRA_MRE_MIN_PM
     else:
         Class.TRA_EM_P = Class.TRA_MRE_MIN_P
 
-    
+    df = pd.DataFrame({'col':dataframe_dates})
+    df.columns=["dates"]
 
     if Class.PDI == Class.BFP:
         if (Class.CPN_is_memoire == "oui"):
-            Class.TRA_EM_P = Class.TRA_GM_PM
+            Class.TRA_MP = Class.TRA_GM_PM
         else:
-            Class.TRA_RM_P = Class.TRA_GM_P
+            Class.TRA_MP = Class.TRA_GM_P
     
     else:
         if (Class.CPN_is_memoire == "oui"):
-            Class.TRA_EM_P = Class.TRA_M_PM
+            Class.TRA_MP = Class.TRA_M_PM
         else:
-            Class.TRA_RM_P = Class.TRA_M_P
+            Class.TRA_MP = Class.TRA_M_P
 

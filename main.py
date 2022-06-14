@@ -61,7 +61,6 @@ def start_processus_template(Class):
     DPRR(Class)
     adcf(Class)
     DPCI_maj(Class)
-
     TDP(Class)
     GC(Class)
     GCA(Class)
@@ -69,6 +68,7 @@ def start_processus_template(Class):
     abac(Class)
     f1_f2(Class)
     SJR(Class)
+
     tds(Class)
     DCF(Class)
     DR1(Class)
@@ -91,6 +91,7 @@ def start_processus_template(Class):
     Memoire4(Class)
     Memoire5(Class)
     Memoire6(Class)
+
     BFP(Class)
     PAGE(Class)
     DDPP(Class)
@@ -99,7 +100,6 @@ def start_processus_template(Class):
     PDC2_maj(Class)
     DDR_maj(Class)
     DPR_maj(Class)
-
     DEC_maj(Class)
     DCI_maj(Class)
     DCF_maj(Class)
@@ -110,6 +110,7 @@ def start_processus_template(Class):
     DDCI_M_B_Strike(Class)
     # ABAC2_MAJ(Class)
     ALL_TRA(Class)
+
     #si coupon autocall
     if (Class.Typologie == "coupon autocall"):
         Class.graph1 = bloc2(Class, "graph1.png", whitestrap=False)
@@ -119,8 +120,10 @@ def start_processus_template(Class):
         else:
             Class.graph1 = bloc3(Class, "graph1.png", whitestrap=False)
 
+
     # Class.graph1 = bloc2(Class, "graph1.png", whitestrap=False)
     Class.graph2 = bloc3(Class, "graph2.png", whitestrap=True)
+    print("iciiiiiiiiiiai")
 
     #ici
     #bloc4

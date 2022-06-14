@@ -349,8 +349,10 @@ def TRA_replace(Class, shapes):
     tra_rm_p = tra_rm_p + "%" 
     replace_text({'<TRA.RM.P>': tra_rm_p}, shapes)
 
+    tra_mp = Class.TRA_MP.replace(".", ",")
+    tra_mp = tra_rm_p + "%" 
+    replace_text({'<TRA.MP>': tra_mp}, shapes)
 
-    
 
 
 

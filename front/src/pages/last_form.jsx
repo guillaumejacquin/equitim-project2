@@ -165,7 +165,6 @@ const Last_form = () => {
                         value={Emission}
                         onChange={(Emission) => {
                         setEmission(Emission);
-                        console.log(Emission)
                         }}
                         renderInput={(params) => <TextField {...params} />}
                     />
@@ -173,7 +172,7 @@ const Last_form = () => {
                 </div>
                 <TextField
             label="Commission"
-            style={{width:"30%", marginTop:"2%", marginLeft:"5%"}}
+            style={{width:"30%", marginTop:"2%", marginLeft:"-1.5%"}}
             name="COM"
             onChange={(e)=>setCOM(e.target.value)}
             margin="normal"
@@ -404,14 +403,9 @@ const Last_form = () => {
       let test = ""
       fetch('http://localhost:5000/add', requestOptions)
           .then(response => response.json())
-          .then(response => setResponse(response))
-          .then(response =>     console.log(requestOptions)        )
-  
+          .then(response => setResponse(response))  
           .then(response => test = (response))
-  
           .catch(error => console.log(error))
-  
-  
         }
     
     const second_bloc = () => {
@@ -434,13 +428,10 @@ const Last_form = () => {
                         >
                         <MenuItem value={"coupon autocall"}>Coupon Autocall</MenuItem>
                         <MenuItem value={"coupon phoenix"}>Coupon Phoenix</MenuItem>
-
-
                         </Select> 
                     </FormControl>
 
                     <FormControl>
-
                         <InputLabel style={{marginTop:"5%" }}id="F0">Fréquence</InputLabel>
                         <Select
                             style={{marginTop:"7%"}}
@@ -459,9 +450,7 @@ const Last_form = () => {
 
                             </Select>
                     </FormControl>
-
-
-                            
+    
                     <TextField
                         label="Coupon périodique (%)"
                         style={{width:"30%"}}
@@ -508,9 +497,9 @@ const Last_form = () => {
                 </div>
 
                 <div className="column5">
-                <div style={{marginTop:"2%", marginLeft:"1.5%", fontWeight: "bold", width:"18%"}}>Barrière de remboursement</div>
+                <div style={{marginTop:"2%", marginLeft:"1.5%", fontWeight: "bold", width:"17%"}}>Barrière de remboursement</div>
                     <TextField
-                        style={{width:"15%", marginLeft:"6%"}}
+                        style={{width:"15%", marginLeft:"4.7%"}}
                         label="Barrière de remboursement initiale"
                         name="BAC"
                         onChange={(e)=>setBAC(e.target.value)}
@@ -572,10 +561,10 @@ const Last_form = () => {
                 </div>
 
                 <div className="column5">
-                <div style={{marginTop:"2%", marginLeft:"1.5%", fontWeight: "bold", width:"25%"}}>Coupon Phoenix</div>
+                <div style={{marginTop:"2%", marginLeft:"1.5%", fontWeight: "bold", width:"17%"}}>Coupon phoenix</div>
                 
                     <TextField
-                        style={{width:"15%"}}
+                        style={{width:"15%", marginLeft:"4.7%"}}
                         label="Barrière de coupon"
                         name="BCPN"
                         onChange={(e)=>setBCPN(e.target.value)}
@@ -682,7 +671,7 @@ const Last_form = () => {
           variant="contained"
             color="primary"
             size="large"
-            style={{ marginTop: "0%", left:"40%", width:"20%", marginBottom:"3%", backgroundColor:"#0B3371"}}
+            style={{ marginTop: "0%", left:"40%", width:"20%", marginBottom:"3%", backgroundColor:"#0B3371", minHeight: '60px'}}
             onClick={handleSubmit}
           >
             Générer la brochure

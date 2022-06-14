@@ -224,7 +224,6 @@ def bloc4_simple_tickers(tickers, Class, Name):
                 my_array.append("N/A")
                 pass
         
-        
         try: #je  sors de la boucle et je rajoute le 10 ans "manuellement" car il est légèrement différent
             result = get_value_array(int(0), start_date, adj_close)
             result = ("{:.2f}".format(result))
