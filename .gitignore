@@ -1,5 +1,4 @@
 env/
 result/
 front/public
-front/package-lock.json
-front/package.json
+
