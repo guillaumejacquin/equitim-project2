@@ -56,7 +56,7 @@ def indice_simple_tickers(tickers, Class, Name):
                 showline=False,
                 showgrid=False,
                 title="",
-                ticks='outside',
+                ticks='inside',
                 visible= True,
                 showticklabels = True,
             ),
@@ -65,7 +65,7 @@ def indice_simple_tickers(tickers, Class, Name):
                 zeroline=True,
                 showline=False,
                 showticklabels=True,
-                ticks='outside',
+                ticks='inside',
                 gridwidth=1,
                 gridcolor='rgb(242, 242, 242)',
                 linecolor='rgb(0, 0, 0)',
@@ -145,8 +145,6 @@ def indice_simple_tickers(tickers, Class, Name):
                 pass
             Class.Yahoo_value.append(my_array)
 
-    fig.show()
-
 def indice_multiple_tickers(tickers, Class, Name):
     bdays=BDay()    
     # df = df.iloc[1: , :]
@@ -166,16 +164,16 @@ def indice_multiple_tickers(tickers, Class, Name):
     df = pd.read_excel (r'database/database_indice.xlsx', sheet_name=tickers[0])
     df = df.iloc[1: , :]
 
-    if len(df_list) == 2:
-            print("yeah yeah")
-            df_list[0] = df_list[0].reset_index(drop=True, inplace=True)
+    # if len(df_list) == 2:
+    #         print("yeah yeah")
+    #         df_list[0] = df_list[0].reset_index(drop=True, inplace=True)
 
-            fig = px.line(data_frame = df[0]
-                        ,x = df[0]
-                        ,y = df_list[0],
-                        title="En points",
-                        ) 
-            print("POUET")
+    #         fig = px.line(data_frame = df[0]
+    #                     ,x = df[0]
+    #                     ,y = df_list[0],
+    #                     title="En points",
+    #                     ) 
+    #         print("POUET")
             # fig.data[0].name = Class.Yahoo_value_name[0]
             # fig.data[1].name = Class.Yahoo_value_name[1]
 

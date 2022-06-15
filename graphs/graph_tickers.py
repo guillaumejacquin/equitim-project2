@@ -91,8 +91,7 @@ def bloc4_simple_tickers(tickers, Class, Name):
         fig = px.line(data_frame = adj_close.index
                         ,x = adj_close.index
                         ,y = [adj_close],
-                        title="En points",
-
+                        title="EUR"
                         )
         fig.update_traces(line_color='#B9A049')
 
@@ -102,7 +101,7 @@ def bloc4_simple_tickers(tickers, Class, Name):
                 showgrid=True,
                 linecolor='rgb(0, 0, 0)',
                 linewidth= 1,
-                ticks='outside',
+                ticks='inside',
                 visible= True,
                 showticklabels = True,
                 title=None,
@@ -117,12 +116,13 @@ def bloc4_simple_tickers(tickers, Class, Name):
                 zeroline=True,
                 showline=False,
                 showticklabels=True,
-                ticks='outside',
+                ticks='inside',
                 gridwidth=1,
                 gridcolor='rgb(242, 242, 242)',
                 linecolor='rgb(0, 0, 0)',
                 linewidth= 1,
                 title=None,
+                
                 tickfont=dict(
                     family='Proxima Nova',
                     size=13,
@@ -150,10 +150,10 @@ def bloc4_simple_tickers(tickers, Class, Name):
             )
         )
 
-        fig.add_annotation( x=adj_close.index[0] - relativedelta(days=15), y=max_value, ax=adj_close.index[0] - relativedelta(days=15), ay=0, xref='x', yref='y', axref='x', ayref='y',
+        fig.add_annotation( x=adj_close.index[0] - relativedelta(days=10), y=max_value + 10, ax=adj_close.index[0] - relativedelta(days=10), ay=0, xref='x', yref='y', axref='x', ayref='y',
      text='', showarrow=True, arrowhead=3, arrowwidth=1, arrowcolor='black')
 
-        fig.add_annotation(x=adj_close.index[-1] +  relativedelta(months=10), y=0, ax=adj_close.index[0] - relativedelta(days=30) , ay=0, xref='x', yref='y', axref='x', ayref='y',
+        fig.add_annotation(x=adj_close.index[-1] +  relativedelta(months=10), y=0, ax=adj_close.index[0] - relativedelta(days=15) , ay=0, xref='x', yref='y', axref='x', ayref='y',
      text='', showarrow=True, arrowhead=3, arrowwidth=1, arrowcolor='black')
 
         fig.data[0].line.color = 'rgb(197, 175, 92)'
@@ -291,7 +291,7 @@ def bloc4_multiple_tickers(tickers, Class, Name):
                 fig = px.line(data_frame = result
                         ,x = result.index
                         ,y = [result[name[0]],result[name[1]]],
-                                                title="En points",
+                                                title="Base 100",
 
                         ) 
                 fig.data[0].name = Class.Yahoo_value_name[0]
@@ -301,7 +301,7 @@ def bloc4_multiple_tickers(tickers, Class, Name):
                 fig = px.line(data_frame = result
                         ,x = result.index
                         ,y = [result[name[0]],result[name[1]], result[name[2]]],
-                                                title="En points",
+                                                title="Base 100",
 
                         )
                 fig.data[0].name = Class.Yahoo_value_name[0]
@@ -312,7 +312,7 @@ def bloc4_multiple_tickers(tickers, Class, Name):
                 fig = px.line(data_frame = result
                         ,x = result.index
                         ,y = [result[name[0]],result[name[1]], result[name[2]], result[name[3]]],
-                                                title="En points",
+                                                title="Base 100",
 
                         )
                 fig.data[0].name = Class.Yahoo_value_name[0]
@@ -324,7 +324,7 @@ def bloc4_multiple_tickers(tickers, Class, Name):
                 fig = px.line(data_frame = result
                         ,x = result.index
                         ,y = [result[name[0]],result[name[1]], result[name[2]], result[name[3]], result[name[4]]],
-                                                title="En points",
+                                                title="Base 100",
 
                         )
                 fig.data[0].name = Class.Yahoo_value_name[0]
@@ -397,10 +397,10 @@ def bloc4_multiple_tickers(tickers, Class, Name):
 
         max_max_value = (max(max_value))
 
-        fig.add_annotation( x=result.index[0] -  relativedelta(days=15), y=max_max_value, ax=result.index[0] - relativedelta(days=15), ay=0, xref='x', yref='y', axref='x', ayref='y',
+        fig.add_annotation( x=result.index[0] -  relativedelta(days=10), y=max_max_value + 10, ax=result.index[0] - relativedelta(days=10), ay=0, xref='x', yref='y', axref='x', ayref='y',
      text='', showarrow=True, arrowhead=3, arrowwidth=1, arrowcolor='black')
 
-        fig.add_annotation(x=result.index[-1] + relativedelta(months=10), y=0, ax=result.index[0] - relativedelta(days=30), ay=0, xref='x', yref='y', axref='x', ayref='y',
+        fig.add_annotation(x=result.index[-1] + relativedelta(months=10), y=0, ax=result.index[0] - relativedelta(days=15), ay=0, xref='x', yref='y', axref='x', ayref='y',
      text='', showarrow=True, arrowhead=3, arrowwidth=1, arrowcolor='black')
 
         # fig.show()
